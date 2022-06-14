@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF643BF5),
+                Color(0xFF643BF5),   
                 Color(0xFF00D5FF),
               ],
               begin: Alignment.topLeft,

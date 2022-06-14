@@ -48,22 +48,39 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.black54),
+                    border: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 2, color: Colors.black54),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.black54),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 2, color: Colors.black54),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
-                    errorBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.red),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(width: 2, color: Colors.red),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(width: 2, color: ThemeClass.primaryColor),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(width: 2, color: ThemeClass.primaryColor),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
                     label: const Text(
                       'Email',
@@ -79,23 +96,41 @@ class _SignInPageState extends State<SignInPage> {
                 TextFormField(
                   obscureText: isVisible,
                   decoration: InputDecoration(
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.black54),
+                    border: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 2, color: Colors.black54),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.black54),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(width: 2, color: Colors.black54),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
-                    errorBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 2, color: Colors.red),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(width: 2, color: Colors.red),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(width: 2, color: ThemeClass.primaryColor),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(width: 2, color: ThemeClass.primaryColor),
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
                     ),
+                    prefixIcon: const Icon(Icons.lock),
                     labelText: 'Password',
                     suffixIcon: IconButton(
                       onPressed: () {
@@ -141,26 +176,56 @@ class _SignInPageState extends State<SignInPage> {
                 const SizedBox(
                   height: 30,
                 ),
-                Container(
-                  height: 55,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: ThemeClass.primaryColor,
-                    borderRadius: BorderRadius.circular(
-                      5,
-                    ),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Material(
+                      elevation: 10,
+                      borderRadius: BorderRadius.circular(
+                        45,
+                      ),
+                      child: Container(
+                        height: 50,
+                        width: 140,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color(0xFF643BF5),
+                              Color(0xFF00D5FF),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          color: ThemeClass.primaryColor,
+                          borderRadius: BorderRadius.circular(
+                            45,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.arrow_right_alt,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
                 const Spacer(
                   flex: 5,
@@ -171,7 +236,7 @@ class _SignInPageState extends State<SignInPage> {
                     const Text(
                       'Don\'t have an account ? ',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.black54,
                         fontSize: 15,
                         fontFamily: 'Lato',
                         fontWeight: FontWeight.w600,
