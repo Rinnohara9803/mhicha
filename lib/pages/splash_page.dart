@@ -21,34 +21,29 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.blue,
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF643BF5),   
-                Color(0xFF00D5FF),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'mhicha',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
-                    fontFamily: 'Lato',
-                    letterSpacing: 1.0,
-                  ),
+        backgroundColor: Colors.deepPurple.withOpacity(
+          0.7,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'images/mhicha.png',
+                height: 150,
+                width: 150,
+              ),
+              const Text(
+                'mhicha',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 45,
+                  fontFamily: 'Lato',
+                  letterSpacing: 1.0,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

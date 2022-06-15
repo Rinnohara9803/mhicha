@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/pages/sign_up_page.dart';
 import 'package:mhicha/utilities/themes.dart';
 
 class SignInPage extends StatefulWidget {
@@ -18,247 +19,248 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(
-            10,
-          ),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(
-                  flex: 4,
-                ),
-                Text(
-                  'Sign In',
-                  style: TextStyle(
-                    color: ThemeClass.primaryColor,
-                    fontSize: 35,
-                    fontFamily: 'Lato',
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(
+              left: 10,
+              right: 10,
+              top: 10,
+              bottom: 30,
+            ),
+            height: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).padding.top -
+                MediaQuery.of(context).padding.top,
+            width: MediaQuery.of(context).size.width,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(),
                   ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 2, color: Colors.black54),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 2, color: Colors.black54),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.red),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: ThemeClass.primaryColor),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: ThemeClass.primaryColor),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    label: const Text(
-                      'Email',
-                    ),
-                    prefixIcon: const Icon(
-                      Icons.mail_outline,
+                  Image.asset(
+                    'images/mhicha.png',
+                    height: 180,
+                    width: 180,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Sign In',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: ThemeClass.primaryColor,
+                      fontSize: 35,
+                      fontFamily: 'Lato',
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  obscureText: isVisible,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 2, color: Colors.black54),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 2, color: Colors.black54),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.red),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: ThemeClass.primaryColor),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 2, color: ThemeClass.primaryColor),
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                    ),
-                    prefixIcon: const Icon(Icons.lock),
-                    labelText: 'Password',
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isVisible = !isVisible;
-                        });
-                      },
-                      icon: isVisible
-                          ? const Icon(Icons.visibility)
-                          : const Icon(Icons.visibility_off),
-                    ),
+                  const SizedBox(
+                    height: 40,
                   ),
-                  validator: (value) {
-                    if (value!.trim().isEmpty) {
-                      return 'Please enter your password.';
-                    } else if (value.trim().length < 7) {
-                      return 'Please enter at least 7 characters.';
-                    } else if (!value.contains('@')) {
-                      return 'Please provide a special character.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {},
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Forgot Password ?',
-                      style: TextStyle(
-                        color: ThemeClass.primaryColor,
-                        fontSize: 15,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Material(
-                      elevation: 10,
-                      borderRadius: BorderRadius.circular(
-                        45,
-                      ),
-                      child: Container(
-                        height: 50,
-                        width: 140,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [
-                              Color(0xFF643BF5),
-                              Color(0xFF00D5FF),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          color: ThemeClass.primaryColor,
-                          borderRadius: BorderRadius.circular(
-                            45,
-                          ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 1.5, color: Colors.black54),
+                        borderRadius: BorderRadius.circular(
+                          10,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text(
-                              'Sign In',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 1.5, color: Colors.black54),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 1.5, color: Colors.red),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1.5, color: ThemeClass.primaryColor),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1.5, color: ThemeClass.primaryColor),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      label: const Text(
+                        'Email',
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.mail_outline,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    obscureText: isVisible,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 1.5, color: Colors.black54),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 1.5, color: Colors.black54),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 1.5, color: Colors.red),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1.5, color: ThemeClass.primaryColor),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1.5, color: ThemeClass.primaryColor),
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      prefixIcon: const Icon(Icons.lock),
+                      labelText: 'Password',
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        icon: isVisible
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.trim().isEmpty) {
+                        return 'Please enter your password.';
+                      } else if (value.trim().length < 7) {
+                        return 'Please enter at least 7 characters.';
+                      } else if (!value.contains('@')) {
+                        return 'Please provide a special character.';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {},
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Forgot Password ?',
+                        style: TextStyle(
+                          color: ThemeClass.primaryColor,
+                          fontSize: 15,
+                          fontFamily: 'Lato',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Material(
+                          elevation: 10,
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: ThemeClass.primaryColor,
+                              borderRadius: BorderRadius.circular(
+                                10,
                               ),
                             ),
-                            SizedBox(
-                              width: 5,
+                            child: const Center(
+                              child: Text(
+                                'Sign In',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                ),
+                              ),
                             ),
-                            Icon(
-                              Icons.arrow_right_alt,
-                              color: Colors.white,
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const Spacer(
-                  flex: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Don\'t have an account ? ',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 15,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.5,
+                    ],
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Don\'t have an account ? ',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 15,
+                          fontFamily: 'Lato',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        color: ThemeClass.primaryColor,
-                        fontSize: 15,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.5,
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(SignUpPage.routeName);
+                        },
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: ThemeClass.primaryColor,
+                            fontSize: 15,
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const Spacer(
-                  flex: 2,
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
