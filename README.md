@@ -13,4 +13,4 @@ A new Flutter project.
 - Swornima Shrestha [@swornex](https://github.com/swornex)
 - Aayush Shrestha [@ayxsth](https://github.com/ayxsth)
 - Sabin Shrestha [@sabinshrestha8](https://github.com/sabinshrestha8)
-- Sagar Shrestha [@rinnohara9803](https://github.com/rinnohara9803)
+- Sagar Prajapati [@rinnohara9803](https://github.com/rinnohara9803)
