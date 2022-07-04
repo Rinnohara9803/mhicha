@@ -4,6 +4,7 @@ import 'package:mhicha/pages/show_up_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
 import 'package:mhicha/pages/splash_page.dart';
+import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/utilities/themes.dart';
 
 void main() {
