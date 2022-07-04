@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/show_up_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
           primary: ThemeClass.primaryColor,
         ),
       ),
-      home: const SplashPage(),
+      home: const VerifyEmailPage(),
       routes: {
         SignInPage.routeName: (context) => const SignInPage(),
         SignUpPage.routeName: (context) => const SignUpPage(),
+        VerifyEmailPage.routeName: (context) => const VerifyEmailPage(),
       },
     );
   }
