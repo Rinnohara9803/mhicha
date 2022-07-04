@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
+import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/utilities/themes.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -240,27 +241,33 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 30,
                   ),
-                  Container(
-                    height: 50,
-                    width: double.infinity,
-                    margin: const EdgeInsets.only(
-                      right: 10,
-                      left: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: ThemeClass.primaryColor,
-                      borderRadius: BorderRadius.circular(
-                        10,
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(VerifyEmailPage.routeName);
+                    },
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(
+                        right: 10,
+                        left: 10,
                       ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1,
+                      decoration: BoxDecoration(
+                        color: ThemeClass.primaryColor,
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1,
+                          ),
                         ),
                       ),
                     ),

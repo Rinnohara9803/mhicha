@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           primary: ThemeClass.primaryColor,
         ),
       ),
-      home: const VerifyEmailPage(),
+      home: const SplashPage(),
       routes: {
         SignInPage.routeName: (context) => const SignInPage(),
         SignUpPage.routeName: (context) => const SignUpPage(),

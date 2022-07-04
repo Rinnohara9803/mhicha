@@ -13,6 +13,15 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void _saveForm() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    print('tada');
+  }
 
   bool isVisible = true;
   @override
@@ -61,6 +70,16 @@ class _SignInPageState extends State<SignInPage> {
                     height: 40,
                   ),
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!value.contains('@') || !value.endsWith('.com')) {
+                        return 'Invalid email!';
+                      }
+                      return null;
+                    },
+                    controller: _emailController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide:
@@ -104,11 +123,15 @@ class _SignInPageState extends State<SignInPage> {
                         Icons.mail_outline,
                       ),
                     ),
+                    onSaved: (text) {
+                      _emailController.text = text!;
+                    },
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   TextFormField(
+                    controller: _passwordController,
                     obscureText: isVisible,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -164,12 +187,12 @@ class _SignInPageState extends State<SignInPage> {
                         return 'Please enter your password.';
                       } else if (value.trim().length < 7) {
                         return 'Please enter at least 7 characters.';
-                      } else if (!value.contains('@')) {
-                        return 'Please provide a special character.';
                       }
                       return null;
                     },
-                    onSaved: (value) {},
+                    onSaved: (text) {
+                      _passwordController.text = text!;
+                    },
                   ),
                   const SizedBox(
                     height: 10,
@@ -201,22 +224,27 @@ class _SignInPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.circular(
                             10,
                           ),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: ThemeClass.primaryColor,
-                              borderRadius: BorderRadius.circular(
-                                10,
+                          child: InkWell(
+                            onTap: () {
+                              _saveForm();
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: ThemeClass.primaryColor,
+                                borderRadius: BorderRadius.circular(
+                                  10,
+                                ),
                               ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Sign In',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
+                              child: const Center(
+                                child: Text(
+                                  'Sign In',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  ),
                                 ),
                               ),
                             ),
