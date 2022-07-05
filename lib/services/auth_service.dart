@@ -63,10 +63,12 @@ class AuthService {
         SharedService.userName = jsonData['user']['name'];
         SharedService.email = jsonData['user']['email'];
         SharedService.userID = jsonData['user']['_id'];
+        SharedService.isVerified = jsonData['user']['verified'];
         SharedService.token = jsonData['token'];
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', jsonData['token']);
         await prefs.setString('userID', jsonData['user']['_id']);
+        await prefs.setBool('isVerified', jsonData['user']['verified']);
       } else {
         return Future.error(
           'Invalid email or password',

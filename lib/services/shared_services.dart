@@ -3,4 +3,5 @@ class SharedService {
   static String userID = '';
   static String userName = '';
   static String email = '';
+  static bool isVerified = false;
 }
