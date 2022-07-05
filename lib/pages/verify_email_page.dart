@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
+import 'package:mhicha/services/auth_service.dart';
+import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:pinput/pinput.dart';
 
@@ -13,6 +18,24 @@ class VerifyEmailPage extends StatefulWidget {
 }
 
 class _VerifyEmailPageState extends State<VerifyEmailPage> {
+  String otp = '';
+
+  Future<void> _verifyOtp(String otp) async {
+    try {
+      await AuthService.verifyUser(otp).then((value) {
+        SnackBars.showNormalSnackbar(context, 'Verification successfull!!!');
+        Navigator.pushReplacementNamed(
+          context,
+          DashboardPage.routeName,
+        );
+      });
+    } on SocketException {
+      SnackBars.showNoInternetConnectionSnackBar(context);
+    } catch (e) {
+      SnackBars.showErrorSnackBar(context, e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final sizeQuery = MediaQuery.of(context).size;
@@ -116,14 +139,11 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                               defaultPinTheme: defaultPinTheme,
                               focusedPinTheme: focusedPinTheme,
                               submittedPinTheme: submittedPinTheme,
-                              // validator: (s) {
-                              //   return s == '123456' ? null : 'Incorrect OTP';
-                              // },
                               pinputAutovalidateMode:
                                   PinputAutovalidateMode.onSubmit,
                               showCursor: true,
                               onCompleted: (pin) {
-                                // print(pin);
+                                otp = pin;
                               },
                             ),
                           ],
@@ -132,7 +152,11 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                           height: 24,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: otp.isEmpty
+                              ? null
+                              : () async {
+                                  await _verifyOtp(otp);
+                                },
                           child: Container(
                             height: sizeQuery.height * 0.065,
                             width: double.infinity,

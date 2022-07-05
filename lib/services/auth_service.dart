@@ -57,9 +57,7 @@ class AuthService {
           },
         ),
       );
-      print(responseData.statusCode);
       var jsonData = jsonDecode(responseData.body);
-      print(jsonData);
 
       if (responseData.statusCode == 200 || responseData.statusCode == 201) {
         SharedService.userName = jsonData['user']['name'];
@@ -73,6 +71,36 @@ class AuthService {
         return Future.error(
           'Invalid email or password',
         );
+      }
+    } on SocketException {
+      return Future.error('No Internet Connection');
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  static Future<void> verifyUser(String otp) async {
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer ${SharedService.token}",
+    };
+    try {
+      var responseData = await http.post(
+        Uri.http(Config.authority, 'api/users/verify'),
+        headers: headers,
+        body: jsonEncode(
+          {
+            "otp": otp,
+          },
+        ),
+      );
+      print(responseData.statusCode);
+      var jsonData = jsonDecode(responseData.body);
+      print(jsonData);
+
+      if (responseData.statusCode == 200 || responseData.statusCode == 201) {
+      } else if (responseData.statusCode == 400) {
+        return Future.error('Invalid or expired OTP');
       }
     } on SocketException {
       return Future.error('No Internet Connection');
