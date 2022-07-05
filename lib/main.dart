@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
         SignInPage.routeName: (context) => const SignInPage(),
         SignUpPage.routeName: (context) => const SignUpPage(),
         VerifyEmailPage.routeName: (context) => const VerifyEmailPage(),
-        DashboardPage.routeName: (context) => const DashboardPage(),
       },
     );
   }
