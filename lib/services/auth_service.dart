@@ -24,12 +24,17 @@ class AuthService {
           },
         ),
       );
-      print(responseData.statusCode);
       var jsonData = jsonDecode(responseData.body);
-      print('here');
-      print(jsonData);
 
-      if (responseData.statusCode == 200 || responseData.statusCode == 201) {}
+      if (responseData.statusCode == 200 || responseData.statusCode == 201) {
+        SharedService.userName = jsonData['user']['name'];
+        SharedService.email = jsonData['user']['email'];
+        SharedService.userID = jsonData['user']['_id'];
+        SharedService.token = jsonData['token'];
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', jsonData['token']);
+        await prefs.setString('userID', jsonData['user']['_id']);
+      }
     } on SocketException {
       return Future.error('No Internet Connection');
     } catch (e) {
@@ -43,7 +48,7 @@ class AuthService {
     };
     try {
       var responseData = await http.post(
-        Uri.http(Config.authority, 'users/login'),
+        Uri.http(Config.authority, 'api/users/login'),
         headers: headers,
         body: jsonEncode(
           {
@@ -57,14 +62,16 @@ class AuthService {
       print(jsonData);
 
       if (responseData.statusCode == 200 || responseData.statusCode == 201) {
+        SharedService.userName = jsonData['user']['name'];
+        SharedService.email = jsonData['user']['email'];
+        SharedService.userID = jsonData['user']['_id'];
+        SharedService.token = jsonData['token'];
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', jsonData['token']);
-        await prefs.setString('userID', jsonData['userData']['_id']);
-        SharedService.token = jsonData['token'];
-        SharedService.userID = jsonData['userData']['_id'];
+        await prefs.setString('userID', jsonData['user']['_id']);
       } else {
         return Future.error(
-          'Unauthorized user',
+          'Invalid email or password',
         );
       }
     } on SocketException {

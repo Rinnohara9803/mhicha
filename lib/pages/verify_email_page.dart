@@ -68,33 +68,41 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: 33,
-                            bottom: 15,
-                          ),
-                          child: const Text(
-                            'Please enter code sent to',
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Color(
-                                0xff605A65,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(
+                                  top: 33,
+                                  bottom: 15,
+                                ),
+                                child: const Text(
+                                  'Please enter code sent to',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Color(
+                                      0xff605A65,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              email,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    email,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 24,

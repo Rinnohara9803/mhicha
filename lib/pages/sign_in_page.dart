@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
+import 'package:mhicha/services/auth_service.dart';
+import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
+import 'package:mhicha/widgets/circular_progress_indicator.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -16,11 +21,33 @@ class _SignInPageState extends State<SignInPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  void _saveForm() {
+  bool _isLoading = false;
+
+  Future<void> _saveForm() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-    print('tada');
+    _formKey.currentState!.save();
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      await AuthService.signInuser(
+              _emailController.text, _passwordController.text)
+          .then((value) {
+        SnackBars.showNormalSnackbar(context, 'Login Successful!!');
+      });
+    } on SocketException {
+      SnackBars.showNoInternetConnectionSnackBar(context);
+    } catch (e) {
+      SnackBars.showErrorSnackBar(
+        context,
+        e.toString(),
+      );
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   bool isVisible = true;
@@ -225,8 +252,8 @@ class _SignInPageState extends State<SignInPage> {
                             10,
                           ),
                           child: InkWell(
-                            onTap: () {
-                              _saveForm();
+                            onTap: () async {
+                              await _saveForm();
                             },
                             child: Container(
                               height: 50,
@@ -236,16 +263,18 @@ class _SignInPageState extends State<SignInPage> {
                                   10,
                                 ),
                               ),
-                              child: const Center(
-                                child: Text(
-                                  'Sign In',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1,
-                                  ),
-                                ),
+                              child: Center(
+                                child: _isLoading
+                                    ? const ProgressIndicator1()
+                                    : const Text(
+                                        'Sign In',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
+                                        ),
+                                      ),
                               ),
                             ),
                           ),

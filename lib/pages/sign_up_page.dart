@@ -6,6 +6,7 @@ import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
+import 'package:mhicha/widgets/circular_progress_indicator.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -332,14 +333,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         child: Center(
                           child: _isLoading
-                              ? const SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2.0,
-                                  ),
-                                )
+                              ? const ProgressIndicator1()
                               : const Text(
                                   'Sign Up',
                                   style: TextStyle(
