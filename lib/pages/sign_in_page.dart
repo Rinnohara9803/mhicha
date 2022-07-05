@@ -185,8 +185,8 @@ class _SignInPageState extends State<SignInPage> {
                     validator: (value) {
                       if (value!.trim().isEmpty) {
                         return 'Please enter your password.';
-                      } else if (value.trim().length < 7) {
-                        return 'Please enter at least 7 characters.';
+                      } else if (value.trim().length < 6) {
+                        return 'Please enter at least 6 characters.';
                       }
                       return null;
                     },
