@@ -35,6 +35,7 @@ class _QRPageState extends State<QRPage> {
             context,
             SendMoneyPage.routeName,
             arguments: {
+              'isDirectPay': false,
               'userName': SharedService.sendToUserName,
               'email': SharedService.sendToEmail,
               'isVerified': SharedService.sendToVerified,

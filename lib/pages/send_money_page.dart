@@ -13,8 +13,10 @@ class SendMoneyPage extends StatefulWidget {
 class _SendMoneyPageState extends State<SendMoneyPage> {
   bool _isLoading = false;
   bool _isBalanceVisible = false;
+  final _emailController = TextEditingController();
   final _amountController = TextEditingController();
   final _remarksController = TextEditingController();
+
   String? purpose;
   List<String> purposes = [
     'Personal use',
@@ -29,9 +31,9 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
   Widget build(BuildContext context) {
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
-    // final userName = routeArgs['userName'] as String;
+    final isDirectPay = routeArgs['isDirectPay'] as bool;
+
     final email = routeArgs['email'] as String;
-    // final isVerified = routeArgs['isVerified'] as bool;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -119,31 +121,99 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                     ),
                     child: Column(
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: 30,
-                          ),
-                          child: TextFormField(
-                            enabled: false,
-                            initialValue: email,
-                            onSaved: (text) {},
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.black54),
-                                borderRadius: BorderRadius.circular(
-                                  10,
+                        if (!isDirectPay)
+                          Container(
+                            margin: const EdgeInsets.only(
+                              top: 30,
+                            ),
+                            child: TextFormField(
+                              enabled: false,
+                              initialValue: email,
+                              onSaved: (text) {},
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      width: 1.5, color: Colors.black54),
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  ),
                                 ),
-                              ),
-                              label: const Text(
-                                'mchicha Email',
-                              ),
-                              prefixIcon: const Icon(
-                                Icons.mail_outline,
+                                label: const Text(
+                                  'mchicha Email',
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.mail_outline,
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                        if (isDirectPay)
+                          Container(
+                            margin: const EdgeInsets.only(
+                              top: 30,
+                            ),
+                            child: TextFormField(
+                              controller: _emailController,
+                              validator: (value) {
+                                if (!value!.endsWith('.com') ||
+                                    !value.contains('@')) {
+                                  return 'Invalid email';
+                                }
+                                if (value!.trim().isEmpty) {
+                                  return 'Please provide a mhicha email.';
+                                }
+                                return null;
+                              },
+                              onSaved: (text) {
+                                _emailController.text = text!;
+                              },
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      width: 1.5, color: Colors.black54),
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      width: 1.5, color: Colors.black54),
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  ),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      width: 1.5, color: Colors.red),
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1.5,
+                                      color: ThemeClass.primaryColor),
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  ),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1.5,
+                                      color: ThemeClass.primaryColor),
+                                  borderRadius: BorderRadius.circular(
+                                    10,
+                                  ),
+                                ),
+                                label: const Text(
+                                  'mhicha email',
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.mail_outline,
+                                ),
+                              ),
+                            ),
+                          ),
                         const SizedBox(
                           height: 15,
                         ),

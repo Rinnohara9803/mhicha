@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/pages/send_money_page.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:dotted_border/dotted_border.dart';
 
@@ -51,6 +52,12 @@ class FeatureRowWidgets extends StatelessWidget {
         ),
         Expanded(
           child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, SendMoneyPage.routeName, arguments: {
+                'isDirectPay': true,
+                'email': '',
+              });
+            },
             child: Column(
               children: [
                 DottedBorder(
