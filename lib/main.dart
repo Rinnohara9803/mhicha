@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
+import 'package:mhicha/pages/splash_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
-import 'package:mhicha/pages/splash_page.dart';
 import 'package:mhicha/utilities/themes.dart';
 
 void main() {
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           primary: ThemeClass.primaryColor,
         ),
       ),
-      home: const SplashPage(),
+      home: const DashboardPage(),
       routes: {
         SignInPage.routeName: (context) => const SignInPage(),
         SignUpPage.routeName: (context) => const SignUpPage(),

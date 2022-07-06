@@ -96,9 +96,6 @@ class AuthService {
           },
         ),
       );
-      print(responseData.statusCode);
-      var jsonData = jsonDecode(responseData.body);
-      print(jsonData);
 
       if (responseData.statusCode == 200 || responseData.statusCode == 201) {
       } else if (responseData.statusCode == 400) {
