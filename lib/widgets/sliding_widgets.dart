@@ -11,14 +11,13 @@ class SlidingWidgets extends StatefulWidget {
 
 class _SlidingWidgetsState extends State<SlidingWidgets> {
   int _currentPage = 0;
-  late Timer _timer;
+  Timer? _timer;
   final PageController _pageController = PageController(
     initialPage: 0,
   );
   bool end = false;
-  @override      
+  @override
   void initState() {
-    super.initState();
     Timer.periodic(const Duration(seconds: 7), (Timer timer) {
       if (_currentPage == 2) {
         end = true;
@@ -31,19 +30,15 @@ class _SlidingWidgetsState extends State<SlidingWidgets> {
       } else {
         _currentPage--;
       }
-
-      _pageController.animateToPage(
-        _currentPage,
-        duration: const Duration(milliseconds: 1000),
-        curve: Curves.easeIn,
-      );
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 1000),
+          curve: Curves.easeIn,
+        );
+      }
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _timer.cancel();
+    super.initState();
   }
 
   @override

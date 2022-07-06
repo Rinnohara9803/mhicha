@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+        controller: ScrollController(),
         child: Padding(
           padding: const EdgeInsets.only(
             left: 18,
