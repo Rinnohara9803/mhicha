@@ -113,7 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _userNameController,
                     validator: (value) {
                       if (value!.trim().isEmpty) {
-                        return 'Please enter your password.';
+                        return 'Please enter your username.';
                       }
                       return null;
                     },
@@ -155,11 +155,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
-                      ),
-                      label: const Text(
-                        'Full Name',
-                      ),
-                      prefixIcon: const Icon(
+                      ), 
+                      label: const Text( 
+                        'Full Name', 
+                      ), 
+                      prefixIcon: const Icon( 
                         Icons.person,
                       ),
                     ),

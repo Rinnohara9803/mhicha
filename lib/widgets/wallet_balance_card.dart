@@ -10,6 +10,7 @@ class WalletBalanceCard extends StatefulWidget {
 
 class _WalletBalanceCardState extends State<WalletBalanceCard> {
   bool _isBalanceVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
