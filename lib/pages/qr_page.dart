@@ -54,6 +54,7 @@ class _QRPageState extends State<QRPage> {
       this.qrViewController = qrViewController;
     });
     qrViewController.scannedDataStream.listen((barcode) {
+      print(barcode.code);
       if (qrShowsError) {
         barCode = barCode;
         _userIdController.text = barcode.code.toString();
