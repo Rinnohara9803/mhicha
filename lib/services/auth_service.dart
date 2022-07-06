@@ -107,4 +107,30 @@ class AuthService {
       return Future.error(e.toString());
     }
   }
+
+  static Future<void> fetchUser(String userId) async {
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer ${SharedService.token}",
+    };
+    try {
+      var responseData = await http.get(
+        Uri.http(Config.authority, 'api/users/$userId'),
+        headers: headers,
+      );
+      if (responseData.statusCode == 200 || responseData.statusCode == 201) {
+        var jsonData = jsonDecode(responseData.body);
+        SharedService.sendToUserId = jsonData['_id'];
+        SharedService.sendToUserName = jsonData['name'];
+        SharedService.sendToEmail = jsonData['email'];
+        SharedService.sendToVerified = jsonData['verified'];
+      } else {
+        return Future.error('No user found.');
+      }
+    } on SocketException {
+      return Future.error('No Internet Connection');
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }

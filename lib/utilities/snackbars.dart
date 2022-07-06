@@ -11,6 +11,7 @@ class SnackBars {
           milliseconds: 2500,
         ),
         backgroundColor: ThemeClass.primaryColor,
+        behavior: SnackBarBehavior.floating,
       ),
     );
   }
@@ -19,6 +20,7 @@ class SnackBars {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        behavior: SnackBarBehavior.floating,
         content: Text(content),
         backgroundColor: const Color.fromARGB(255, 189, 86, 80),
         duration: const Duration(
