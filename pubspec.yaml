@@ -48,6 +48,8 @@ dev_dependencies:
   pinput:
   http:
   shared_preferences:
+  dotted_border:
+  qr_flutter:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
