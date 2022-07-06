@@ -38,9 +38,7 @@ class _DashboardPageState extends State<DashboardPage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: ThemeClass.primaryColor,
           onPressed: () {
-            setState(() {
-              currentScreen = const QRPage();
-            });
+            Navigator.of(context).pushNamed(QRPage.routeName);
           },
           child: const Icon(
             Icons.qr_code,

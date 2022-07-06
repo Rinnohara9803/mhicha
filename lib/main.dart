@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
+import 'package:mhicha/pages/qr_page.dart';
 import 'package:mhicha/pages/splash_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
@@ -23,12 +24,13 @@ class MyApp extends StatelessWidget {
           primary: ThemeClass.primaryColor,
         ),
       ),
-      home: const DashboardPage(),
+      home: const SplashPage(),
       routes: {
         SignInPage.routeName: (context) => const SignInPage(),
         SignUpPage.routeName: (context) => const SignUpPage(),
         VerifyEmailPage.routeName: (context) => const VerifyEmailPage(),
         DashboardPage.routeName: (context) => const DashboardPage(),
+        QRPage.routeName: (context) => const QRPage(),
       },
     );
   }
