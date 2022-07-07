@@ -115,7 +115,9 @@ class _QRPageState extends State<QRPage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).padding.top -
+                MediaQuery.of(context).padding.bottom,
             width: MediaQuery.of(context).size.width,
             child: Stack(
               children: [

@@ -38,15 +38,15 @@ class _SignInPageState extends State<SignInPage> {
       await AuthService.signInuser(
               _emailController.text, _passwordController.text)
           .then((value) {
-        if (SharedService.isVerified) {
-          Navigator.pushReplacementNamed(context, DashboardPage.routeName);
-        } else {
-          Navigator.pushReplacementNamed(
-            context,
-            VerifyEmailPage.routeName,
-            arguments: SharedService.email,
-          );
-        }
+        // if (SharedService.isVerified) {
+        Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+        // } else {
+        //   Navigator.pushReplacementNamed(
+        //     context,
+        //     VerifyEmailPage.routeName,
+        //     arguments: SharedService.email,
+        //   );
+        // }
       });
     } on SocketException {
       SnackBars.showNoInternetConnectionSnackBar(context);

@@ -41,6 +41,27 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
     );
   }
 
+  List userNameChars =
+      SharedService.proceedSendMoney.receiverUserName.split('');
+
+  String hashedReceiverUserName() {
+    String hashedUserName = '';
+    for (var i in userNameChars) {
+      if (userNameChars.indexOf(i) == 0) {
+        hashedUserName = hashedUserName + i;
+      } else if (userNameChars.indexOf(i) == 1) {
+        hashedUserName = hashedUserName + i;
+      } else if (userNameChars.indexOf(i) == userNameChars.length - 1) {
+        hashedUserName = hashedUserName + i;
+      } else if (i == ' ') {
+        hashedUserName = hashedUserName + ' ';
+      } else {
+        hashedUserName = hashedUserName + '*';
+      }
+    }
+    return hashedUserName;
+  }
+
   void showNoticeBottomSheet() {
     showModalBottomSheet(
       context: context,
@@ -50,7 +71,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
       builder: (BuildContext context) {
         return Container(
           padding: const EdgeInsets.all(
-            8,
+            12,
           ),
           height: 170,
           width: double.infinity,
@@ -243,28 +264,38 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                   ),
                   child: Column(
                     children: [
-                      proceedSendMoneyDetails('mhicha Email',
-                          SharedService.proceedSendMoney.mhichaEmail),
-                      const SizedBox(
-                        height: 8,
+                      proceedSendMoneyDetails(
+                        'mhicha Email',
+                        SharedService.proceedSendMoney.mhichaEmail,
                       ),
-                      proceedSendMoneyDetails('Receiver Username',
-                          SharedService.proceedSendMoney.receiverUserName),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      proceedSendMoneyDetails('Amount ( NPR ) ',
-                          SharedService.proceedSendMoney.amount.toString()),
                       const SizedBox(
                         height: 8,
                       ),
                       proceedSendMoneyDetails(
-                          'Purpose', SharedService.proceedSendMoney.purpose),
+                        'Receiver Username',
+                        hashedReceiverUserName(),
+                      ),
                       const SizedBox(
                         height: 8,
                       ),
                       proceedSendMoneyDetails(
-                          'Remarks', SharedService.proceedSendMoney.remarks),
+                        'Amount ( NPR ) ',
+                        SharedService.proceedSendMoney.amount.toString(),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      proceedSendMoneyDetails(
+                        'Purpose',
+                        SharedService.proceedSendMoney.purpose,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      proceedSendMoneyDetails(
+                        'Remarks',
+                        SharedService.proceedSendMoney.remarks,
+                      ),
                     ],
                   ),
                 ),
