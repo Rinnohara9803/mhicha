@@ -28,7 +28,7 @@ class _QRPageState extends State<QRPage> {
 
   Future<void> fetchUser(String userId) async {
     try {
-      await AuthService.fetchUser(userId).then(
+      await AuthService.fetchUserByEmail(userId).then(
         (value) {
           Navigator.pushReplacementNamed(
             context,
@@ -113,199 +113,214 @@ class _QRPageState extends State<QRPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Stack(
-          children: [
-            Column(
+        body: SingleChildScrollView(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Stack(
               children: [
-                Expanded(
-                  flex: 5,
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: QRView(
-                      key: _qrKey,
-                      onQRViewCreated: onQRViewCreated,
-                      overlay: QrScannerOverlayShape(
-                        borderRadius: 10,
-                        borderLength: 20,
-                        borderWidth: 10,
-                        borderColor: ThemeClass.primaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 40,
-                      vertical: 30,
-                    ),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          ThemeClass.primaryColor.withOpacity(0.8),
-                          Colors.white,
-                        ],
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'My Profile',
-                          style: TextStyle(
-                            letterSpacing: 1,
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                Column(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: QRView(
+                          key: _qrKey,
+                          onQRViewCreated: onQRViewCreated,
+                          overlay: QrScannerOverlayShape(
+                            borderRadius: 10,
+                            borderLength: 20,
+                            borderWidth: 10,
+                            borderColor: ThemeClass.primaryColor,
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 30,
                         ),
-                        Row(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              ThemeClass.primaryColor.withOpacity(0.8),
+                              Colors.white,
+                            ],
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  showQRBottomSheet();
-                                },
-                                child: Material(
-                                  borderRadius: BorderRadius.circular(
-                                    10,
-                                  ),
-                                  elevation: 10,
-                                  child: Container(
-                                    height: 55,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                        10,
-                                      ),
-                                      color: ThemeClass.primaryColor,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: const [
-                                        Icon(
-                                          Icons.qr_code_scanner_outlined,
-                                          color: Colors.white,
-                                          size: 25,
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          'QR Code',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                            const Text(
+                              'My Profile',
+                              style: TextStyle(
+                                letterSpacing: 1,
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             const SizedBox(
-                              width: 20,
+                              height: 20,
                             ),
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {},
-                                child: Material(
-                                  borderRadius: BorderRadius.circular(
-                                    10,
-                                  ),
-                                  elevation: 10,
-                                  child: Container(
-                                    height: 55,
-                                    decoration: BoxDecoration(
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () {
+                                      showQRBottomSheet();
+                                    },
+                                    child: Material(
                                       borderRadius: BorderRadius.circular(
                                         10,
                                       ),
-                                      color: ThemeClass.primaryColor,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: const [
-                                        Icon(
-                                          Icons.send_to_mobile_sharp,
-                                          color: Colors.white,
-                                          size: 25,
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          'Send Money',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
+                                      elevation: 10,
+                                      child: Container(
+                                        height: 55,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            10,
                                           ),
+                                          color: ThemeClass.primaryColor,
                                         ),
-                                      ],
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: const [
+                                            Icon(
+                                              Icons.qr_code_scanner_outlined,
+                                              color: Colors.white,
+                                              size: 25,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'QR Code',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        SendMoneyPage.routeName,
+                                        arguments: {
+                                          'isDirectPay': true,
+                                          'email': '',
+                                        },
+                                      );
+                                    },
+                                    child: Material(
+                                      borderRadius: BorderRadius.circular(
+                                        10,
+                                      ),
+                                      elevation: 10,
+                                      child: Container(
+                                        height: 55,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                          color: ThemeClass.primaryColor,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: const [
+                                            Icon(
+                                              Icons.send_to_mobile_sharp,
+                                              color: Colors.white,
+                                              size: 25,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'Send Money',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
+                  ],
+                ),
+                Positioned(
+                  top: 10,
+                  left: 10,
+                  child: FloatingActionButton.small(
+                    backgroundColor: Colors.grey,
+                    child: const Icon(
+                      Icons.navigate_before,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: IconButton(
+                    icon: isFlashOn
+                        ? const Icon(
+                            Icons.flash_off,
+                            size: 30,
+                            color: Colors.white,
+                          )
+                        : const Icon(
+                            Icons.flash_on,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                    onPressed: () async {
+                      await qrViewController?.toggleFlash();
+                      setState(() {
+                        isFlashOn = !isFlashOn;
+                      });
+                    },
                   ),
                 ),
               ],
             ),
-            Positioned(
-              top: 10,
-              left: 10,
-              child: FloatingActionButton.small(
-                backgroundColor: Colors.grey,
-                child: const Icon(
-                  Icons.navigate_before,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
-            Positioned(
-              top: 10,
-              right: 10,
-              child: IconButton(
-                icon: isFlashOn
-                    ? const Icon(
-                        Icons.flash_off,
-                        size: 30,
-                        color: Colors.white,
-                      )
-                    : const Icon(
-                        Icons.flash_on,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                onPressed: () async {
-                  await qrViewController?.toggleFlash();
-                  setState(() {
-                    isFlashOn = !isFlashOn;
-                  });
-                },
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

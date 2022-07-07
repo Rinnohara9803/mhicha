@@ -37,6 +37,7 @@ class AuthService {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', jsonData['token']);
         await prefs.setString('userID', jsonData['user']['_id']);
+        print(jsonData['user']['_id']);
       }
     } on SocketException {
       return Future.error('No Internet Connection');
@@ -89,6 +90,9 @@ class AuthService {
     if (!prefs.containsKey('token')) {
       Navigator.pushReplacementNamed(context, SignInPage.routeName);
     } else {
+      print('here');
+      print(prefs.getString('userID'));
+      print('here');
       SharedService.token = prefs.getString('token')!;
       SharedService.userID = prefs.getString('userID')!;
       try {
@@ -156,18 +160,46 @@ class AuthService {
     }
   }
 
-  static Future<void> fetchMyProfile(String userId) async {
+  static Future<void> fetchUserByEmail(String email) async {
     Map<String, String> headers = {
       "Content-type": "application/json",
       "Authorization": "Bearer ${SharedService.token}",
     };
     try {
       var responseData = await http.get(
+        Uri.http(Config.authority, 'api/users/$email'),
+        headers: headers,
+      );
+      if (responseData.statusCode == 200 || responseData.statusCode == 201) {
+        var jsonData = jsonDecode(responseData.body);
+        SharedService.sendToUserId = jsonData['_id'];
+        SharedService.sendToUserName = jsonData['name'];
+        SharedService.sendToEmail = jsonData['email'];
+        SharedService.sendToVerified = jsonData['verified'];
+      } else {
+        return Future.error('No user found.');
+      }
+    } on SocketException {
+      return Future.error('No Internet Connection');
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  static Future<void> fetchMyProfile(String userId) async {
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer ${SharedService.token}",
+    };
+    try {
+      print(userId);
+      var responseData = await http.get(
         Uri.http(Config.authority, 'api/users/$userId'),
         headers: headers,
       );
       if (responseData.statusCode == 200 || responseData.statusCode == 201) {
         var jsonData = jsonDecode(responseData.body);
+        print(jsonData);
         SharedService.userID = jsonData['_id'];
         SharedService.userName = jsonData['name'];
         SharedService.email = jsonData['email'];
@@ -180,5 +212,14 @@ class AuthService {
     } catch (e) {
       return Future.error(e.toString());
     }
+  }
+
+  static Future<void> logOut(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Navigator.pushReplacementNamed(
+      context,
+      SignInPage.routeName,
+    );
   }
 }
