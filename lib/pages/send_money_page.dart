@@ -159,7 +159,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                     !value.contains('@')) {
                                   return 'Invalid email';
                                 }
-                                if (value!.trim().isEmpty) {
+                                if (value.trim().isEmpty) {
                                   return 'Please provide a mhicha email.';
                                 }
                                 return null;

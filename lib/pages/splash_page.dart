@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
+import 'package:mhicha/services/auth_service.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed(SignInPage.routeName);
+      AuthService.autoLogin(context);
     });
     super.initState();
   }

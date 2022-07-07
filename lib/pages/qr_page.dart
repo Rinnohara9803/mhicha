@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/pages/send_money_page.dart';
 import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/services/shared_services.dart';
-import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/my_qr_widget.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -31,7 +30,7 @@ class _QRPageState extends State<QRPage> {
     try {
       await AuthService.fetchUser(userId).then(
         (value) {
-          Navigator.pushNamed(
+          Navigator.pushReplacementNamed(
             context,
             SendMoneyPage.routeName,
             arguments: {
@@ -55,7 +54,6 @@ class _QRPageState extends State<QRPage> {
       this.qrViewController = qrViewController;
     });
     qrViewController.scannedDataStream.listen((barcode) {
-      print(barcode.code);
       if (qrShowsError) {
         barCode = barCode;
         _userIdController.text = barcode.code.toString();

@@ -1,5 +1,3 @@
-import 'package:mhicha/models/user.dart';
-
 class SharedService {
   static String token = '';
   static String userID = '';

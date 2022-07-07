@@ -11,7 +11,6 @@ class SlidingWidgets extends StatefulWidget {
 
 class _SlidingWidgetsState extends State<SlidingWidgets> {
   int _currentPage = 0;
-  Timer? _timer;
   final PageController _pageController = PageController(
     initialPage: 0,
   );

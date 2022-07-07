@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:mhicha/models/user.dart';
+import 'package:mhicha/pages/dashboard_page.dart';
+import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config.dart';
@@ -81,6 +84,25 @@ class AuthService {
     }
   }
 
+  static Future<void> autoLogin(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('token')) {
+      Navigator.pushReplacementNamed(context, SignInPage.routeName);
+    } else {
+      SharedService.token = prefs.getString('token')!;
+      SharedService.userID = prefs.getString('userID')!;
+      try {
+        await fetchMyProfile(SharedService.userID).then((_) {
+          Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+        });
+      } on SocketException {
+        Navigator.pushReplacementNamed(context, SignInPage.routeName);
+      } catch (e) {
+        Navigator.pushReplacementNamed(context, SignInPage.routeName);
+      }
+    }
+  }
+
   static Future<void> verifyUser(String otp) async {
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -124,6 +146,32 @@ class AuthService {
         SharedService.sendToUserName = jsonData['name'];
         SharedService.sendToEmail = jsonData['email'];
         SharedService.sendToVerified = jsonData['verified'];
+      } else {
+        return Future.error('No user found.');
+      }
+    } on SocketException {
+      return Future.error('No Internet Connection');
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  static Future<void> fetchMyProfile(String userId) async {
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer ${SharedService.token}",
+    };
+    try {
+      var responseData = await http.get(
+        Uri.http(Config.authority, 'api/users/$userId'),
+        headers: headers,
+      );
+      if (responseData.statusCode == 200 || responseData.statusCode == 201) {
+        var jsonData = jsonDecode(responseData.body);
+        SharedService.userID = jsonData['_id'];
+        SharedService.userName = jsonData['name'];
+        SharedService.email = jsonData['email'];
+        SharedService.isVerified = jsonData['verified'];
       } else {
         return Future.error('No user found.');
       }
