@@ -197,16 +197,19 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Stack(
                 overflow: Overflow.visible,
                 children: [
-                  CircleAvatar(
-                    radius: theWidth * 0.14,
-                    backgroundColor: ThemeClass.primaryColor.withOpacity(
-                      0.6,
-                    ),
+                  Hero(
+                    tag: 'profileImage',
                     child: CircleAvatar(
-                      radius: theWidth * 0.135,
-                      backgroundColor: Colors.black12,
-                      backgroundImage: const AssetImage(
-                        'images/profile_avatar.png',
+                      radius: theWidth * 0.14,
+                      backgroundColor: ThemeClass.primaryColor.withOpacity(
+                        0.6,
+                      ),
+                      child: CircleAvatar(
+                        radius: theWidth * 0.135,
+                        backgroundColor: Colors.black12,
+                        backgroundImage: const AssetImage(
+                          'images/profile_avatar.png',
+                        ),
                       ),
                     ),
                   ),
@@ -282,8 +285,8 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             Positioned(
-              right: 0,
-              top: 0,
+              right: 10,
+              top: 5,
               child: IconButton(
                 color: Colors.white,
                 onPressed: () {
@@ -291,6 +294,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
                 icon: const Icon(
                   Icons.edit,
+                ),
+              ),
+            ),
+            Positioned(
+              left: 10,
+              top: 5,
+              child: IconButton(
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
                 ),
               ),
             ),

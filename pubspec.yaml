@@ -51,6 +51,7 @@ dev_dependencies:
   qr_flutter:
   qr_code_scanner:
   provider:
+  image_picker:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
