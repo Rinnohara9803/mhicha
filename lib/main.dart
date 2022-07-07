@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
+import 'package:mhicha/pages/edit_profile_page.dart';
 import 'package:mhicha/pages/proceed_send_money_page.dart';
+import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
 import 'package:mhicha/pages/send_money_page.dart';
 import 'package:mhicha/pages/splash_page.dart';
@@ -44,6 +46,8 @@ class MyApp extends StatelessWidget {
           SendMoneyPage.routeName: (context) => const SendMoneyPage(),
           ProceedSendMoneyPage.routeName: (context) =>
               const ProceedSendMoneyPage(),
+          ProfilePage.routeName: (context) => const ProfilePage(),
+          EditProfilePage.routeName: (context) => const EditProfilePage(),
         },
       ),
     );
