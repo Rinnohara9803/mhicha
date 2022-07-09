@@ -39,7 +39,6 @@ class AuthService {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', jsonData['token']);
         await prefs.setString('userID', jsonData['user']['_id']);
-        print(jsonData['user']['_id']);
       }
     } on SocketException {
       return Future.error('No Internet Connection');
@@ -84,7 +83,6 @@ class AuthService {
     } on SocketException {
       return Future.error('No Internet Connection');
     } catch (e) {
-      print(e.toString());
       return Future.error(e.toString());
     }
   }
@@ -92,6 +90,7 @@ class AuthService {
   static Future<void> autoLogin(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('token')) {
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, SignInPage.routeName);
     } else {
       SharedService.token = prefs.getString('token')!;

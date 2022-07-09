@@ -49,7 +49,8 @@ class _QRPageState extends State<QRPage> {
     }
   }
 
-  void onQRViewCreated(QRViewController qrViewController) {
+  void onQRViewCreated(QRViewController qrViewController) async {
+    await qrViewController.resumeCamera();
     setState(() {
       this.qrViewController = qrViewController;
     });

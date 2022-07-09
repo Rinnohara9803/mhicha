@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/edit_profile_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
-import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
@@ -194,8 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
               top: theHeight * 0.13,
               left: theWidth * 0.09,
               child: Stack(
-                overflow: Overflow.visible,
-                children: [
+                clipBehavior: Clip.none, children: [
                   Hero(
                     tag: 'profileImage',
                     child: CircleAvatar(

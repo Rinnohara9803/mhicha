@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "831923079385",
+    "project_id": "mhicha-1bab0",
+    "storage_bucket": "mhicha-1bab0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831923079385:android:b256b448e1330a4d9816c8",
+        "android_client_info": {
+          "package_name": "com.example.mhicha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831923079385-djjdin3j9tuotdng3gilsu0v09fheb0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwiVTgEQHqHLiMCpVNy2OQcY2exlwp_-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831923079385-djjdin3j9tuotdng3gilsu0v09fheb0c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "831923079385-giq56p3uuaucbpqfect91hrfr459k3sr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mhicha"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

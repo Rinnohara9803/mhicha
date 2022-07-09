@@ -67,7 +67,6 @@ class ProfileProvider with ChangeNotifier {
         Uri.http(Config.authority, 'api/users/me'),
         headers: headers,
       );
-      print(responseData.statusCode);
 
       var jsonData = jsonDecode(responseData.body);
 

@@ -43,6 +43,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
+
   flutter_lints: ^1.0.0
   pinput:
   http:
@@ -53,6 +54,9 @@ dev_dependencies:
   provider:
   image_picker:
   auto_size_text:
+  firebase_messaging:
+  firebase_core:
+  flutter_local_notifications:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

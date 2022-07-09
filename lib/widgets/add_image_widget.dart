@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mhicha/utilities/themes.dart';
-import 'package:path/path.dart' as path;
 
 class AddImageWidget extends StatefulWidget {
   final Function getUserProfilePhoto;
@@ -15,25 +13,25 @@ class AddImageWidget extends StatefulWidget {
 
 class _AddImageWidgetState extends State<AddImageWidget> {
   File? _selectedImage;
-  Future<void> _getUserPicture(ImageSource imageSource) async {
-    ImagePicker _picker = ImagePicker();
-    final image = await _picker.pickImage(
-      source: imageSource,
-    );
-    if (image == null) {
-      return;
-    }
-    final _imageName = path.basename(image.path);
+  // Future<void> _getUserPicture(ImageSource imageSource) async {
+  //   ImagePicker _picker = ImagePicker();
+  //   final image = await _picker.pickImage(
+  //     source: imageSource,
+  //   );
+  //   if (image == null) {
+  //     return;
+  //   }
+  //   final _imageName = path.basename(image.path);
 
-    setState(() {
-      _selectedImage = File(image.path);
-    });
+  //   setState(() {
+  //     _selectedImage = File(image.path);
+  //   });
 
-    widget.getUserProfilePhoto(
-      _selectedImage,
-      _imageName,
-    );
-  }
+  //   widget.getUserProfilePhoto(
+  //     _selectedImage,
+  //     _imageName,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
