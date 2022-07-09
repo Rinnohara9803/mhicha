@@ -6,10 +6,12 @@ class SharedService {
   static String userName = '';
   static String email = '';
   static bool isVerified = false;
+  static double balance = 0.0;
   static String sendToUserId = '';
   static String sendToUserName = '';
   static String sendToEmail = '';
   static bool sendToVerified = false;
+
   static ProceedSendMoney proceedSendMoney = ProceedSendMoney(
     mhichaEmail: '',
     receiverUserName: '',

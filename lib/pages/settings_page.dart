@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/services/auth_service.dart';
 
-class Page4 extends StatelessWidget {
-  const Page4({Key? key}) : super(key: key);
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

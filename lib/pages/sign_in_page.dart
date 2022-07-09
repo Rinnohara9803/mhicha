@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
+import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -37,16 +39,20 @@ class _SignInPageState extends State<SignInPage> {
     try {
       await AuthService.signInuser(
               _emailController.text, _passwordController.text)
-          .then((value) {
-        // if (SharedService.isVerified) {
-        Navigator.pushReplacementNamed(context, DashboardPage.routeName);
-        // } else {
-        //   Navigator.pushReplacementNamed(
-        //     context,
-        //     VerifyEmailPage.routeName,
-        //     arguments: SharedService.email,
-        //   );
-        // }
+          .then((value) async {
+        await Provider.of<ProfileProvider>(context, listen: false)
+            .getMyProfile()
+            .then((value) {
+          if (SharedService.isVerified) {
+            Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+          } else {
+            Navigator.pushReplacementNamed(
+              context,
+              VerifyEmailPage.routeName,
+              arguments: SharedService.email,
+            );
+          }
+        });
       });
     } on SocketException {
       SnackBars.showNoInternetConnectionSnackBar(context);

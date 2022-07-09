@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/pages/home_page.dart';
 import 'package:mhicha/pages/page2.dart';
 import 'package:mhicha/pages/page3.dart';
-import 'package:mhicha/pages/page4.dart';
+import 'package:mhicha/pages/settings_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
 import 'package:mhicha/utilities/themes.dart';
 
@@ -20,7 +20,7 @@ class _DashboardPageState extends State<DashboardPage> {
     HomePage(),
     Page2(),
     Page3(),
-    Page4(),
+    SettingsPage(),
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -159,7 +159,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
-                          currentScreen = const Page4();
+                          currentScreen = const SettingsPage();
                           currentTab = 4;
                         });
                       },

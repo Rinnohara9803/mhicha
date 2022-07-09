@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/models/user.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
+import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class AuthService {
   static Future<void> signUpUser(User user) async {
@@ -69,6 +71,7 @@ class AuthService {
         SharedService.userID = jsonData['user']['_id'];
         SharedService.isVerified = jsonData['user']['verified'];
         SharedService.token = jsonData['token'];
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', jsonData['token']);
         await prefs.setString('userID', jsonData['user']['_id']);
@@ -81,6 +84,7 @@ class AuthService {
     } on SocketException {
       return Future.error('No Internet Connection');
     } catch (e) {
+      print(e.toString());
       return Future.error(e.toString());
     }
   }
@@ -90,13 +94,12 @@ class AuthService {
     if (!prefs.containsKey('token')) {
       Navigator.pushReplacementNamed(context, SignInPage.routeName);
     } else {
-      print('here');
-      print(prefs.getString('userID'));
-      print('here');
       SharedService.token = prefs.getString('token')!;
       SharedService.userID = prefs.getString('userID')!;
       try {
-        await fetchMyProfile(SharedService.userID).then((_) {
+        await Provider.of<ProfileProvider>(context, listen: false)
+            .getMyProfile()
+            .then((_) {
           Navigator.pushReplacementNamed(context, DashboardPage.routeName);
         });
       } on SocketException {

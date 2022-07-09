@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/features_row_widgets.dart';
@@ -27,48 +28,56 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                          top: 22,
-                          left: 5,
-                        ),
-                        padding: const EdgeInsets.only(
-                          right: 20,
-                          left: 90,
-                          top: 10,
-                          bottom: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            20,
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, ProfilePage.routeName);
+                    },
+                    child: Stack(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                            top: 22,
+                            left: 5,
                           ),
-                          color: ThemeClass.primaryColor.withOpacity(
-                            0.2,
+                          padding: const EdgeInsets.only(
+                            right: 20,
+                            left: 90,
+                            top: 10,
+                            bottom: 10,
                           ),
-                        ),
-                        child: Text(
-                          SharedService.userName,
-                          style: TextStyle(
-                            color: ThemeClass.primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const Positioned(
-                        child: CircleAvatar(
-                          radius: 39,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage(
-                              'images/profile_avatar.png',
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              20,
                             ),
-                            radius: 37,
+                            color: ThemeClass.primaryColor.withOpacity(
+                              0.2,
+                            ),
+                          ),
+                          child: Text(
+                            SharedService.userName,
+                            style: TextStyle(
+                              color: ThemeClass.primaryColor,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        const Positioned(
+                          child: CircleAvatar(
+                            radius: 39,
+                            backgroundColor: Colors.white,
+                            child: Hero(
+                              tag: 'profileImage',
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage(
+                                  'images/profile_avatar.png',
+                                ),
+                                radius: 37,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   IconButton(
                     onPressed: () {},
