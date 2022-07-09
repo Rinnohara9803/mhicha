@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
@@ -22,19 +24,42 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String userName = SharedService.userName;
   String email = SharedService.email;
 
-  Future<void> updateProfile() async {}
+  Future<void> updateProfile() async {
+    try {
+      await Provider.of<ProfileProvider>(
+        context,
+        listen: false,
+      ).updateProfile(userName, email).then((value) {
+        SnackBars.showNormalSnackbar(
+          context,
+          'Profile updated successfully!!!',
+        );
+      });
+    } on SocketException {
+      SnackBars.showNoInternetConnectionSnackBar(context);
+    } catch (e) {
+      SnackBars.showErrorSnackBar(
+        context,
+        e.toString(),
+      );
+    }
+  }
 
   Future<void> _saveForm() async {
-    if (_formKey.currentState!.validate()) {
+    if (!_formKey.currentState!.validate()) {
       return;
     }
     _formKey.currentState!.save();
+
     if (userName == SharedService.userName && email == SharedService.email) {
       SnackBars.showNormalSnackbar(context, 'No changes to save.');
+      return;
     }
     setState(() {
       _isLoading = true;
     });
+
+    await updateProfile();
     setState(() {
       _isLoading = false;
     });
@@ -56,19 +81,36 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.289,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topRight,
-                            end: Alignment.bottomLeft,
-                            colors: [
-                              ThemeClass.primaryColor,
-                              const Color(0xff018AF3),
-                            ],
+                      Stack(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.289,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [
+                                  ThemeClass.primaryColor,
+                                  const Color(0xff018AF3),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            top: 10,
+                            left: 10,
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Expanded(
                         flex: 10,
@@ -136,7 +178,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     'Username',
                                   ),
                                   prefixIcon: const Icon(
-                                    Icons.mail_outline,
+                                    Icons.person,
                                   ),
                                 ),
                                 onSaved: (text) {

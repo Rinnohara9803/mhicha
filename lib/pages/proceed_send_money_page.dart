@@ -48,14 +48,26 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
 
   String hashedReceiverUserName() {
     String hashedUserName = '';
+    List uniqueNameChars = [];
     for (var i in userNameChars) {
-      if (userNameChars.indexOf(i) == 0) {
-        hashedUserName = hashedUserName + i;
-      } else if (userNameChars.indexOf(i) == 1) {
-        hashedUserName = hashedUserName + i;
-      } else if (userNameChars.indexOf(i) == userNameChars.length - 1) {
-        hashedUserName = hashedUserName + i;
-      } else if (i == ' ') {
+      uniqueNameChars.add(
+        {
+          'key': UniqueKey(),
+          'value': i,
+        },
+      );
+    }
+
+    /// creates a unique list of characters
+
+    for (var i in uniqueNameChars) {
+      if (uniqueNameChars.indexOf(i) == 0) {
+        hashedUserName = hashedUserName + i['value'];
+      } else if (uniqueNameChars.indexOf(i) == 1) {
+        hashedUserName = hashedUserName + i['value'];
+      } else if (i == uniqueNameChars.last) {
+        hashedUserName = hashedUserName + i['value'];
+      } else if (i['value'] == ' ') {
         hashedUserName = hashedUserName + ' ';
       } else {
         hashedUserName = hashedUserName + '*';

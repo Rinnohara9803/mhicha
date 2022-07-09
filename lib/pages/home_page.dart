@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/profile_page.dart';
-import 'package:mhicha/services/shared_services.dart';
+import 'package:mhicha/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/features_row_widgets.dart';
 import 'package:mhicha/widgets/sliding_widgets.dart';
@@ -54,7 +55,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            SharedService.userName,
+                            Provider.of<ProfileProvider>(context).userName,
                             style: TextStyle(
                               color: ThemeClass.primaryColor,
                               fontWeight: FontWeight.w500,

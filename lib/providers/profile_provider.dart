@@ -31,7 +31,7 @@ class ProfileProvider with ChangeNotifier {
     try {
       await http
           .put(
-        Uri.http(Config.authority, 'user'),
+        Uri.http(Config.authority, 'api/users/${SharedService.userID}'),
         headers: headers,
         body: jsonEncode(
           {
@@ -41,8 +41,11 @@ class ProfileProvider with ChangeNotifier {
         ),
       )
           .then((_) {
+        SharedService.userName = userName;
         _userName = userName;
+
         notifyListeners();
+        SharedService.email = email;
         _email = email;
         notifyListeners();
       });
@@ -82,7 +85,6 @@ class ProfileProvider with ChangeNotifier {
     } on SocketException {
       return Future.error('No Internet connection');
     } catch (e) {
-      print(e.toString());
       rethrow;
     }
   }
