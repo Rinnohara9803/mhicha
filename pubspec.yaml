@@ -52,6 +52,7 @@ dev_dependencies:
   qr_code_scanner:
   provider:
   image_picker:
+  auto_size_text:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

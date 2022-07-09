@@ -58,23 +58,22 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Column(
               children: [
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        bottomRight: Radius.circular(
-                          55,
-                        ),
+                Container(
+                  height: theHeight * 0.230,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      bottomRight: Radius.circular(
+                        55,
                       ),
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          ThemeClass.primaryColor,
-                          const Color(0xff018AF3),
-                        ],
-                      ),
+                    ),
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        ThemeClass.primaryColor,
+                        const Color(0xff018AF3),
+                      ],
                     ),
                   ),
                 ),
@@ -141,9 +140,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 color: Colors.white,
                                               ),
                                             ),
-                                            const Text(
-                                              'Rs. 600',
-                                              style: TextStyle(
+                                            Text(
+                                              'Rs. ${Provider.of<ProfileProvider>(context).balance}',
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 23,
                                                 fontWeight: FontWeight.w500,
@@ -215,42 +214,48 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Positioned(
                     bottom: -14,
-                    left: 14,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: ThemeClass.primaryColor,
-                        borderRadius: BorderRadius.circular(
-                          15,
-                        ),
-                      ),
-                      child: Row(
-                        children: const [
-                          Icon(
-                            Icons.verified_outlined,
-                            color: Colors.white,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Verified',
-                            style: TextStyle(
-                              color: Colors.white,
+                          decoration: BoxDecoration(
+                            color: ThemeClass.primaryColor,
+                            borderRadius: BorderRadius.circular(
+                              15,
                             ),
                           ),
-                        ],
-                      ),
+                          child: Row(
+                            children: const [
+                              Icon(
+                                Icons.verified_outlined,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Verified',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
             Positioned(
-              top: theHeight * 0.178,
+              top: theHeight * 0.168,
               left: theWidth * 0.4,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

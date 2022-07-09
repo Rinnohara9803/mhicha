@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
+import 'package:provider/provider.dart';
 
 class ProceedSendMoneyPage extends StatefulWidget {
   static String routeName = '/proceedSendMoneyPage';
@@ -218,7 +220,9 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                               });
                             },
                             child: Text(
-                              !_isBalanceVisible ? 'XXX.XX' : 'Rs. 600',
+                              !_isBalanceVisible
+                                  ? 'XXX.XX'
+                                  : 'Rs. ${Provider.of<ProfileProvider>(context).balance}',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
@@ -265,7 +269,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                   child: Column(
                     children: [
                       proceedSendMoneyDetails(
-                        'mhicha Email',
+                        'Email',
                         SharedService.proceedSendMoney.mhichaEmail,
                       ),
                       const SizedBox(

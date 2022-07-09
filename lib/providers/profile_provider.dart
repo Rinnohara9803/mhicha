@@ -9,13 +9,7 @@ import '../config.dart';
 class ProfileProvider with ChangeNotifier {
   String _userName = SharedService.userName;
   String _email = SharedService.email;
-
-  // void setProfileDetails(String userName, String email) {
-  //   _userName = userName;
-  //   notifyListeners();
-  //   _email = email;
-  //   notifyListeners();
-  // }
+  double _balance = SharedService.balance;
 
   String get userName {
     return _userName;
@@ -23,6 +17,10 @@ class ProfileProvider with ChangeNotifier {
 
   String get email {
     return _email;
+  }
+
+  double get balance {
+    return _balance;
   }
 
   Future<void> updateProfile(String userName, String email) async {
@@ -61,10 +59,12 @@ class ProfileProvider with ChangeNotifier {
       "Authorization": "Bearer ${SharedService.token}",
     };
     try {
+      print(SharedService.token);
       var responseData = await http.get(
-        Uri.http(Config.authority, 'users/me'),
+        Uri.http(Config.authority, 'api/users/me'),
         headers: headers,
       );
+      print(responseData.statusCode);
 
       var jsonData = jsonDecode(responseData.body);
 
@@ -72,12 +72,17 @@ class ProfileProvider with ChangeNotifier {
       SharedService.userName = jsonData['name'];
       SharedService.email = jsonData['email'];
       SharedService.isVerified = jsonData['verified'];
+      SharedService.balance = double.parse(
+        jsonData['balance'].toString(),
+      );
 
       _userName = SharedService.userName;
       _email = SharedService.email;
+      _balance = SharedService.balance;
     } on SocketException {
       return Future.error('No Internet connection');
     } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }

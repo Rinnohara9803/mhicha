@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mhicha/models/proceed_send_money.dart';
 import 'package:mhicha/pages/proceed_send_money_page.dart';
+import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:provider/provider.dart';
 
 class SendMoneyPage extends StatefulWidget {
   static String routeName = '/sendMoneyPage';
@@ -105,7 +108,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 40,
-                      vertical: 40,
+                      vertical: 30,
                     ),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -144,8 +147,10 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                   _isBalanceVisible = !_isBalanceVisible;
                                 });
                               },
-                              child: Text(
-                                !_isBalanceVisible ? 'XXX.XX' : 'Rs. 600',
+                              child: AutoSizeText(
+                                !_isBalanceVisible
+                                    ? 'XXX.XX'
+                                    : 'Rs. ${Provider.of<ProfileProvider>(context).balance}',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 25,
@@ -156,7 +161,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                           ],
                         ),
                         const Spacer(),
-                        const Text(
+                        const AutoSizeText(
                           'Total Balance',
                           style: TextStyle(
                             color: Colors.white,
@@ -167,7 +172,6 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                     ),
                   ),
                   Expanded(
-                    flex: 9,
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.only(
