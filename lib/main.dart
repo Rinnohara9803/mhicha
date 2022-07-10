@@ -5,7 +5,6 @@ import 'package:mhicha/pages/proceed_send_money_page.dart';
 import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
 import 'package:mhicha/pages/send_money_page.dart';
-import 'package:mhicha/pages/settings_page.dart';
 import 'package:mhicha/pages/splash_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
@@ -76,7 +75,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final x = '1';
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
