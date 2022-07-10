@@ -1,6 +1,14 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:mhicha/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mhicha/services/pdf_invoice_service.dart';
+import 'package:mhicha/services/pdf_service.dart';
+
+import '../models/student.dart';
+import '../services/apis/pdf_api.dart';
+import '../services/apis/pdf_invoice_api.dart';
 
 class PaymentPage extends StatelessWidget {
   const PaymentPage({Key? key}) : super(key: key);
@@ -9,28 +17,46 @@ class PaymentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: TextButton(
-          onPressed: () {
-            flutterLocalNotificationsPlugin.show(
-              0,
-              'Notification title',
-              'Notification body',
-              NotificationDetails(
-                android: AndroidNotificationDetails(
-                  channel.id,
-                  channel.name,
-                  channelDescription: channel.description,
-                  importance: Importance.high,
-                  playSound: true,
-                  color: Colors.white,
-                  icon: '@mipmap/ic_launcher',
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () async {
+                final pdfFile = await PdfInvoiceApi.generate(
+                  Student(
+                    firstName: 'Sagar',
+                    lastName: 'Prajapati',
+                    age: 21,
+                  ),
+                );
+                PdfApi.openFile(pdfFile);
+              },
+              child: const Text('Generate PDF'),
+            ),
+            TextButton(
+              onPressed: () {
+                flutterLocalNotificationsPlugin.show(
+                  0,
+                  'Notification title',
+                  'Notification body',
+                  NotificationDetails(
+                    android: AndroidNotificationDetails(
+                      channel.id,
+                      channel.name,
+                      channelDescription: channel.description,
+                      importance: Importance.high,
+                      playSound: true,
+                      color: Colors.white,
+                      icon: '@mipmap/ic_launcher',
+                    ),
+                  ),
+                );
+              },
+              child: const Text(
+                'Show Local Notification',
               ),
-            );
-          },
-          child: const Text(
-            'Show Local Notification',
-          ),
+            ),
+          ],
         ),
       ),
     );

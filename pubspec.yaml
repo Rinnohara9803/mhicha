@@ -57,6 +57,9 @@ dev_dependencies:
   firebase_core:
   flutter_local_notifications:
   fluttertoast:
+  path_provider:
+  pdf: 3.0.0
+  open_file:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
