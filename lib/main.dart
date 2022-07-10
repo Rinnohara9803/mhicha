@@ -5,6 +5,7 @@ import 'package:mhicha/pages/proceed_send_money_page.dart';
 import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
 import 'package:mhicha/pages/send_money_page.dart';
+import 'package:mhicha/pages/settings_page.dart';
 import 'package:mhicha/pages/splash_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
@@ -79,9 +80,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).isDarkMode
-          ? ThemeData.dark(
-            
-          )
+          ? ThemeData.dark().copyWith()
           : ThemeData(
               colorScheme: ColorScheme.fromSwatch().copyWith(
                 primary: ThemeClass.primaryColor,

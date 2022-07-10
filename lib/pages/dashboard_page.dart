@@ -18,14 +18,15 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   int currentTab = 0;
-  List tabs = const [
-    HomePage(),
-    Page2(),
-    PaymentPage(),
-    SettingsPage(),
-  ];
 
   final PageStorageBucket bucket = PageStorageBucket();
+
+  void returnToPreviousPage() {
+    setState(() {
+      currentScreen = const HomePage();
+      currentTab = 0;
+    });
+  }
 
   Widget currentScreen = const HomePage();
   @override
@@ -142,7 +143,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       onPressed: () {
                         setState(() {
                           currentScreen = const PaymentPage();
-                          currentTab = 3;
+                          currentTab = 2;
                         });
                       },
                       child: Column(
@@ -150,7 +151,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           Icon(
                             Icons.payment,
-                            color: currentTab == 3
+                            color: currentTab == 2
                                 ? Provider.of<ThemeProvider>(context).isDarkMode
                                     ? Colors.white
                                     : ThemeClass.primaryColor
@@ -159,7 +160,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           Text(
                             'Payments',
                             style: TextStyle(
-                              color: currentTab == 3
+                              color: currentTab == 2
                                   ? Provider.of<ThemeProvider>(context)
                                           .isDarkMode
                                       ? Colors.white
@@ -177,7 +178,9 @@ class _DashboardPageState extends State<DashboardPage> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
-                          currentScreen = const SettingsPage();
+                          currentScreen = SettingsPage(
+                            returnToPreviousFunction: returnToPreviousPage,
+                          );
                           currentTab = 4;
                         });
                       },
@@ -186,7 +189,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           Icon(
                             Icons.settings,
-                            color: currentTab == 4
+                            color: currentTab == 3
                                 ? Provider.of<ThemeProvider>(context).isDarkMode
                                     ? Colors.white
                                     : ThemeClass.primaryColor
@@ -195,7 +198,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           Text(
                             ' Settings ',
                             style: TextStyle(
-                              color: currentTab == 4
+                              color: currentTab == 3
                                   ? Provider.of<ThemeProvider>(context)
                                           .isDarkMode
                                       ? Colors.white

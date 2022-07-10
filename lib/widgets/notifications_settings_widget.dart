@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
+import 'package:mhicha/utilities/flutter_toasts.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
 
-class ChangeToDarkThemeWidget extends StatefulWidget {
-  const ChangeToDarkThemeWidget({Key? key}) : super(key: key);
+class ChangeNotificationStatusWidget extends StatefulWidget {
+  const ChangeNotificationStatusWidget({Key? key}) : super(key: key);
 
   @override
-  State<ChangeToDarkThemeWidget> createState() =>
+  State<ChangeNotificationStatusWidget> createState() =>
       _ChangeToDarkThemeWidgetState();
 }
 
-class _ChangeToDarkThemeWidgetState extends State<ChangeToDarkThemeWidget> {
-  bool isDarkMode = SharedService.isDarkMode;
+class _ChangeToDarkThemeWidgetState
+    extends State<ChangeNotificationStatusWidget> {
+  bool isNotificationOn = SharedService.isNotificationOn;
 
   void toggleSwitch(bool value) {
-    if (isDarkMode == false) {
+    if (isNotificationOn == false) {
       setState(() {
-        isDarkMode = true;
+        isNotificationOn = true;
       });
+      FlutterToasts.showNormalFlutterToast('Notifications turned off.');
     } else {
       setState(() {
-        isDarkMode = false;
+        isNotificationOn = false;
       });
+      FlutterToasts.showNormalFlutterToast('Notifications turned on.');
     }
   }
 
@@ -43,7 +47,7 @@ class _ChangeToDarkThemeWidgetState extends State<ChangeToDarkThemeWidget> {
                       0.7,
                     ),
               child: Icon(
-                Icons.dark_mode_outlined,
+                Icons.notifications_active,
                 size: 22.0,
                 color: Provider.of<ThemeProvider>(context).isDarkMode
                     ? Colors.black
@@ -55,28 +59,17 @@ class _ChangeToDarkThemeWidgetState extends State<ChangeToDarkThemeWidget> {
               shape: const CircleBorder(),
             ),
             const Text(
-              'Dark Theme',
+              'Mute Notifications',
             ),
           ],
         ),
-        Row(
-          children: [
-            Text(
-              isDarkMode ? 'ON' : 'OFF',
-            ),
-            Switch(
-              onChanged: (isDarkMode) {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .changeTheme()
-                    .then((value) {
-                  toggleSwitch(isDarkMode);
-                });
-              },
-              value: isDarkMode,
-              activeColor: ThemeClass.primaryColor,
-              splashRadius: 4,
-            ),
-          ],
+        Switch(
+          onChanged: (isDarkMode) {
+            toggleSwitch(isDarkMode);
+          },
+          value: isNotificationOn,
+          activeColor: ThemeClass.primaryColor,
+          splashRadius: 4,
         ),
       ],
     );
