@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
@@ -44,39 +43,40 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
     );
   }
 
+  String name = 'Ajay';
+
   List userNameChars =
-      SharedService.proceedSendMoney.receiverUserName.split('');
+      SharedService.proceedSendMoney.receiverUserName.split(' ');
 
   String hashedReceiverUserName() {
+    List toBeHashedUserName = userNameChars[0].split("");
+    List uniqueToBeHashedUserName = [];
     String hashedUserName = '';
-    List uniqueNameChars = [];
-    for (var i in userNameChars) {
-      uniqueNameChars.add(
-        {
-          'key': UniqueKey(),
-          'value': i,
-        },
-      );
+
+    for (var i in toBeHashedUserName) {
+      uniqueToBeHashedUserName.add({
+        'key': UniqueKey(),
+        'value': i,
+      });
     }
 
-    /// creates a unique list of characters
-
-    for (var i in uniqueNameChars) {
-      if (uniqueNameChars.indexOf(i) == 0) {
+    for (var i in uniqueToBeHashedUserName) {
+      if (uniqueToBeHashedUserName.indexOf(i) <= 1 ||
+          uniqueToBeHashedUserName.indexOf(i) ==
+              uniqueToBeHashedUserName.length - 1) {
         hashedUserName = hashedUserName + i['value'];
-      } else if (uniqueNameChars.indexOf(i) == 1) {
-        hashedUserName = hashedUserName + i['value'];
-      } else if (i == uniqueNameChars.last) {
-        hashedUserName = hashedUserName + i['value'];
-      } else if (i['value'] == ' ') {
-        hashedUserName = hashedUserName + ' ';
       } else {
-        hashedUserName = hashedUserName + '*';
+        hashedUserName = hashedUserName + "*";
       }
     }
-    return hashedUserName;
+    print(hashedUserName);
+
+    userNameChars[0] = hashedUserName;
+
+    return userNameChars.join(" ");
   }
 
+ 
   void showNoticeBottomSheet() {
     showModalBottomSheet(
       context: context,

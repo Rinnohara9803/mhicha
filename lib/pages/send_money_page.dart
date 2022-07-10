@@ -199,7 +199,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                     ),
                                   ),
                                   label: const Text(
-                                    'mchicha Email',
+                                    'Email',
                                   ),
                                   prefixIcon: const Icon(
                                     Icons.mail_outline,
@@ -267,7 +267,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                     ),
                                   ),
                                   label: const Text(
-                                    'mhicha email',
+                                    'Email',
                                   ),
                                   prefixIcon: const Icon(
                                     Icons.mail_outline,

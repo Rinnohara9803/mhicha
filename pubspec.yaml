@@ -52,7 +52,6 @@ dev_dependencies:
   qr_flutter:
   qr_code_scanner:
   provider:
-  image_picker:
   auto_size_text:
   firebase_messaging:
   firebase_core:

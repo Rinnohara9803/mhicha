@@ -79,7 +79,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 Expanded(
                   flex: 10,
                   child: Container(
-                    color: Colors.white,
                     child: Column(
                       children: [
                         SingleChildScrollView(
@@ -193,7 +192,8 @@ class _ProfilePageState extends State<ProfilePage> {
               top: theHeight * 0.13,
               left: theWidth * 0.09,
               child: Stack(
-                clipBehavior: Clip.none, children: [
+                clipBehavior: Clip.none,
+                children: [
                   Hero(
                     tag: 'profileImage',
                     child: CircleAvatar(

@@ -10,6 +10,7 @@ import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
+import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -62,6 +63,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ProfileProvider>(
           create: (context) => ProfileProvider(),
+        ),
+        ChangeNotifierProvider<ThemeProvider>(
+          create: (context) => ThemeProvider(),
         ),
       ],
       child: MaterialApp(
