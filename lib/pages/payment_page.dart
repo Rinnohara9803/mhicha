@@ -9,28 +9,37 @@ class PaymentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: TextButton(
-          onPressed: () {
-            flutterLocalNotificationsPlugin.show(
-              0,
-              'Notification title',
-              'Notification body',
-              NotificationDetails(
-                android: AndroidNotificationDetails(
-                  channel.id,
-                  channel.name,
-                  channelDescription: channel.description,
-                  importance: Importance.high,
-                  playSound: true,
-                  color: Colors.white,
-                  icon: '@mipmap/ic_launcher',
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: Text('Generate PDF'),
+            ),
+            TextButton(
+              onPressed: () {
+                flutterLocalNotificationsPlugin.show(
+                  0,
+                  'Notification title',
+                  'Notification body',
+                  NotificationDetails(
+                    android: AndroidNotificationDetails(
+                      channel.id,
+                      channel.name,
+                      channelDescription: channel.description,
+                      importance: Importance.high,
+                      playSound: true,
+                      color: Colors.white,
+                      icon: '@mipmap/ic_launcher',
+                    ),
+                  ),
+                );
+              },
+              child: const Text(
+                'Show Local Notification',
               ),
-            );
-          },
-          child: const Text(
-            'Show Local Notification',
-          ),
+            ),
+          ],
         ),
       ),
     );
