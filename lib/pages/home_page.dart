@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
+import 'package:mhicha/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/features_row_widgets.dart';
@@ -52,11 +53,18 @@ class HomePage extends StatelessWidget {
                             color: ThemeClass.primaryColor.withOpacity(
                               0.2,
                             ),
+                            border:
+                                Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Border.all(color: Colors.white)
+                                    : null,
                           ),
                           child: Text(
                             Provider.of<ProfileProvider>(context).userName,
                             style: TextStyle(
-                              color: ThemeClass.primaryColor,
+                              color:
+                                  Provider.of<ThemeProvider>(context).isDarkMode
+                                      ? Colors.white
+                                      : ThemeClass.primaryColor,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -112,10 +120,12 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text(
+                  Text(
                     'Transactions',
                     style: TextStyle(
-                      color: Colors.black87,
+                      color: Provider.of<ThemeProvider>(context).isDarkMode
+                          ? Colors.white
+                          : Colors.black87,
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                     ),
@@ -125,9 +135,11 @@ class HomePage extends StatelessWidget {
                     child: Text(
                       'See All',
                       style: TextStyle(
-                        color: ThemeClass.primaryColor.withOpacity(
-                          0.8,
-                        ),
+                        color: Provider.of<ThemeProvider>(context).isDarkMode
+                            ? Colors.white
+                            : ThemeClass.primaryColor.withOpacity(
+                                0.8,
+                              ),
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/home_page.dart';
-import 'package:mhicha/pages/page2.dart';
-import 'package:mhicha/pages/page3.dart';
+import 'package:mhicha/pages/statements_page.dart';
+import 'package:mhicha/pages/payment_page.dart';
 import 'package:mhicha/pages/settings_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
+import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/utilities/themes.dart';
+import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
   static String routeName = '/dashboardPage';
@@ -19,7 +21,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List tabs = const [
     HomePage(),
     Page2(),
-    Page3(),
+    PaymentPage(),
     SettingsPage(),
   ];
 
@@ -43,6 +45,7 @@ class _DashboardPageState extends State<DashboardPage> {
           },
           child: const Icon(
             Icons.qr_code,
+            color: Colors.white,
           ),
         ),
         bottomNavigationBar: BottomAppBar(
@@ -72,14 +75,19 @@ class _DashboardPageState extends State<DashboardPage> {
                           Icon(
                             Icons.home_rounded,
                             color: currentTab == 0
-                                ? ThemeClass.primaryColor
+                                ? Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Colors.white
+                                    : ThemeClass.primaryColor
                                 : Colors.grey,
                           ),
                           Text(
                             '   Home   ',
                             style: TextStyle(
                               color: currentTab == 0
-                                  ? ThemeClass.primaryColor
+                                  ? Provider.of<ThemeProvider>(context)
+                                          .isDarkMode
+                                      ? Colors.white
+                                      : ThemeClass.primaryColor
                                   : Colors.grey,
                             ),
                           )
@@ -103,14 +111,19 @@ class _DashboardPageState extends State<DashboardPage> {
                           Icon(
                             Icons.book,
                             color: currentTab == 1
-                                ? ThemeClass.primaryColor
+                                ? Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Colors.white
+                                    : ThemeClass.primaryColor
                                 : Colors.grey,
                           ),
                           Text(
                             'Statements',
                             style: TextStyle(
                               color: currentTab == 1
-                                  ? ThemeClass.primaryColor
+                                  ? Provider.of<ThemeProvider>(context)
+                                          .isDarkMode
+                                      ? Colors.white
+                                      : ThemeClass.primaryColor
                                   : Colors.grey,
                             ),
                           )
@@ -128,7 +141,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
-                          currentScreen = const Page3();
+                          currentScreen = const PaymentPage();
                           currentTab = 3;
                         });
                       },
@@ -138,14 +151,19 @@ class _DashboardPageState extends State<DashboardPage> {
                           Icon(
                             Icons.payment,
                             color: currentTab == 3
-                                ? ThemeClass.primaryColor
+                                ? Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Colors.white
+                                    : ThemeClass.primaryColor
                                 : Colors.grey,
                           ),
                           Text(
                             'Payments',
                             style: TextStyle(
                               color: currentTab == 3
-                                  ? ThemeClass.primaryColor
+                                  ? Provider.of<ThemeProvider>(context)
+                                          .isDarkMode
+                                      ? Colors.white
+                                      : ThemeClass.primaryColor
                                   : Colors.grey,
                             ),
                           )
@@ -169,14 +187,19 @@ class _DashboardPageState extends State<DashboardPage> {
                           Icon(
                             Icons.settings,
                             color: currentTab == 4
-                                ? ThemeClass.primaryColor
+                                ? Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Colors.white
+                                    : ThemeClass.primaryColor
                                 : Colors.grey,
                           ),
                           Text(
                             ' Settings ',
                             style: TextStyle(
                               color: currentTab == 4
-                                  ? ThemeClass.primaryColor
+                                  ? Provider.of<ThemeProvider>(context)
+                                          .isDarkMode
+                                      ? Colors.white
+                                      : ThemeClass.primaryColor
                                   : Colors.grey,
                             ),
                           )

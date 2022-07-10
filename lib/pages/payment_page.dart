@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:mhicha/utilities/themes.dart';
 
-class Page3 extends StatelessWidget {
-  const Page3({Key? key}) : super(key: key);
+class PaymentPage extends StatelessWidget {
+  const PaymentPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

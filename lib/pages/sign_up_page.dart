@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/models/user.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
+import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
+import 'package:mhicha/utilities/constants.dart';
 import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -123,41 +126,21 @@ class _SignUpPageState extends State<SignUpPage> {
                       _userNameController.text = text!;
                     },
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
+                      border: border,
                       enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.red),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            width: 1.5, color: ThemeClass.primaryColor),
+                            width: 1.5,
+                            color:
+                                Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Colors.white60
+                                    : Colors.black54),
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1.5, color: ThemeClass.primaryColor),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
+                      errorBorder: errorBorder,
+                      focusedBorder: focusedBorder,
+                      focusedErrorBorder: focusedErrorBorder,
                       label: const Text(
                         'Full Name',
                       ),
@@ -184,41 +167,21 @@ class _SignUpPageState extends State<SignUpPage> {
                       return null;
                     },
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
+                      border: border,
                       enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.red),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            width: 1.5, color: ThemeClass.primaryColor),
+                            width: 1.5,
+                            color:
+                                Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Colors.white60
+                                    : Colors.black54),
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1.5, color: ThemeClass.primaryColor),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
+                      errorBorder: errorBorder,
+                      focusedBorder: focusedBorder,
+                      focusedErrorBorder: focusedErrorBorder,
                       label: const Text(
                         'Email',
                       ),
@@ -245,41 +208,21 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     obscureText: isVisible,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
+                      border: border,
                       enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.5, color: Colors.red),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                            width: 1.5, color: ThemeClass.primaryColor),
+                            width: 1.5,
+                            color:
+                                Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Colors.white60
+                                    : Colors.black54),
                         borderRadius: BorderRadius.circular(
                           10,
                         ),
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1.5, color: ThemeClass.primaryColor),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
+                      errorBorder: errorBorder,
+                      focusedBorder: focusedBorder,
+                      focusedErrorBorder: focusedErrorBorder,
                       prefixIcon: const Icon(Icons.lock),
                       labelText: 'Password',
                       suffixIcon: IconButton(
@@ -303,7 +246,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       Text(
                         'Forgot Password ?',
                         style: TextStyle(
-                          color: ThemeClass.primaryColor,
+                          color: Provider.of<ThemeProvider>(context).isDarkMode
+                              ? Colors.white
+                              : ThemeClass.primaryColor,
                           fontSize: 15,
                           fontFamily: 'Lato',
                           fontWeight: FontWeight.w600,
@@ -355,10 +300,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         'Already have an account ? ',
                         style: TextStyle(
-                          color: Colors.black54,
+                          color: Provider.of<ThemeProvider>(context).isDarkMode
+                              ? Colors.white60
+                              : Colors.black54,
                           fontSize: 15,
                           fontFamily: 'Lato',
                           fontWeight: FontWeight.w600,
@@ -373,7 +320,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Text(
                           'Sign In',
                           style: TextStyle(
-                            color: ThemeClass.primaryColor,
+                            color:
+                                Provider.of<ThemeProvider>(context).isDarkMode
+                                    ? Colors.white
+                                    : ThemeClass.primaryColor,
                             fontSize: 15,
                             fontFamily: 'Lato',
                             fontWeight: FontWeight.w600,

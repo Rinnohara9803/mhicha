@@ -62,7 +62,6 @@ class ProfileProvider with ChangeNotifier {
       "Authorization": "Bearer ${SharedService.token}",
     };
     try {
-      print(SharedService.token);
       var responseData = await http.get(
         Uri.http(Config.authority, 'api/users/me'),
         headers: headers,

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mhicha/utilities/themes.dart';
 
@@ -12,7 +11,7 @@ class AddImageWidget extends StatefulWidget {
 }
 
 class _AddImageWidgetState extends State<AddImageWidget> {
-  File? _selectedImage;
+  // File? _selectedImage;
   // Future<void> _getUserPicture(ImageSource imageSource) async {
   //   ImagePicker _picker = ImagePicker();
   //   final image = await _picker.pickImage(

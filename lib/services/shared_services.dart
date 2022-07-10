@@ -19,6 +19,6 @@ class SharedService {
     purpose: '',
     remarks: '',
   );
-
+  
   static bool isDarkMode = false;
 }

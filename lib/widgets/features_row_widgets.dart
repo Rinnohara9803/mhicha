@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/pages/send_money_page.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 
 class FeatureRowWidgets extends StatelessWidget {
   const FeatureRowWidgets({Key? key}) : super(key: key);
@@ -19,6 +21,9 @@ class FeatureRowWidgets extends StatelessWidget {
                   radius: const Radius.circular(
                     15,
                   ),
+                  color: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.white
+                      : Colors.black,
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -32,7 +37,9 @@ class FeatureRowWidgets extends StatelessWidget {
                     height: 90,
                     child: Icon(
                       Icons.file_upload_outlined,
-                      color: ThemeClass.primaryColor,
+                      color: Provider.of<ThemeProvider>(context).isDarkMode
+                          ? Colors.white
+                          : ThemeClass.primaryColor,
                       size: 30,
                     ),
                   ),
@@ -61,6 +68,9 @@ class FeatureRowWidgets extends StatelessWidget {
             child: Column(
               children: [
                 DottedBorder(
+                  color: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.white
+                      : Colors.black,
                   borderType: BorderType.RRect,
                   radius: const Radius.circular(
                     15,
@@ -78,7 +88,9 @@ class FeatureRowWidgets extends StatelessWidget {
                     height: 90,
                     child: Icon(
                       Icons.screen_share_rounded,
-                      color: ThemeClass.primaryColor,
+                      color: Provider.of<ThemeProvider>(context).isDarkMode
+                          ? Colors.white
+                          : ThemeClass.primaryColor,
                       size: 30,
                     ),
                   ),
@@ -101,6 +113,9 @@ class FeatureRowWidgets extends StatelessWidget {
             child: Column(
               children: [
                 DottedBorder(
+                  color: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.white
+                      : Colors.black,
                   borderType: BorderType.RRect,
                   radius: const Radius.circular(
                     15,
@@ -118,7 +133,9 @@ class FeatureRowWidgets extends StatelessWidget {
                     height: 90,
                     child: Icon(
                       Icons.smartphone,
-                      color: ThemeClass.primaryColor,
+                      color: Provider.of<ThemeProvider>(context).isDarkMode
+                          ? Colors.white
+                          : ThemeClass.primaryColor,
                       size: 30,
                     ),
                   ),

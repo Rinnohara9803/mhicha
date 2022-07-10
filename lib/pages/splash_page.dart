@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/main.dart';
+import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -12,11 +14,18 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  Future<void> getIsDarkModeValue() async {
+    await Provider.of<ThemeProvider>(context, listen: false)
+        .getIsDarkModeValue();
+  }
+
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3), () {
       AuthService.autoLogin(context);
     });
+    getIsDarkModeValue();
+
     super.initState();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;

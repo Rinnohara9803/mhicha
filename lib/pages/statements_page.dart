@@ -5,9 +5,11 @@ class Page2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const  Scaffold(
       body: Center(
-        child: Text('Page 2'),
+        child: Text(
+          'Statements Page',
+        ),
       ),
     );
   }

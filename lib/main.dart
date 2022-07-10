@@ -33,7 +33,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  print('A big message just showed up: ${message.messageId}');
 }
 
 Future<void> main() async {
@@ -51,15 +50,8 @@ Future<void> main() async {
     sound: true,
   );
 
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
+  runApp(
+    MultiProvider(
       providers: [
         ChangeNotifierProvider<ProfileProvider>(
           create: (context) => ProfileProvider(),
@@ -68,28 +60,46 @@ class MyApp extends StatelessWidget {
           create: (context) => ThemeProvider(),
         ),
       ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch().copyWith(
-            primary: ThemeClass.primaryColor,
-          ),
-        ),
-        home: const SplashPage(),
-        routes: {
-          SignInPage.routeName: (context) => const SignInPage(),
-          SignUpPage.routeName: (context) => const SignUpPage(),
-          VerifyEmailPage.routeName: (context) => const VerifyEmailPage(),
-          DashboardPage.routeName: (context) => const DashboardPage(),
-          QRPage.routeName: (context) => const QRPage(),
-          SendMoneyPage.routeName: (context) => const SendMoneyPage(),
-          ProceedSendMoneyPage.routeName: (context) =>
-              const ProceedSendMoneyPage(),
-          ProfilePage.routeName: (context) => const ProfilePage(),
-          EditProfilePage.routeName: (context) => const EditProfilePage(),
-        },
-      ),
+      child: const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: Provider.of<ThemeProvider>(context).isDarkMode
+          ? ThemeData.dark(
+            
+          )
+          : ThemeData(
+              colorScheme: ColorScheme.fromSwatch().copyWith(
+                primary: ThemeClass.primaryColor,
+              ),
+            ),
+      home: const SplashPage(),
+      routes: {
+        SignInPage.routeName: (context) => const SignInPage(),
+        SignUpPage.routeName: (context) => const SignUpPage(),
+        VerifyEmailPage.routeName: (context) => const VerifyEmailPage(),
+        DashboardPage.routeName: (context) => const DashboardPage(),
+        QRPage.routeName: (context) => const QRPage(),
+        SendMoneyPage.routeName: (context) => const SendMoneyPage(),
+        ProceedSendMoneyPage.routeName: (context) =>
+            const ProceedSendMoneyPage(),
+        ProfilePage.routeName: (context) => const ProfilePage(),
+        EditProfilePage.routeName: (context) => const EditProfilePage(),
+      },
     );
   }
 }

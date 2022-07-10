@@ -6,7 +6,10 @@ class SnackBars {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(content),
+        content: Text(
+          content,
+          style: const TextStyle(color: Colors.white),
+        ),
         duration: const Duration(
           milliseconds: 2500,
         ),
@@ -21,7 +24,10 @@ class SnackBars {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         behavior: SnackBarBehavior.floating,
-        content: Text(content),
+        content: Text(
+          content,
+          style: const TextStyle(color: Colors.white),
+        ),
         backgroundColor: const Color.fromARGB(255, 189, 86, 80),
         duration: const Duration(
           milliseconds: 2500,
@@ -34,7 +40,12 @@ class SnackBars {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('No internet connection.'),
+        content: Text(
+          'No internet connection.',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         duration: Duration(
           milliseconds: 2500,
         ),

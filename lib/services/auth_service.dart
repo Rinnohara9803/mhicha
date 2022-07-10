@@ -90,7 +90,7 @@ class AuthService {
   static Future<void> autoLogin(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('token')) {
-      // ignore: use_build_context_synchronously
+      
       Navigator.pushReplacementNamed(context, SignInPage.routeName);
     } else {
       SharedService.token = prefs.getString('token')!;
@@ -194,14 +194,12 @@ class AuthService {
       "Authorization": "Bearer ${SharedService.token}",
     };
     try {
-      print(userId);
       var responseData = await http.get(
         Uri.http(Config.authority, 'api/users/$userId'),
         headers: headers,
       );
       if (responseData.statusCode == 200 || responseData.statusCode == 201) {
         var jsonData = jsonDecode(responseData.body);
-        print(jsonData);
         SharedService.userID = jsonData['_id'];
         SharedService.userName = jsonData['name'];
         SharedService.email = jsonData['email'];

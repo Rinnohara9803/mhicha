@@ -49,7 +49,6 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
           purpose: purpose,
           remarks: _remarksController.text,
         );
-        ;
         Navigator.pushNamed(
           context,
           ProceedSendMoneyPage.routeName,

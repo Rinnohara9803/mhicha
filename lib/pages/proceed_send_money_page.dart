@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/providers/profile_provider.dart';
+import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
@@ -69,20 +70,21 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
         hashedUserName = hashedUserName + "*";
       }
     }
-    print(hashedUserName);
 
     userNameChars[0] = hashedUserName;
 
     return userNameChars.join(" ");
   }
 
- 
   void showNoticeBottomSheet() {
     showModalBottomSheet(
       context: context,
       isDismissible: true,
       enableDrag: true,
-      backgroundColor: Colors.white,
+      backgroundColor:
+          Provider.of<ThemeProvider>(context, listen: false).isDarkMode
+              ? Colors.black
+              : Colors.white,
       builder: (BuildContext context) {
         return Container(
           padding: const EdgeInsets.all(
@@ -94,17 +96,23 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                children: const [
+                children: [
                   Icon(
                     Icons.info,
+                    color: Provider.of<ThemeProvider>(context).isDarkMode
+                        ? Colors.white
+                        : Colors.black,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Text(
                     'Notice',
                     style: TextStyle(
                       fontSize: 20,
+                      color: Provider.of<ThemeProvider>(context).isDarkMode
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                 ],
@@ -112,19 +120,25 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
+              Text(
                 'Please send money to only Trusted users after verifying properly. Do not send money on request from facebook, messenger or other social networking sites.',
                 style: TextStyle(
                   fontSize: 14,
+                  color: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.white
+                      : Colors.black,
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
+              Text(
                 'OR Call to confirm before sending money to any person in mhicha.',
                 style: TextStyle(
                   fontSize: 14,
+                  color: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.white
+                      : Colors.black,
                 ),
               ),
             ],
@@ -177,9 +191,11 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                       onPressed: () {
                         showNoticeBottomSheet();
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.info,
-                        color: Colors.black87,
+                        color: Provider.of<ThemeProvider>(context).isDarkMode
+                            ? Colors.white
+                            : Colors.black87,
                       ),
                     ),
                   ],
