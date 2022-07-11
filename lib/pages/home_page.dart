@@ -7,6 +7,7 @@ import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/features_row_widgets.dart';
 import 'package:mhicha/widgets/sliding_widgets.dart';
 import 'package:mhicha/widgets/wallet_balance_card.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,7 +59,7 @@ class HomePage extends StatelessWidget {
                                     ? Border.all(color: Colors.white)
                                     : null,
                           ),
-                          child: Text(
+                          child: AutoSizeText(
                             Provider.of<ProfileProvider>(context).userName,
                             style: TextStyle(
                               color:
@@ -120,7 +121,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
+                  AutoSizeText(
                     'Transactions',
                     style: TextStyle(
                       color: Provider.of<ThemeProvider>(context).isDarkMode
@@ -132,7 +133,7 @@ class HomePage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {},
-                    child: Text(
+                    child: AutoSizeText(
                       'See All',
                       style: TextStyle(
                         color: Provider.of<ThemeProvider>(context).isDarkMode
@@ -150,7 +151,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
+              const AutoSizeText(
                 'You have no available transactions !!!',
               ),
               const SizedBox(

@@ -198,7 +198,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                       10,
                                     ),
                                   ),
-                                  label: const Text(
+                                  label: const AutoSizeText(
                                     'Email',
                                   ),
                                   prefixIcon: const Icon(
@@ -240,7 +240,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                   errorBorder: errorBorder,
                                   focusedBorder: focusedBorder,
                                   focusedErrorBorder: focusedErrorBorder,
-                                  label: const Text(
+                                  label: const AutoSizeText(
                                     'Email',
                                   ),
                                   prefixIcon: const Icon(
@@ -281,7 +281,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                               errorBorder: errorBorder,
                               focusedBorder: focusedBorder,
                               focusedErrorBorder: focusedErrorBorder,
-                              label: const Text(
+                              label: const AutoSizeText(
                                 'Amount',
                               ),
                             ),
@@ -303,14 +303,14 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                               errorBorder: errorBorder,
                               focusedBorder: focusedBorder,
                               focusedErrorBorder: focusedErrorBorder,
-                              label: const Text(
+                              label: const AutoSizeText(
                                 'Purpose',
                               ),
                             ),
                             items: purposes.map(
                               (purpose) {
                                 return DropdownMenuItem(
-                                  child: Text(purpose),
+                                  child: AutoSizeText(purpose),
                                   value: purpose,
                                 );
                               },
@@ -329,8 +329,6 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                             height: 15,
                           ),
                           TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
                             controller: _remarksController,
                             validator: (value) {
                               if (value!.trim().isEmpty) {
@@ -353,7 +351,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                               errorBorder: errorBorder,
                               focusedBorder: focusedBorder,
                               focusedErrorBorder: focusedErrorBorder,
-                              label: const Text(
+                              label: const AutoSizeText(
                                 'Remarks',
                               ),
                             ),
@@ -386,7 +384,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                 child: Center(
                                   child: _isLoading
                                       ? const ProgressIndicator1()
-                                      : const Text(
+                                      : const AutoSizeText(
                                           'Send',
                                           style: TextStyle(
                                             color: Colors.white,

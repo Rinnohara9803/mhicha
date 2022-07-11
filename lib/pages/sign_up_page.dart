@@ -10,6 +10,7 @@ import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -98,7 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  AutoSizeText(
                     'Sign Up',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -141,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       errorBorder: errorBorder,
                       focusedBorder: focusedBorder,
                       focusedErrorBorder: focusedErrorBorder,
-                      label: const Text(
+                      label: const AutoSizeText(
                         'Full Name',
                       ),
                       prefixIcon: const Icon(
@@ -182,7 +183,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       errorBorder: errorBorder,
                       focusedBorder: focusedBorder,
                       focusedErrorBorder: focusedErrorBorder,
-                      label: const Text(
+                      label: const AutoSizeText(
                         'Email',
                       ),
                       prefixIcon: const Icon(
@@ -243,7 +244,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
+                      AutoSizeText(
                         'Forgot Password ?',
                         style: TextStyle(
                           color: Provider.of<ThemeProvider>(context).isDarkMode
@@ -281,7 +282,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Center(
                           child: _isLoading
                               ? const ProgressIndicator1()
-                              : const Text(
+                              : const AutoSizeText(
                                   'Sign Up',
                                   style: TextStyle(
                                     color: Colors.white,
@@ -300,7 +301,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                    AutoSizeText(
                         'Already have an account ? ',
                         style: TextStyle(
                           color: Provider.of<ThemeProvider>(context).isDarkMode
@@ -317,7 +318,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Navigator.of(context)
                               .pushReplacementNamed(SignInPage.routeName);
                         },
-                        child: Text(
+                        child: AutoSizeText(
                           'Sign In',
                           style: TextStyle(
                             color:

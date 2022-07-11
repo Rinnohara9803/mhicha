@@ -5,6 +5,7 @@ import 'package:mhicha/services/auth_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -90,7 +91,7 @@ class _SplashPageState extends State<SplashPage> {
                 height: 150,
                 width: 150,
               ),
-              const Text(
+              const AutoSizeText(
                 'mhicha',
                 style: TextStyle(
                   color: Colors.white,

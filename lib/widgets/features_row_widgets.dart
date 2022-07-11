@@ -4,6 +4,7 @@ import 'package:mhicha/utilities/themes.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class FeatureRowWidgets extends StatelessWidget {
   const FeatureRowWidgets({Key? key}) : super(key: key);
@@ -47,7 +48,7 @@ class FeatureRowWidgets extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
+                const AutoSizeText(
                   'Load Money',
                 ),
               ],
@@ -98,7 +99,7 @@ class FeatureRowWidgets extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
+                const AutoSizeText(
                   'Send Money',
                 ),
               ],
@@ -143,7 +144,7 @@ class FeatureRowWidgets extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
+                const AutoSizeText(
                   'Top - Up',
                 ),
               ],

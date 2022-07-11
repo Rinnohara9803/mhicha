@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'border_painter_widget.dart';
 
 class MyQRWidget extends StatelessWidget {
@@ -31,7 +31,7 @@ class MyQRWidget extends StatelessWidget {
                 height: 70,
                 width: double.infinity,
                 child: const Center(
-                  child: Text(
+                  child: AutoSizeText(
                     'My QR Code',
                     style: TextStyle(
                       color: Colors.white,
@@ -45,7 +45,7 @@ class MyQRWidget extends StatelessWidget {
                 left: 20,
                 child: IconButton(
                   icon: const Icon(
-                    Icons.arrow_back,
+                    Icons.navigate_before,
                     color: Colors.white,
                   ),
                   onPressed: () {

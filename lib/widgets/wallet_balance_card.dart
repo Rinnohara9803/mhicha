@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class WalletBalanceCard extends StatefulWidget {
   const WalletBalanceCard({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _WalletBalanceCardState extends State<WalletBalanceCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              const AutoSizeText(
                 'Balance',
                 style: TextStyle(
                   color: Colors.white,
@@ -66,7 +67,7 @@ class _WalletBalanceCardState extends State<WalletBalanceCard> {
                     _isBalanceVisible = !_isBalanceVisible;
                   });
                 },
-                child: Text(
+                child: AutoSizeText(
                   !_isBalanceVisible
                       ? 'XXX.XX'
                       : 'Rs. ${Provider.of<ProfileProvider>(context).balance}',

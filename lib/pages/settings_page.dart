@@ -42,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     widget.returnToPreviousFunction();
                   },
                   child: const Icon(
-                    Icons.arrow_back,
+                    Icons.navigate_before,
                   ),
                 ),
                 const SizedBox(
@@ -124,7 +124,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ? Colors.white
                       : ThemeClass.primaryColor,
                 ),
-                label: Text(
+                label: AutoSizeText(
                   'Logout',
                   style: TextStyle(
                     color: Provider.of<ThemeProvider>(context).isDarkMode

@@ -18,13 +18,7 @@ class PaymentsPage extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () async {
-                final pdfFile = await PdfInvoiceApi.generate(
-                  Student(
-                    firstName: 'Sagar',
-                    lastName: 'Prajapati',
-                    age: 21,
-                  ),
-                );
+                final pdfFile = await PdfInvoiceApi.generate();
                 PdfApi.openFile(pdfFile);
               },
               child: const Text('Generate PDF'),

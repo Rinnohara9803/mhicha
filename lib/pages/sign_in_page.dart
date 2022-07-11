@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
@@ -101,7 +101,7 @@ class _SignInPageState extends State<SignInPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  AutoSizeText(
                     'Sign In',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -142,7 +142,7 @@ class _SignInPageState extends State<SignInPage> {
                       errorBorder: errorBorder,
                       focusedBorder: focusedBorder,
                       focusedErrorBorder: focusedErrorBorder,
-                      label: const Text(
+                      label: const AutoSizeText(
                         'Email',
                       ),
                       prefixIcon: const Icon(
@@ -206,7 +206,7 @@ class _SignInPageState extends State<SignInPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
+                      AutoSizeText(
                         'Forgot Password ?',
                         style: TextStyle(
                           color: Provider.of<ThemeProvider>(context).isDarkMode
@@ -247,7 +247,7 @@ class _SignInPageState extends State<SignInPage> {
                               child: Center(
                                 child: _isLoading
                                     ? const ProgressIndicator1()
-                                    : const Text(
+                                    : const AutoSizeText(
                                         'Sign In',
                                         style: TextStyle(
                                           color: Colors.white,
@@ -269,7 +269,7 @@ class _SignInPageState extends State<SignInPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      AutoSizeText(
                         'Don\'t have an account ? ',
                         style: TextStyle(
                           color: Provider.of<ThemeProvider>(context).isDarkMode
@@ -286,7 +286,7 @@ class _SignInPageState extends State<SignInPage> {
                           Navigator.of(context)
                               .pushReplacementNamed(SignUpPage.routeName);
                         },
-                        child: Text(
+                        child: AutoSizeText(
                           'Sign Up',
                           style: TextStyle(
                             color:

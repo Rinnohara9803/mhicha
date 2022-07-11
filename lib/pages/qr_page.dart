@@ -7,6 +7,7 @@ import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/my_qr_widget.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class QRPage extends StatefulWidget {
   static String routeName = '/qrPage';
@@ -161,7 +162,7 @@ class _QRPageState extends State<QRPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            const AutoSizeText(
                               'My Profile',
                               style: TextStyle(
                                 letterSpacing: 1,
@@ -207,7 +208,7 @@ class _QRPageState extends State<QRPage> {
                                             SizedBox(
                                               width: 5,
                                             ),
-                                            Text(
+                                            AutoSizeText(
                                               'QR Code',
                                               style: TextStyle(
                                                 fontSize: 18,
@@ -263,7 +264,7 @@ class _QRPageState extends State<QRPage> {
                                             SizedBox(
                                               width: 5,
                                             ),
-                                            Text(
+                                            AutoSizeText(
                                               'Send Money',
                                               style: TextStyle(
                                                 fontSize: 18,

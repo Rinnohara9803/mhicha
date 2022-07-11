@@ -7,6 +7,7 @@ import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:pinput/pinput.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -101,7 +102,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                                   top: 33,
                                   bottom: 15,
                                 ),
-                                child: const Text(
+                                child: const AutoSizeText(
                                   'Please enter code sent to',
                                   style: TextStyle(
                                     fontSize: 17,
@@ -114,7 +115,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  AutoSizeText(
                                     email,
                                     style: const TextStyle(
                                       fontSize: 17,
@@ -167,7 +168,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                               ),
                             ),
                             child: const Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 'Verify',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -184,7 +185,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                           children: [
                             TextButton(
                               onPressed: () {},
-                              child: const Text(
+                              child: const AutoSizeText(
                                 'Resend Code',
                                 style: TextStyle(
                                   color: Colors.grey,
@@ -201,7 +202,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            const AutoSizeText(
                               'Already have an account ? ',
                               style: TextStyle(
                                 color: Colors.black54,
@@ -216,7 +217,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                                 Navigator.of(context)
                                     .pushReplacementNamed(SignInPage.routeName);
                               },
-                              child: Text(
+                              child: AutoSizeText(
                                 'Sign In',
                                 style: TextStyle(
                                   color: ThemeClass.primaryColor,
@@ -277,7 +278,7 @@ class PhoneViewTopWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          AutoSizeText(
             text1,
             style: const TextStyle(
               fontSize: 25,
@@ -285,7 +286,7 @@ class PhoneViewTopWidget extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          Text(
+          AutoSizeText(
             text2,
             style: const TextStyle(
               fontSize: 25,

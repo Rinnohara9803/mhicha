@@ -5,6 +5,7 @@ import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/secondary_balance_card.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class ProceedSendMoneyPage extends StatefulWidget {
   static String routeName = '/proceedSendMoneyPage';
@@ -21,7 +22,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Text(
+          child: AutoSizeText(
             key,
             style: const TextStyle(
               color: Colors.white,
@@ -30,7 +31,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
           ),
         ),
         Expanded(
-          child: Text(
+          child: AutoSizeText(
             value,
             textAlign: TextAlign.end,
             style: const TextStyle(
@@ -105,7 +106,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                   const SizedBox(
                     width: 20,
                   ),
-                  Text(
+                  AutoSizeText(
                     'Notice',
                     style: TextStyle(
                       fontSize: 20,
@@ -119,7 +120,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
               const SizedBox(
                 height: 20,
               ),
-              Text(
+              AutoSizeText(
                 'Please send money to only Trusted users after verifying properly. Do not send money on request from facebook, messenger or other social networking sites.',
                 style: TextStyle(
                   fontSize: 14,
@@ -131,7 +132,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              AutoSizeText(
                 'OR Call to confirm before sending money to any person in mhicha.',
                 style: TextStyle(
                   fontSize: 14,
@@ -172,13 +173,13 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                             Navigator.of(context).pop();
                           },
                           icon: const Icon(
-                            Icons.arrow_back,
+                            Icons.navigate_before,
                           ),
                         ),
                         const SizedBox(
                           width: 20,
                         ),
-                        const Text(
+                        const AutoSizeText(
                           'Send Money',
                           style: TextStyle(
                             fontSize: 25,
@@ -289,7 +290,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                         ),
                       ),
                       child: const Center(
-                        child: Text(
+                        child: AutoSizeText(
                           'Confirm',
                           style: TextStyle(
                             color: Colors.white,

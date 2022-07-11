@@ -6,6 +6,7 @@ import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class ProfilePage extends StatefulWidget {
   static String routeName = '/profilePage';
@@ -20,7 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        AutoSizeText(
           label,
           style: TextStyle(
             color: Provider.of<ThemeProvider>(context).isDarkMode
@@ -32,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
         const SizedBox(
           height: 5,
         ),
-        Text(
+        AutoSizeText(
           value,
           style: TextStyle(
             color: Provider.of<ThemeProvider>(context).isDarkMode
@@ -145,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               color: Colors.white,
                                             ),
                                           ),
-                                          Text(
+                                          AutoSizeText(
                                             'Rs. ${Provider.of<ProfileProvider>(context).balance}',
                                             style: const TextStyle(
                                               color: Colors.white,
@@ -155,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           ),
                                         ],
                                       ),
-                                      const Text(
+                                      const AutoSizeText(
                                         'Total Balance',
                                         style: TextStyle(
                                           color: Colors.white,
@@ -243,7 +244,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(
+                              AutoSizeText(
                                 'Verified',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -264,7 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  AutoSizeText(
                     Provider.of<ProfileProvider>(
                       context,
                     ).userName,
@@ -284,7 +285,7 @@ class _ProfilePageState extends State<ProfilePage> {
               left: 30,
               child: TextButton(
                 onPressed: () {},
-                child: const Text(
+                child: const AutoSizeText(
                   'Reset Password',
                   style: TextStyle(
                     fontSize: 15,
@@ -315,7 +316,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Navigator.pop(context);
                 },
                 icon: const Icon(
-                  Icons.arrow_back,
+                  Icons.navigate_before,
                 ),
               ),
             ),

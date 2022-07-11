@@ -17,6 +17,7 @@ class SendMoneySuccessPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isPdfDownloaded = false;
     Widget dataWidget(String key, String value) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,14 +72,7 @@ class SendMoneySuccessPage extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () async {
-                          final pdfFile = await PdfInvoiceApi.generate(
-                            Student(
-                              firstName: 'Sagar',
-                              lastName: 'Prajapati',
-                              age: 21,
-                            ),
-                          );
-
+                          final pdfFile = await PdfInvoiceApi.generate();
                           Share.shareFiles(
                             [pdfFile.path],
                           );
@@ -89,14 +83,43 @@ class SendMoneySuccessPage extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () async {
-                          final pdfFile = await PdfInvoiceApi.generate(
-                            Student(
-                              firstName: 'Sagar',
-                              lastName: 'Prajapati',
-                              age: 21,
-                            ),
-                          );
-                          PdfApi.openFile(pdfFile);
+                          if (isPdfDownloaded) {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Are you Sure ?'),
+                                    content: const Text(
+                                      'Do you want to re-download the Pdf ?',
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text(
+                                          'No',
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          final pdfFile =
+                                              await PdfInvoiceApi.generate();
+                                          PdfApi.openFile(pdfFile);
+                                          isPdfDownloaded = true;
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Yes'),
+                                      ),
+                                    ],
+                                  );
+                                });
+                            return;
+                          } else {
+                            final pdfFile = await PdfInvoiceApi.generate();
+                            PdfApi.openFile(pdfFile);
+                            isPdfDownloaded = true;
+                          }
                         },
                         icon: const Icon(Icons.picture_as_pdf_outlined),
                       ),

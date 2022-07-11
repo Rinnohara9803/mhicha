@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/providers/theme_provider.dart';
@@ -107,7 +107,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 Navigator.pop(context);
                               },
                               icon: const Icon(
-                                Icons.arrow_back,
+                                Icons.navigate_before,
                                 color: Colors.white,
                               ),
                             ),
@@ -155,7 +155,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   errorBorder: errorBorder,
                                   focusedBorder: focusedBorder,
                                   focusedErrorBorder: focusedErrorBorder,
-                                  label: const Text(
+                                  label: const AutoSizeText(
                                     'Username',
                                   ),
                                   prefixIcon: const Icon(
@@ -202,7 +202,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   errorBorder: errorBorder,
                                   focusedBorder: focusedBorder,
                                   focusedErrorBorder: focusedErrorBorder,
-                                  label: const Text(
+                                  label: const AutoSizeText(
                                     'Email',
                                   ),
                                   prefixIcon: const Icon(
@@ -239,7 +239,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     child: Center(
                                       child: _isLoading
                                           ? const ProgressIndicator1()
-                                          : const Text(
+                                          : const AutoSizeText(
                                               'Update Profile',
                                               style: TextStyle(
                                                 color: Colors.white,

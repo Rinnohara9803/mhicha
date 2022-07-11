@@ -80,7 +80,10 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).isDarkMode
-          ? ThemeData.dark().copyWith()
+          ? ThemeData.dark().copyWith(
+              colorScheme: ColorScheme.fromSwatch().copyWith(
+              primary: Colors.white,
+            ))
           : ThemeData(
               colorScheme: ColorScheme.fromSwatch().copyWith(
                 primary: ThemeClass.primaryColor,

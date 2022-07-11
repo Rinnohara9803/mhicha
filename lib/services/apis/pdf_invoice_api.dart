@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'package:mhicha/services/apis/pdf_api.dart';
 import 'package:pdf/widgets.dart';
-import '../../models/student.dart';
 import 'package:intl/intl.dart';
 
 class PdfInvoiceApi {
-  static Future<File> generate(Student student) async {
+  static Future<File> generate() async {
     final pdf = Document();
 
     pdf.addPage(
@@ -33,7 +32,7 @@ class PdfInvoiceApi {
       ),
     );
 
-    return PdfApi.saveDocument(name: 'student1.pdf', pdf: pdf);
+    return PdfApi.saveDocument(name: 'invoice1.pdf', pdf: pdf);
   }
 
   static Widget buildTopInvoiceLayout() {

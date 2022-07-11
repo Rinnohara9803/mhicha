@@ -4,6 +4,7 @@ import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/flutter_toasts.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class ChangeNotificationStatusWidget extends StatefulWidget {
   const ChangeNotificationStatusWidget({Key? key}) : super(key: key);
@@ -58,7 +59,7 @@ class _ChangeToDarkThemeWidgetState
               ),
               shape: const CircleBorder(),
             ),
-            const Text(
+            const AutoSizeText(
               'Mute Notifications',
             ),
           ],

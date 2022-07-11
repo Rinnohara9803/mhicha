@@ -7,6 +7,7 @@ import 'package:mhicha/pages/qr_page.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class DashboardPage extends StatefulWidget {
   static String routeName = '/dashboardPage';
@@ -81,7 +82,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     : ThemeClass.primaryColor
                                 : Colors.grey,
                           ),
-                          Text(
+                          AutoSizeText(
                             '   Home   ',
                             style: TextStyle(
                               color: currentTab == 0
@@ -117,7 +118,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     : ThemeClass.primaryColor
                                 : Colors.grey,
                           ),
-                          Text(
+                          AutoSizeText(
                             'Statements',
                             style: TextStyle(
                               color: currentTab == 1
@@ -157,7 +158,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     : ThemeClass.primaryColor
                                 : Colors.grey,
                           ),
-                          Text(
+                          AutoSizeText(
                             'Payments',
                             style: TextStyle(
                               color: currentTab == 2
@@ -195,7 +196,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     : ThemeClass.primaryColor
                                 : Colors.grey,
                           ),
-                          Text(
+                          AutoSizeText(
                             ' Settings ',
                             style: TextStyle(
                               color: currentTab == 3

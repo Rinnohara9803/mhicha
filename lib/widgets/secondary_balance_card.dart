@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class SecondaryBalanceCard extends StatefulWidget {
   const SecondaryBalanceCard({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class _SecondaryBalanceCardState extends State<SecondaryBalanceCard> {
                     _isBalanceVisible = !_isBalanceVisible;
                   });
                 },
-                child: Text(
+                child: AutoSizeText(
                   !_isBalanceVisible
                       ? 'XXX.XX'
                       : 'Rs. ${Provider.of<ProfileProvider>(context).balance}',
@@ -73,7 +74,7 @@ class _SecondaryBalanceCardState extends State<SecondaryBalanceCard> {
               ),
             ],
           ),
-          const Text(
+          const AutoSizeText(
             'Total Balance',
             style: TextStyle(
               color: Colors.white,
