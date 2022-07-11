@@ -9,6 +9,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
 import '../models/student.dart';
 import '../services/apis/pdf_invoice_api.dart';
+import 'package:share/share.dart';
 
 class SendMoneySuccessPage extends StatelessWidget {
   static String routeName = '/sendMoneySuccessPage';
@@ -69,7 +70,19 @@ class SendMoneySuccessPage extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          final pdfFile = await PdfInvoiceApi.generate(
+                            Student(
+                              firstName: 'Sagar',
+                              lastName: 'Prajapati',
+                              age: 21,
+                            ),
+                          );
+
+                          Share.shareFiles(
+                            [pdfFile.path],
+                          );
+                        },
                         icon: const Icon(
                           Icons.share,
                         ),
