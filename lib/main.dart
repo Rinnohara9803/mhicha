@@ -5,7 +5,7 @@ import 'package:mhicha/pages/proceed_send_money_page.dart';
 import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
 import 'package:mhicha/pages/send_money_page.dart';
-// import 'package:mhicha/pages/send_money_success_page.dart';
+import 'package:mhicha/pages/send_money_success_page.dart';
 import 'package:mhicha/pages/splash_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
@@ -98,8 +98,8 @@ class _MyAppState extends State<MyApp> {
             const ProceedSendMoneyPage(),
         ProfilePage.routeName: (context) => const ProfilePage(),
         EditProfilePage.routeName: (context) => const EditProfilePage(),
-        // SendMoneySuccessPage.routeName: (context) =>
-        //     const SendMoneySuccessPage(),
+        SendMoneySuccessPage.routeName: (context) =>
+            const SendMoneySuccessPage(),
       },
     );
   }
