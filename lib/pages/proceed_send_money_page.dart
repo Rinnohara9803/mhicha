@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:mhicha/pages/send_money_success_page.dart';
-// import 'package:mhicha/providers/profile_provider.dart';
+import 'package:mhicha/pages/send_money_success_page.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
@@ -275,10 +274,10 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                   ),
                   child: InkWell(
                     onTap: () {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   SendMoneySuccessPage.routeName,
-                      // );
+                      Navigator.pushNamed(
+                        context,
+                        SendMoneySuccessPage.routeName,
+                      );
                     },
                     child: Container(
                       height: 50,
