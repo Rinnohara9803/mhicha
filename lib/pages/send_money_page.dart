@@ -6,6 +6,7 @@ import 'package:mhicha/pages/proceed_send_money_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/services/shared_services.dart';
+import 'package:mhicha/utilities/constants.dart';
 import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
@@ -228,13 +229,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                   _emailController.text = text!;
                                 },
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        width: 1.5, color: Colors.black54),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
+                                  border: border,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                         width: 1.5, color: Colors.black54),
@@ -242,29 +237,9 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                       10,
                                     ),
                                   ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        width: 1.5, color: Colors.red),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.5,
-                                        color: ThemeClass.primaryColor),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.5,
-                                        color: ThemeClass.primaryColor),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
+                                  errorBorder: errorBorder,
+                                  focusedBorder: focusedBorder,
+                                  focusedErrorBorder: focusedErrorBorder,
                                   label: const Text(
                                     'Email',
                                   ),
@@ -295,13 +270,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                               return null;
                             },
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.black54),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
+                              border: border,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     width: 1.5, color: Colors.black54),
@@ -309,27 +278,9 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                   10,
                                 ),
                               ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.red),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1.5, color: ThemeClass.primaryColor),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1.5, color: ThemeClass.primaryColor),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
+                              errorBorder: errorBorder,
+                              focusedBorder: focusedBorder,
+                              focusedErrorBorder: focusedErrorBorder,
                               label: const Text(
                                 'Amount',
                               ),
@@ -341,13 +292,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                           DropdownButtonFormField(
                             decoration: InputDecoration(
                               isDense: true,
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.black54),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
+                              border: border,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     width: 1.5, color: Colors.black54),
@@ -355,27 +300,9 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                   10,
                                 ),
                               ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.red),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1.5, color: ThemeClass.primaryColor),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1.5, color: ThemeClass.primaryColor),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
+                              errorBorder: errorBorder,
+                              focusedBorder: focusedBorder,
+                              focusedErrorBorder: focusedErrorBorder,
                               label: const Text(
                                 'Purpose',
                               ),
@@ -415,13 +342,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                               _remarksController.text = text!;
                             },
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.black54),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
+                              border: border,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     width: 1.5, color: Colors.black54),
@@ -429,27 +350,9 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                   10,
                                 ),
                               ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.red),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1.5, color: ThemeClass.primaryColor),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1.5, color: ThemeClass.primaryColor),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
+                              errorBorder: errorBorder,
+                              focusedBorder: focusedBorder,
+                              focusedErrorBorder: focusedErrorBorder,
                               label: const Text(
                                 'Remarks',
                               ),

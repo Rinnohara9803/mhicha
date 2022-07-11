@@ -4,7 +4,7 @@ import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/change_theme_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:mhicha/widgets/help_settings_widget.dart';
+import 'package:mhicha/widgets/aboutus_settings_widget.dart';
 import 'package:mhicha/widgets/notifications_settings_widget.dart';
 import 'package:mhicha/widgets/profile_settings_widget.dart';
 import 'package:provider/provider.dart';
@@ -103,7 +103,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           SizedBox(
                             height: 15,
                           ),
-                          HelpSettingsWidget(),
+                          AboutUsSettingsWidget(),
                         ],
                       ),
                     ),

@@ -3,14 +3,14 @@ import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
 
-class HelpSettingsWidget extends StatefulWidget {
-  const HelpSettingsWidget({Key? key}) : super(key: key);
+class AboutUsSettingsWidget extends StatefulWidget {
+  const AboutUsSettingsWidget({Key? key}) : super(key: key);
 
   @override
-  State<HelpSettingsWidget> createState() => HelpSettingsWidgetState();
+  State<AboutUsSettingsWidget> createState() => AboutUsSettingsWidgetState();
 }
 
-class HelpSettingsWidgetState extends State<HelpSettingsWidget> {
+class AboutUsSettingsWidgetState extends State<AboutUsSettingsWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -39,7 +39,7 @@ class HelpSettingsWidgetState extends State<HelpSettingsWidget> {
               shape: const CircleBorder(),
             ),
             const Text(
-              'Help',
+              'About Us',
             ),
           ],
         ),

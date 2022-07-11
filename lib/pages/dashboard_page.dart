@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/home_page.dart';
 import 'package:mhicha/pages/statements_page.dart';
-import 'package:mhicha/pages/payment_page.dart';
+import 'package:mhicha/pages/payments_page.dart';
 import 'package:mhicha/pages/settings_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
 import 'package:mhicha/providers/theme_provider.dart';
@@ -142,7 +142,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
-                          currentScreen = const PaymentPage();
+                          currentScreen = const PaymentsPage();
                           currentTab = 2;
                         });
                       },
@@ -181,7 +181,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           currentScreen = SettingsPage(
                             returnToPreviousFunction: returnToPreviousPage,
                           );
-                          currentTab = 4;
+                          currentTab = 3;
                         });
                       },
                       child: Column(

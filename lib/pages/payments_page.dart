@@ -1,17 +1,13 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:mhicha/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:mhicha/services/pdf_invoice_service.dart';
-import 'package:mhicha/services/pdf_service.dart';
 
 import '../models/student.dart';
 import '../services/apis/pdf_api.dart';
 import '../services/apis/pdf_invoice_api.dart';
 
-class PaymentPage extends StatelessWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+class PaymentsPage extends StatelessWidget {
+  const PaymentsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
