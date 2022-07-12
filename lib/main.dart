@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/edit_profile_page.dart';
+import 'package:mhicha/pages/load_money_page.dart';
 import 'package:mhicha/pages/proceed_send_money_page.dart';
 import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
@@ -11,6 +12,7 @@ import 'package:mhicha/pages/splash_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
+import 'package:mhicha/pages/verify_loadmoneyotp_page.dart';
 import 'package:mhicha/providers/locale_provider.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/providers/theme_provider.dart';
@@ -111,6 +113,9 @@ class _MyAppState extends State<MyApp> {
         EditProfilePage.routeName: (context) => const EditProfilePage(),
         SendMoneySuccessPage.routeName: (context) =>
             const SendMoneySuccessPage(),
+        LoadMoneyPage.routeName: (context) => const LoadMoneyPage(),
+        VerifyLoadMoneyOtpPage.routeName: (context) =>
+            const VerifyLoadMoneyOtpPage(),
       },
       supportedLocales: L10n.all,
       localizationsDelegates: const [

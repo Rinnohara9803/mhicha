@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/pages/load_money_page.dart';
 import 'package:mhicha/pages/send_money_page.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -15,6 +16,12 @@ class FeatureRowWidgets extends StatelessWidget {
       children: [
         Expanded(
           child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                LoadMoneyPage.routeName,
+              );
+            },
             child: Column(
               children: [
                 DottedBorder(
