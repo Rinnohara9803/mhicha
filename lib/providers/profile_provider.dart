@@ -78,8 +78,11 @@ class ProfileProvider with ChangeNotifier {
       );
 
       _userName = SharedService.userName;
+      notifyListeners();
       _email = SharedService.email;
+      notifyListeners();
       _balance = SharedService.balance;
+      notifyListeners();
     } on SocketException {
       return Future.error('No Internet connection');
     } catch (e) {

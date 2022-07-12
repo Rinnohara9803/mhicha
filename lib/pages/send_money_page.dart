@@ -11,6 +11,7 @@ import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:mhicha/widgets/general_textformfield.dart';
 import 'package:provider/provider.dart';
 
 class SendMoneyPage extends StatefulWidget {
@@ -212,9 +213,11 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                               margin: const EdgeInsets.only(
                                 top: 30,
                               ),
-                              child: TextFormField(
-                                autofocus: true,
+                              child: GeneralTextFormField(
+                                hasPrefixIcon: true,
+                                hasSuffixIcon: false,
                                 controller: _emailController,
+                                label: 'Email',
                                 validator: (value) {
                                   if (!value!.endsWith('.com') ||
                                       !value.contains('@')) {
@@ -225,40 +228,19 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                                   }
                                   return null;
                                 },
-                                onSaved: (text) {
-                                  _emailController.text = text!;
-                                },
-                                decoration: InputDecoration(
-                                  border: border,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        width: 1.5, color: Colors.black54),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
-                                  errorBorder: errorBorder,
-                                  focusedBorder: focusedBorder,
-                                  focusedErrorBorder: focusedErrorBorder,
-                                  label: const AutoSizeText(
-                                    'Email',
-                                  ),
-                                  prefixIcon: const Icon(
-                                    Icons.mail_outline,
-                                  ),
-                                ),
+                                textInputType: TextInputType.emailAddress,
+                                iconData: Icons.mail_outline,
+                                autoFocus: true,
                               ),
                             ),
                           const SizedBox(
                             height: 15,
                           ),
-                          TextFormField(
-                            autofocus: isDirectPay ? false : true,
-                            keyboardType: TextInputType.number,
+                          GeneralTextFormField(
+                            hasPrefixIcon: false,
+                            hasSuffixIcon: false,
                             controller: _amountController,
-                            onSaved: (text) {
-                              _amountController.text = text!;
-                            },
+                            label: 'Amount',
                             validator: (value) {
                               if (int.tryParse(value!) == null) {
                                 return 'Enter valid value';
@@ -269,22 +251,9 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
 
                               return null;
                             },
-                            decoration: InputDecoration(
-                              border: border,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.black54),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              errorBorder: errorBorder,
-                              focusedBorder: focusedBorder,
-                              focusedErrorBorder: focusedErrorBorder,
-                              label: const AutoSizeText(
-                                'Amount',
-                              ),
-                            ),
+                            textInputType: TextInputType.number,
+                            iconData: Icons.lock,
+                            autoFocus: isDirectPay ? false : true,
                           ),
                           const SizedBox(
                             height: 15,
@@ -328,33 +297,20 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
                           const SizedBox(
                             height: 15,
                           ),
-                          TextFormField(
+                          GeneralTextFormField(
+                            hasPrefixIcon: false,
+                            hasSuffixIcon: false,
                             controller: _remarksController,
+                            label: 'Remarks',
                             validator: (value) {
                               if (value!.trim().isEmpty) {
                                 return 'Please provide a remark.';
                               }
                               return null;
                             },
-                            onSaved: (text) {
-                              _remarksController.text = text!;
-                            },
-                            decoration: InputDecoration(
-                              border: border,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1.5, color: Colors.black54),
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
-                              ),
-                              errorBorder: errorBorder,
-                              focusedBorder: focusedBorder,
-                              focusedErrorBorder: focusedErrorBorder,
-                              label: const AutoSizeText(
-                                'Remarks',
-                              ),
-                            ),
+                            textInputType: TextInputType.name,
+                            iconData: Icons.lock,
+                            autoFocus: false,
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.1,

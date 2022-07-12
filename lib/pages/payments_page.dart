@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import '../models/student.dart';
 import '../services/apis/pdf_api.dart';
 import '../services/apis/pdf_invoice_api.dart';
 

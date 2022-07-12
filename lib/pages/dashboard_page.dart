@@ -22,6 +22,44 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final PageStorageBucket bucket = PageStorageBucket();
 
+  Widget bottomNavItem(int tab, String label, IconData icon, Function onTap) {
+    return MaterialButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22.0),
+      ),
+      minWidth: 40,
+      onPressed: () {
+        onTap();
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: currentTab == tab
+                ? Provider.of<ThemeProvider>(context).isDarkMode
+                    ? Colors.white
+                    : ThemeClass.primaryColor
+                : Colors.grey,
+          ),
+          FittedBox(
+            child: AutoSizeText(
+              label,
+              style: TextStyle(
+                color: currentTab == tab
+                    ? Provider.of<ThemeProvider>(context).isDarkMode
+                        ? Colors.white
+                        : ThemeClass.primaryColor
+                    : Colors.grey,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   void returnToPreviousPage() {
     setState(() {
       currentScreen = const HomePage();
@@ -55,162 +93,60 @@ class _DashboardPageState extends State<DashboardPage> {
           notchMargin: 10,
           child: SizedBox(
             height: 70,
+            width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(22.0),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: bottomNavItem(0, 'Home', Icons.home_rounded, () {
+                          setState(() {
+                            currentScreen = const HomePage();
+                            currentTab = 0;
+                          });
+                        }),
                       ),
-                      minWidth: 40,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = const HomePage();
-                          currentTab = 0;
-                        });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.home_rounded,
-                            color: currentTab == 0
-                                ? Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white
-                                    : ThemeClass.primaryColor
-                                : Colors.grey,
-                          ),
-                          AutoSizeText(
-                            '   Home   ',
-                            style: TextStyle(
-                              color: currentTab == 0
-                                  ? Provider.of<ThemeProvider>(context)
-                                          .isDarkMode
-                                      ? Colors.white
-                                      : ThemeClass.primaryColor
-                                  : Colors.grey,
-                            ),
-                          )
-                        ],
+                      Expanded(
+                        child: bottomNavItem(1, 'Statements', Icons.book, () {
+                          setState(() {
+                            currentScreen = const Page2();
+                            currentTab = 1;
+                          });
+                        }),
                       ),
-                    ),
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(22.0),
-                      ),
-                      minWidth: 40,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = const Page2();
-                          currentTab = 1;
-                        });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.book,
-                            color: currentTab == 1
-                                ? Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white
-                                    : ThemeClass.primaryColor
-                                : Colors.grey,
-                          ),
-                          AutoSizeText(
-                            'Statements',
-                            style: TextStyle(
-                              color: currentTab == 1
-                                  ? Provider.of<ThemeProvider>(context)
-                                          .isDarkMode
-                                      ? Colors.white
-                                      : ThemeClass.primaryColor
-                                  : Colors.grey,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(22.0),
+                const SizedBox(
+                  width: 50,
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: bottomNavItem(2, 'Payments', Icons.payment, () {
+                          setState(() {
+                            currentScreen = const PaymentsPage();
+                            currentTab = 2;
+                          });
+                        }),
                       ),
-                      minWidth: 40,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = const PaymentsPage();
-                          currentTab = 2;
-                        });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.payment,
-                            color: currentTab == 2
-                                ? Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white
-                                    : ThemeClass.primaryColor
-                                : Colors.grey,
-                          ),
-                          AutoSizeText(
-                            'Payments',
-                            style: TextStyle(
-                              color: currentTab == 2
-                                  ? Provider.of<ThemeProvider>(context)
-                                          .isDarkMode
-                                      ? Colors.white
-                                      : ThemeClass.primaryColor
-                                  : Colors.grey,
-                            ),
-                          )
-                        ],
+                      Expanded(
+                        child: bottomNavItem(3, 'Settings', Icons.settings, () {
+                          setState(() {
+                            currentScreen = SettingsPage(
+                              returnToPreviousFunction: returnToPreviousPage,
+                            );
+                            currentTab = 3;
+                          });
+                        }),
                       ),
-                    ),
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(22.0),
-                      ),
-                      minWidth: 40,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen = SettingsPage(
-                            returnToPreviousFunction: returnToPreviousPage,
-                          );
-                          currentTab = 3;
-                        });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.settings,
-                            color: currentTab == 3
-                                ? Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white
-                                    : ThemeClass.primaryColor
-                                : Colors.grey,
-                          ),
-                          AutoSizeText(
-                            ' Settings ',
-                            style: TextStyle(
-                              color: currentTab == 3
-                                  ? Provider.of<ThemeProvider>(context)
-                                          .isDarkMode
-                                      ? Colors.white
-                                      : ThemeClass.primaryColor
-                                  : Colors.grey,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

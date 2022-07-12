@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/main.dart';
+import 'package:mhicha/providers/locale_provider.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -26,6 +27,7 @@ class _SplashPageState extends State<SplashPage> {
       AuthService.autoLogin(context);
     });
     getIsDarkModeValue();
+    Provider.of<LocaleProvider>(context, listen: false).getLocale();
 
     super.initState();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
