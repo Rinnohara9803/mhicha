@@ -74,11 +74,9 @@ class _WalletBalanceCardState extends State<WalletBalanceCard> {
                   splashColor: Colors.white,
                   splashRadius: 24,
                   onStartIconPress: () {
-                    // print('here 1');
                     return true;
                   },
                   onEndIconPress: () {
-                    // print('here 2');
                     return true;
                   },
                   duration: const Duration(milliseconds: 500),

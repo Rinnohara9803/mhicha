@@ -25,7 +25,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget bottomNavItem(int tab, String label, IconData icon, Function onTap) {
     return MaterialButton(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(22.0),
+        borderRadius: BorderRadius.circular(40.0),
       ),
       minWidth: 40,
       onPressed: () {
@@ -42,17 +42,17 @@ class _DashboardPageState extends State<DashboardPage> {
                     : ThemeClass.primaryColor
                 : Colors.grey,
           ),
-          FittedBox(
-            child: AutoSizeText(
-              label,
-              style: TextStyle(
-                color: currentTab == tab
-                    ? Provider.of<ThemeProvider>(context).isDarkMode
-                        ? Colors.white
-                        : ThemeClass.primaryColor
-                    : Colors.grey,
-                fontWeight: FontWeight.normal,
-              ),
+          AutoSizeText(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: currentTab == tab
+                  ? Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.white
+                      : ThemeClass.primaryColor
+                  : Colors.grey,
+              fontWeight: FontWeight.normal,
             ),
           ),
         ],
@@ -102,20 +102,25 @@ class _DashboardPageState extends State<DashboardPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: bottomNavItem(0, 'Home', Icons.home_rounded, () {
-                          setState(() {
-                            currentScreen = const HomePage();
-                            currentTab = 0;
-                          });
-                        }),
+                        child: Center(
+                          child:
+                              bottomNavItem(0, 'Home', Icons.home_rounded, () {
+                            setState(() {
+                              currentScreen = const HomePage();
+                              currentTab = 0;
+                            });
+                          }),
+                        ),
                       ),
                       Expanded(
-                        child: bottomNavItem(1, 'Statements', Icons.book, () {
-                          setState(() {
-                            currentScreen = const Page2();
-                            currentTab = 1;
-                          });
-                        }),
+                        child: Center(
+                          child: bottomNavItem(1, 'Statements', Icons.book, () {
+                            setState(() {
+                              currentScreen = const Page2();
+                              currentTab = 1;
+                            });
+                          }),
+                        ),
                       ),
                     ],
                   ),
@@ -128,22 +133,28 @@ class _DashboardPageState extends State<DashboardPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: bottomNavItem(2, 'Payments', Icons.payment, () {
-                          setState(() {
-                            currentScreen = const PaymentsPage();
-                            currentTab = 2;
-                          });
-                        }),
+                        child: Center(
+                          child:
+                              bottomNavItem(2, 'Payments', Icons.payment, () {
+                            setState(() {
+                              currentScreen = const PaymentsPage();
+                              currentTab = 2;
+                            });
+                          }),
+                        ),
                       ),
                       Expanded(
-                        child: bottomNavItem(3, 'Settings', Icons.settings, () {
-                          setState(() {
-                            currentScreen = SettingsPage(
-                              returnToPreviousFunction: returnToPreviousPage,
-                            );
-                            currentTab = 3;
-                          });
-                        }),
+                        child: Center(
+                          child:
+                              bottomNavItem(3, 'Settings', Icons.settings, () {
+                            setState(() {
+                              currentScreen = SettingsPage(
+                                returnToPreviousFunction: returnToPreviousPage,
+                              );
+                              currentTab = 3;
+                            });
+                          }),
+                        ),
                       ),
                     ],
                   ),
