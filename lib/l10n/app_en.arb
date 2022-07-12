@@ -1,0 +1,14 @@
+{
+    "settings": "Settings",
+    "@settings": {
+        "description": "settings"
+    },
+    "profile": "Profile",
+    "@settings": {
+        "profile": "profile"
+    },
+    "personalinfo": "Personal Info",
+    "@personalinfo": {
+        "description": "personalinfo"
+    }
+}

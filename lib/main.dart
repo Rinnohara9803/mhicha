@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/edit_profile_page.dart';
 import 'package:mhicha/pages/proceed_send_money_page.dart';
@@ -10,6 +11,7 @@ import 'package:mhicha/pages/splash_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
+import 'package:mhicha/providers/locale_provider.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/utilities/themes.dart';
@@ -18,6 +20,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
+import 'L10n/L10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel',
@@ -60,6 +64,9 @@ Future<void> main() async {
         ChangeNotifierProvider<ThemeProvider>(
           create: (context) => ThemeProvider(),
         ),
+        ChangeNotifierProvider<LocaleProvider>(
+          create: (context) => LocaleProvider(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -82,8 +89,9 @@ class _MyAppState extends State<MyApp> {
       theme: Provider.of<ThemeProvider>(context).isDarkMode
           ? ThemeData.dark().copyWith(
               colorScheme: ColorScheme.fromSwatch().copyWith(
-              primary: Colors.white,
-            ))
+                primary: Colors.white,
+              ),
+            )
           : ThemeData(
               colorScheme: ColorScheme.fromSwatch().copyWith(
                 primary: ThemeClass.primaryColor,
@@ -104,6 +112,14 @@ class _MyAppState extends State<MyApp> {
         SendMoneySuccessPage.routeName: (context) =>
             const SendMoneySuccessPage(),
       },
+      supportedLocales: L10n.all,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      locale: Provider.of<LocaleProvider>(context).locale,
     );
   }
 }

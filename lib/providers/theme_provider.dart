@@ -29,10 +29,12 @@ class ThemeProvider with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var isDarkMode = prefs.getBool('isDarkMode');
 
-    if (isDarkMode == false) {
-      SharedService.isDarkMode = false;
-    } else {
+    if (isDarkMode == true) {
       SharedService.isDarkMode = true;
+      _isDarkMode = SharedService.isDarkMode;
+      notifyListeners();
+    } else {
+      SharedService.isDarkMode = false;
       _isDarkMode = SharedService.isDarkMode;
       notifyListeners();
     }

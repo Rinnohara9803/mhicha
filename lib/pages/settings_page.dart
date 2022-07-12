@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
 import 'package:mhicha/utilities/themes.dart';
+import 'package:mhicha/widgets/aboutus_settings_widget.dart';
+import 'package:mhicha/widgets/change_language_widget.dart';
 import 'package:mhicha/widgets/change_theme_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:mhicha/widgets/aboutus_settings_widget.dart';
 import 'package:mhicha/widgets/notifications_settings_widget.dart';
 import 'package:mhicha/widgets/profile_settings_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatefulWidget {
   final Function returnToPreviousFunction;
@@ -48,14 +50,14 @@ class _SettingsPageState extends State<SettingsPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                     right: 20,
                     left: 20,
                   ),
                   child: AutoSizeText(
-                    'Settings',
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.settings,
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w500,
                     ),
@@ -72,38 +74,42 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           AutoSizeText(
-                            'Account',
-                            style: TextStyle(
+                            AppLocalizations.of(context)!.profile,
+                            style: const TextStyle(
                               fontSize: 23,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          ProfileSettingsWidget(),
-                          SizedBox(
+                          const ProfileSettingsWidget(),
+                          const SizedBox(
                             height: 30,
                           ),
-                          AutoSizeText(
+                          const AutoSizeText(
                             'Settings',
                             style: TextStyle(
                               fontSize: 23,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          ChangeToDarkThemeWidget(),
-                          SizedBox(
+                          const ChangeToDarkThemeWidget(),
+                          const SizedBox(
                             height: 15,
                           ),
-                          ChangeNotificationStatusWidget(),
-                          SizedBox(
+                          const ChangeNotificationStatusWidget(),
+                          const SizedBox(
                             height: 15,
                           ),
-                          AboutUsSettingsWidget(),
+                          const ChangeLanguageWidget(),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          const AboutUsSettingsWidget(),
                         ],
                       ),
                     ),

@@ -7,7 +7,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:intl/intl.dart';
-import '../models/student.dart';
 import '../services/apis/pdf_invoice_api.dart';
 import 'package:share/share.dart';
 

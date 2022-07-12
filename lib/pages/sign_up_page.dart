@@ -9,6 +9,7 @@ import 'package:mhicha/utilities/constants.dart';
 import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
+import 'package:mhicha/widgets/general_textformfield.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -113,8 +114,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 40,
                   ),
-                  TextFormField(
+                  GeneralTextFormField(
+                    hasPrefixIcon: true,
+                    hasSuffixIcon: false,
                     controller: _userNameController,
+                    label: 'Full Name',
                     validator: (value) {
                       if (value!.trim().isEmpty) {
                         return 'Please enter your username.';
@@ -123,41 +127,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null;
                     },
-                    onSaved: (text) {
-                      _userNameController.text = text!;
-                    },
-                    decoration: InputDecoration(
-                      border: border,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1.5,
-                            color:
-                                Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white60
-                                    : Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      errorBorder: errorBorder,
-                      focusedBorder: focusedBorder,
-                      focusedErrorBorder: focusedErrorBorder,
-                      label: const AutoSizeText(
-                        'Full Name',
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.person,
-                      ),
-                    ),
+                    textInputType: TextInputType.name,
+                    iconData: Icons.person,
+                    autoFocus: false,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
+                  GeneralTextFormField(
+                    hasPrefixIcon: true,
+                    hasSuffixIcon: false,
                     controller: _emailController,
-                    onSaved: (text) {
-                      _emailController.text = text!;
-                    },
+                    label: 'Email',
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your email';
@@ -167,38 +148,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null;
                     },
-                    decoration: InputDecoration(
-                      border: border,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1.5,
-                            color:
-                                Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white60
-                                    : Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      errorBorder: errorBorder,
-                      focusedBorder: focusedBorder,
-                      focusedErrorBorder: focusedErrorBorder,
-                      label: const AutoSizeText(
-                        'Email',
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.mail_outline,
-                      ),
-                    ),
+                    textInputType: TextInputType.emailAddress,
+                    iconData: Icons.mail_outline,
+                    autoFocus: false,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
+                  GeneralTextFormField(
+                    hasPrefixIcon: true,
+                    hasSuffixIcon: true,
                     controller: _passwordController,
-                    onSaved: (text) {
-                      _passwordController.text = text!;
-                    },
+                    label: 'Password',
                     validator: (value) {
                       if (value!.trim().isEmpty) {
                         return 'Please enter your password.';
@@ -207,36 +168,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null;
                     },
-                    obscureText: isVisible,
-                    decoration: InputDecoration(
-                      border: border,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1.5,
-                            color:
-                                Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white60
-                                    : Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      errorBorder: errorBorder,
-                      focusedBorder: focusedBorder,
-                      focusedErrorBorder: focusedErrorBorder,
-                      prefixIcon: const Icon(Icons.lock),
-                      labelText: 'Password',
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                        icon: isVisible
-                            ? const Icon(Icons.visibility)
-                            : const Icon(Icons.visibility_off),
-                      ),
-                    ),
+                    textInputType: TextInputType.name,
+                    iconData: Icons.lock,
+                    autoFocus: false,
                   ),
                   const SizedBox(
                     height: 10,
@@ -301,7 +235,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                    AutoSizeText(
+                      AutoSizeText(
                         'Already have an account ? ',
                         style: TextStyle(
                           color: Provider.of<ThemeProvider>(context).isDarkMode

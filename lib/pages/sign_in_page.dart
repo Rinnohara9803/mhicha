@@ -14,6 +14,8 @@ import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/general_textformfield.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -115,7 +117,11 @@ class _SignInPageState extends State<SignInPage> {
                   const SizedBox(
                     height: 40,
                   ),
-                  TextFormField(
+                  GeneralTextFormField(
+                    hasPrefixIcon: true,
+                    hasSuffixIcon: false,
+                    controller: _emailController,
+                    label: 'Email',
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your email';
@@ -125,69 +131,18 @@ class _SignInPageState extends State<SignInPage> {
                       }
                       return null;
                     },
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      border: border,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1.5,
-                            color:
-                                Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white60
-                                    : Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      errorBorder: errorBorder,
-                      focusedBorder: focusedBorder,
-                      focusedErrorBorder: focusedErrorBorder,
-                      label: const AutoSizeText(
-                        'Email',
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.mail_outline,
-                      ),
-                    ),
-                    onSaved: (text) {
-                      _emailController.text = text!;
-                    },
+                    textInputType: TextInputType.emailAddress,
+                    iconData: Icons.mail_outline,
+                    autoFocus: false,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
+                  GeneralTextFormField(
+                    hasPrefixIcon: true,
+                    hasSuffixIcon: true,
                     controller: _passwordController,
-                    obscureText: isVisible,
-                    decoration: InputDecoration(
-                      border: border,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 1.5,
-                            color:
-                                Provider.of<ThemeProvider>(context).isDarkMode
-                                    ? Colors.white60
-                                    : Colors.black54),
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                      errorBorder: errorBorder,
-                      focusedBorder: focusedBorder,
-                      focusedErrorBorder: focusedErrorBorder,
-                      prefixIcon: const Icon(Icons.lock),
-                      labelText: 'Password',
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                        icon: isVisible
-                            ? const Icon(Icons.visibility)
-                            : const Icon(Icons.visibility_off),
-                      ),
-                    ),
+                    label: 'Password',
                     validator: (value) {
                       if (value!.trim().isEmpty) {
                         return 'Please enter your password.';
@@ -196,9 +151,9 @@ class _SignInPageState extends State<SignInPage> {
                       }
                       return null;
                     },
-                    onSaved: (text) {
-                      _passwordController.text = text!;
-                    },
+                    textInputType: TextInputType.name,
+                    iconData: Icons.lock,
+                    autoFocus: false,
                   ),
                   const SizedBox(
                     height: 10,
