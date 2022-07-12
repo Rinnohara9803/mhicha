@@ -5,7 +5,6 @@ import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
-import 'package:mhicha/utilities/constants.dart';
 import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';

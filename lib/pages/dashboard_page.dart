@@ -51,9 +51,10 @@ class _DashboardPageState extends State<DashboardPage> {
                         ? Colors.white
                         : ThemeClass.primaryColor
                     : Colors.grey,
+                fontWeight: FontWeight.normal,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -92,42 +93,60 @@ class _DashboardPageState extends State<DashboardPage> {
           notchMargin: 10,
           child: SizedBox(
             height: 70,
+            width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    bottomNavItem(0, '   Home   ', Icons.home_rounded, () {
-                      setState(() {
-                        currentScreen = const HomePage();
-                        currentTab = 0;
-                      });
-                    }),
-                    bottomNavItem(1, 'Statements', Icons.book, () {
-                      setState(() {
-                        currentScreen = const Page2();
-                        currentTab = 1;
-                      });
-                    }),
-                  ],
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: bottomNavItem(0, 'Home', Icons.home_rounded, () {
+                          setState(() {
+                            currentScreen = const HomePage();
+                            currentTab = 0;
+                          });
+                        }),
+                      ),
+                      Expanded(
+                        child: bottomNavItem(1, 'Statements', Icons.book, () {
+                          setState(() {
+                            currentScreen = const Page2();
+                            currentTab = 1;
+                          });
+                        }),
+                      ),
+                    ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    bottomNavItem(2, 'Payments', Icons.payment, () {
-                      setState(() {
-                        currentScreen = const PaymentsPage();
-                        currentTab = 2;
-                      });
-                    }),
-                    bottomNavItem(3, ' Settings ', Icons.settings, () {
-                      setState(() {
-                        currentScreen = SettingsPage(
-                          returnToPreviousFunction: returnToPreviousPage,
-                        );
-                        currentTab = 3;
-                      });
-                    }),
-                  ],
+                const SizedBox(
+                  width: 50,
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: bottomNavItem(2, 'Payments', Icons.payment, () {
+                          setState(() {
+                            currentScreen = const PaymentsPage();
+                            currentTab = 2;
+                          });
+                        }),
+                      ),
+                      Expanded(
+                        child: bottomNavItem(3, 'Settings', Icons.settings, () {
+                          setState(() {
+                            currentScreen = SettingsPage(
+                              returnToPreviousFunction: returnToPreviousPage,
+                            );
+                            currentTab = 3;
+                          });
+                        }),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
