@@ -53,6 +53,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       : ThemeClass.primaryColor
                   : Colors.grey,
               fontWeight: FontWeight.normal,
+              fontSize: 12,
             ),
           ),
         ],

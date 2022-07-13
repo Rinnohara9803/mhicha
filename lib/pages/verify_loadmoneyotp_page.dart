@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mhicha/main.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
@@ -10,6 +11,7 @@ import 'package:mhicha/utilities/themes.dart';
 import 'package:pinput/pinput.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class VerifyLoadMoneyOtpPage extends StatefulWidget {
   const VerifyLoadMoneyOtpPage({Key? key}) : super(key: key);
@@ -27,6 +29,22 @@ class VerifyLoadMoneyOtpPageState extends State<VerifyLoadMoneyOtpPage> {
     try {
       await BalanceService.validateLoadMoneyOtp(otp).then((value) async {
         SnackBars.showNormalSnackbar(context, 'Amount loaded successfully.');
+        flutterLocalNotificationsPlugin.show(
+          0,
+          'Load Money',
+          'Balance loaded successfully!!!',
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              channelDescription: channel.description,
+              importance: Importance.high,
+              playSound: true,
+              color: Colors.white,
+              icon: '@mipmap/ic_launcher',
+            ),
+          ),
+        );
         Navigator.pushNamedAndRemoveUntil(
             context, DashboardPage.routeName, (route) => false);
         await Provider.of<ProfileProvider>(context, listen: false)
