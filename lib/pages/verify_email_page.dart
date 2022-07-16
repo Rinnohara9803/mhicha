@@ -69,6 +69,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       ),
     );
     final email = ModalRoute.of(context)!.settings.arguments as String;
+    
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(

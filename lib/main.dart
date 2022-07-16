@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/edit_profile_page.dart';
 import 'package:mhicha/pages/load_money_page.dart';
+import 'package:mhicha/pages/notifications_page.dart';
 import 'package:mhicha/pages/proceed_send_money_page.dart';
 import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/pages/qr_page.dart';
@@ -114,6 +115,7 @@ class _MyAppState extends State<MyApp> {
         SendMoneySuccessPage.routeName: (context) =>
             const SendMoneySuccessPage(),
         LoadMoneyPage.routeName: (context) => const LoadMoneyPage(),
+        NotificationsPage.routeName: (context) => const NotificationsPage(),
         VerifyLoadMoneyOtpPage.routeName: (context) =>
             const VerifyLoadMoneyOtpPage(),
       },
