@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/pages/notifications_page.dart';
 import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/providers/theme_provider.dart';
@@ -96,7 +97,12 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          NotificationsPage.routeName,
+                        );
+                      },
                       icon: Icon(
                         Icons.notifications,
                         color: ThemeClass.primaryColor,
