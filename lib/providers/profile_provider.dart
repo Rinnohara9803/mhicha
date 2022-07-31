@@ -68,6 +68,7 @@ class ProfileProvider with ChangeNotifier {
       );
 
       var jsonData = jsonDecode(responseData.body);
+      print(jsonData);
 
       SharedService.userID = jsonData['_id'];
       SharedService.userName = jsonData['name'];
@@ -90,25 +91,25 @@ class ProfileProvider with ChangeNotifier {
     }
   }
 
-  // Future<void> createNewPassword(String newPassword) async {
-  //   Map<String, String> headers = {
-  //     "Content-type": "application/json",
-  //     "Authorization": "Bearer ${SharedService.token}",
-  //   };
-  //   try {
-  //     await http.put(
-  //       Uri.http(Config.authority, 'user/updatepassword'),
-  //       headers: headers,
-  //       body: jsonEncode(
-  //         {
-  //           'Password': newPassword,
-  //         },
-  //       ),
-  //     );
-  //   } on SocketException {
-  //     return Future.error('No Internet connection');
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  Future<void> createNewPassword(String newPassword) async {
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer ${SharedService.token}",
+    };
+    try {
+      await http.put(
+        Uri.http(Config.authority, 'user/updatepassword'),
+        headers: headers,
+        body: jsonEncode(
+          {
+            'Password': newPassword,
+          },
+        ),
+      );
+    } on SocketException {
+      return Future.error('No Internet connection');
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

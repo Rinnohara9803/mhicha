@@ -31,7 +31,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
 
   String purpose = '';
   List<String> purposes = [
-    'Personal use',
+    'Personal Use',
     'Borrow/Lend',
     'Family Expenses',
     'Bill Sharing',

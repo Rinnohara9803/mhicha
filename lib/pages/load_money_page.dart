@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/pages/verify_loadmoneyotp_page.dart';
 import 'package:mhicha/services/balance_service.dart';
 import 'package:mhicha/services/shared_services.dart';

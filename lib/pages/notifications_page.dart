@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mhicha/utilities/themes.dart';
 
 class NotificationsPage extends StatefulWidget {
   static String routeName = '/notificationsPage';

@@ -46,6 +46,7 @@ class _SignInPageState extends State<SignInPage> {
         await Provider.of<ProfileProvider>(context, listen: false)
             .getMyProfile()
             .then((value) {
+          
           if (SharedService.isVerified) {
             Navigator.pushReplacementNamed(context, DashboardPage.routeName);
           } else {

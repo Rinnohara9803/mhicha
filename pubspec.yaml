@@ -98,12 +98,12 @@ flutter:
         - asset: fonts/Lato-Bold.ttf
         - asset: fonts/Lato-Light.ttf
 
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Black.ttf
-        - asset: fonts/Roboto-Bold.ttf
-        - asset: fonts/Roboto-Light.ttf
-          weight: 700
+    # - family: Roboto
+    #   fonts:
+    #     - asset: fonts/Roboto-Black.ttf
+    #     - asset: fonts/Roboto-Bold.ttf
+    #     - asset: fonts/Roboto-Light.ttf
+    #       weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -99,65 +99,66 @@ class _DashboardPageState extends State<DashboardPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child:
-                              bottomNavItem(0, 'Home', Icons.home_rounded, () {
-                            setState(() {
-                              currentScreen = const HomePage();
-                              currentTab = 0;
-                            });
-                          }),
-                        ),
-                      ),
-                      Expanded(
-                        child: Center(
-                          child: bottomNavItem(1, 'Statements', Icons.book, () {
-                            setState(() {
-                              currentScreen = const Page2();
-                              currentTab = 1;
-                            });
-                          }),
-                        ),
-                      ),
-                    ],
+                  child: Center(
+                    child: bottomNavItem(0, 'Home', Icons.home_rounded, () {
+                      setState(() {
+                        currentScreen = const HomePage();
+                        currentTab = 0;
+                      });
+                    }),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: bottomNavItem(1, 'Statements', Icons.book, () {
+                      setState(() {
+                        currentScreen = const Page2();
+                        currentTab = 1;
+                      });
+                    }),
                   ),
                 ),
                 const SizedBox(
-                  width: 50,
+                  width: 70,
+                ), // Expanded(
+                //   child: Column(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       Container(
+                //         padding: const EdgeInsets.only(
+                //           top: 25,
+                //         ),
+                //         child: const Text(
+                //           'Scan and Pay',
+                //           textAlign: TextAlign.center,
+                //           style: TextStyle(
+                //             fontSize: 12,
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                Expanded(
+                  child: Center(
+                    child: bottomNavItem(2, 'Payments', Icons.payment, () {
+                      setState(() {
+                        currentScreen = const PaymentsPage();
+                        currentTab = 2;
+                      });
+                    }),
+                  ),
                 ),
                 Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child:
-                              bottomNavItem(2, 'Payments', Icons.payment, () {
-                            setState(() {
-                              currentScreen = const PaymentsPage();
-                              currentTab = 2;
-                            });
-                          }),
-                        ),
-                      ),
-                      Expanded(
-                        child: Center(
-                          child:
-                              bottomNavItem(3, 'Settings', Icons.settings, () {
-                            setState(() {
-                              currentScreen = SettingsPage(
-                                returnToPreviousFunction: returnToPreviousPage,
-                              );
-                              currentTab = 3;
-                            });
-                          }),
-                        ),
-                      ),
-                    ],
+                  child: Center(
+                    child: bottomNavItem(3, 'Settings', Icons.settings, () {
+                      setState(() {
+                        currentScreen = SettingsPage(
+                          returnToPreviousFunction: returnToPreviousPage,
+                        );
+                        currentTab = 3;
+                      });
+                    }),
                   ),
                 ),
               ],

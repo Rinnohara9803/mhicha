@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/models/user.dart';
 import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
+import 'package:mhicha/pages/verify_email_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -90,7 +91,6 @@ class AuthService {
   static Future<void> autoLogin(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('token')) {
-      
       Navigator.pushReplacementNamed(context, SignInPage.routeName);
     } else {
       SharedService.token = prefs.getString('token')!;
@@ -99,7 +99,15 @@ class AuthService {
         await Provider.of<ProfileProvider>(context, listen: false)
             .getMyProfile()
             .then((_) {
-          Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+          if (SharedService.isVerified) {
+            Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+          } else {
+            Navigator.pushReplacementNamed(
+              context,
+              VerifyEmailPage.routeName,
+              arguments: SharedService.email,
+            );
+          }
         });
       } on SocketException {
         Navigator.pushReplacementNamed(context, SignInPage.routeName);
@@ -128,6 +136,31 @@ class AuthService {
       if (responseData.statusCode == 200 || responseData.statusCode == 201) {
       } else if (responseData.statusCode == 400) {
         return Future.error('Invalid or expired OTP');
+      }
+    } on SocketException {
+      return Future.error('No Internet Connection');
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  static Future<void> resendOtp() async {
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer ${SharedService.token}",
+    };
+    try {
+      var responseData = await http.post(
+        Uri.http(Config.authority, 'api/users/resend-otp'),
+        headers: headers,
+      );
+
+      if (responseData.statusCode == 200 || responseData.statusCode == 201) {
+        print(
+          jsonDecode(responseData.body),
+        );
+      } else if (responseData.statusCode == 400) {
+        return Future.error('Something went wrong.');
       }
     } on SocketException {
       return Future.error('No Internet Connection');
