@@ -61,14 +61,34 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
+  void goToStatementsPage() {
+    setState(() {
+      currentScreen = StatementsPage(
+        returnToPreviousFunction: returnToPreviousPage,
+      );
+      currentTab = 1;
+    });
+  }
+
   void returnToPreviousPage() {
     setState(() {
-      currentScreen = const HomePage();
+      currentScreen = HomePage(
+        goToStatementsPage: goToStatementsPage,
+      );
       currentTab = 0;
     });
   }
 
-  Widget currentScreen = const HomePage();
+  late Widget currentScreen;
+
+  @override
+  void initState() {
+    currentScreen = HomePage(
+      goToStatementsPage: goToStatementsPage,
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -102,7 +122,9 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: Center(
                     child: bottomNavItem(0, 'Home', Icons.home_rounded, () {
                       setState(() {
-                        currentScreen = const HomePage();
+                        currentScreen = HomePage(
+                          goToStatementsPage: goToStatementsPage,
+                        );
                         currentTab = 0;
                       });
                     }),
@@ -112,7 +134,9 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: Center(
                     child: bottomNavItem(1, 'Statements', Icons.book, () {
                       setState(() {
-                        currentScreen = const Page2();
+                        currentScreen = StatementsPage(
+                          returnToPreviousFunction: returnToPreviousPage,
+                        );
                         currentTab = 1;
                       });
                     }),
@@ -120,25 +144,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 const SizedBox(
                   width: 70,
-                ), // Expanded(
-                //   child: Column(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: [
-                //       Container(
-                //         padding: const EdgeInsets.only(
-                //           top: 25,
-                //         ),
-                //         child: const Text(
-                //           'Scan and Pay',
-                //           textAlign: TextAlign.center,
-                //           style: TextStyle(
-                //             fontSize: 12,
-                //           ),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                ),
                 Expanded(
                   child: Center(
                     child: bottomNavItem(2, 'Payments', Icons.payment, () {

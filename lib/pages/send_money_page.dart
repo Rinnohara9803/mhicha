@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mhicha/models/proceed_send_money.dart';
+import 'package:mhicha/models/fund_transfer_detail_model.dart';
 import 'package:mhicha/pages/proceed_send_money_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/services/auth_service.dart';
@@ -44,12 +44,17 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
   Future<void> fetchSendToUser(String email) async {
     try {
       await AuthService.fetchUserByEmail(email).then((value) {
-        SharedService.proceedSendMoney = ProceedSendMoney(
-          mhichaEmail: SharedService.sendToEmail,
+        SharedService.proceedSendMoney = FundTransferModel(
+          transactionCode: DateTime.now().toString(),
+          receiverMhichaEmail: SharedService.sendToEmail,
           receiverUserName: SharedService.sendToUserName,
+          senderMhichaEmail: SharedService.email,
+          senderUserName: SharedService.userName,
           amount: double.parse(_amountController.text),
           purpose: purpose,
           remarks: _remarksController.text,
+          time: DateTime.now().toIso8601String(),
+          cashFlow: '',
         );
         Navigator.pushNamed(
           context,

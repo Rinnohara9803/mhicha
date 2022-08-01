@@ -156,9 +156,6 @@ class AuthService {
       );
 
       if (responseData.statusCode == 200 || responseData.statusCode == 201) {
-        print(
-          jsonDecode(responseData.body),
-        );
       } else if (responseData.statusCode == 400) {
         return Future.error('Something went wrong.');
       }

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/main.dart';
 import 'package:mhicha/pages/send_money_success_page.dart';
+import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/providers/theme_provider.dart';
+import 'package:mhicha/services/balance_service.dart';
 import 'package:mhicha/services/shared_services.dart';
+import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
+import 'package:mhicha/widgets/circular_progress_indicator.dart';
 import 'package:mhicha/widgets/secondary_balance_card.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import '../models/fund_transfer_detail_model.dart';
 
 class ProceedSendMoneyPage extends StatefulWidget {
   static String routeName = '/proceedSendMoneyPage';
@@ -148,6 +155,59 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
     );
   }
 
+  bool _isLoading = false;
+
+  Future<void> confirmSendMoney() async {
+    setState(() {
+      _isLoading = true;
+    });
+    await BalanceService.transferBalance(
+      FundTransferModel(
+        transactionCode: DateTime.now().toString(),
+        receiverMhichaEmail: SharedService.proceedSendMoney.receiverMhichaEmail,
+        receiverUserName: SharedService.proceedSendMoney.receiverUserName,
+        senderMhichaEmail: SharedService.email,
+        senderUserName: SharedService.userName,
+        amount: SharedService.proceedSendMoney.amount,
+        purpose: SharedService.proceedSendMoney.purpose,
+        remarks: SharedService.proceedSendMoney.remarks,
+        time: DateTime.now().toIso8601String(),
+        cashFlow: 'Out',
+      ),
+    ).then((_) async {
+      flutterLocalNotificationsPlugin.show(
+        0,
+        'Fund transfer',
+        'Rs. ${SharedService.proceedSendMoney.amount} transferred to ${SharedService.proceedSendMoney.receiverUserName} successfully !!!',
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            channelDescription: channel.description,
+            importance: Importance.high,
+            playSound: true,
+            color: Colors.white,
+            icon: '@mipmap/ic_launcher',
+          ),
+        ),
+      );
+      await Provider.of<ProfileProvider>(context, listen: false).getMyProfile();
+      Navigator.pushReplacementNamed(
+        context,
+        SendMoneySuccessPage.routeName,
+        arguments: SharedService.proceedSendMoney,
+      );
+    }).catchError((e) {
+      SnackBars.showErrorSnackBar(
+        context,
+        e.toString(),
+      );
+    });
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -232,7 +292,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                     children: [
                       proceedSendMoneyDetails(
                         'Email',
-                        SharedService.proceedSendMoney.mhichaEmail,
+                        SharedService.proceedSendMoney.receiverMhichaEmail,
                       ),
                       const SizedBox(
                         height: 8,
@@ -274,11 +334,8 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                     10,
                   ),
                   child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        SendMoneySuccessPage.routeName,
-                      );
+                    onTap: () async {
+                      await confirmSendMoney();
                     },
                     child: Container(
                       height: 50,
@@ -289,16 +346,18 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
                           10,
                         ),
                       ),
-                      child: const Center(
-                        child: AutoSizeText(
-                          'Confirm',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
-                          ),
-                        ),
+                      child: Center(
+                        child: _isLoading
+                            ? const ProgressIndicator1()
+                            : const AutoSizeText(
+                                'Confirm',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                ),
+                              ),
                       ),
                     ),
                   ),

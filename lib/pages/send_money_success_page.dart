@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mhicha/models/fund_transfer_detail_model.dart';
+import 'package:mhicha/pages/dashboard_page.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/apis/pdf_api.dart';
+import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/secondary_balance_card.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -32,6 +35,9 @@ class SendMoneySuccessPage extends StatelessWidget {
         ],
       );
     }
+
+    final fundTransferDetail =
+        ModalRoute.of(context)!.settings.arguments as FundTransferModel;
 
     return SafeArea(
       child: Scaffold(
@@ -71,7 +77,9 @@ class SendMoneySuccessPage extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () async {
-                          final pdfFile = await PdfInvoiceApi.generate();
+                          final pdfFile = await PdfInvoiceApi.generate(
+                            fundTransferDetail,
+                          );
                           Share.shareFiles(
                             [pdfFile.path],
                           );
@@ -103,7 +111,9 @@ class SendMoneySuccessPage extends StatelessWidget {
                                       TextButton(
                                         onPressed: () async {
                                           final pdfFile =
-                                              await PdfInvoiceApi.generate();
+                                              await PdfInvoiceApi.generate(
+                                            fundTransferDetail,
+                                          );
                                           PdfApi.openFile(pdfFile);
                                           isPdfDownloaded = true;
                                           Navigator.pop(context);
@@ -115,7 +125,9 @@ class SendMoneySuccessPage extends StatelessWidget {
                                 });
                             return;
                           } else {
-                            final pdfFile = await PdfInvoiceApi.generate();
+                            final pdfFile = await PdfInvoiceApi.generate(
+                              fundTransferDetail,
+                            );
                             PdfApi.openFile(pdfFile);
                             isPdfDownloaded = true;
                           }
@@ -171,9 +183,7 @@ class SendMoneySuccessPage extends StatelessWidget {
                                       'Send Money',
                                     ),
                                     AutoSizeText(
-                                      DateFormat('yyyy-MM-dd – kk:mm a').format(
-                                        DateTime.now(),
-                                      ),
+                                      fundTransferDetail.time,
                                     ),
                                     Container(
                                       padding: const EdgeInsets.symmetric(
@@ -190,9 +200,9 @@ class SendMoneySuccessPage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                const AutoSizeText(
-                                  'Rs. 50',
-                                  style: TextStyle(
+                                AutoSizeText(
+                                  fundTransferDetail.amount.toString(),
+                                  style: const TextStyle(
                                     fontSize: 18,
                                   ),
                                 ),
@@ -233,15 +243,17 @@ class SendMoneySuccessPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
-                                      child: dataWidget(
-                                          'Transaction Code:', 'RINO9803'),
+                                      child: dataWidget('Transaction Code:',
+                                          fundTransferDetail.transactionCode),
                                     ),
                                     const SizedBox(
                                       width: 5,
                                     ),
                                     Expanded(
-                                      child: dataWidget('Processed By:',
-                                          'rinnohara9803@gmail.com'),
+                                      child: dataWidget(
+                                        'Processed By:',
+                                        SharedService.email,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -250,7 +262,10 @@ class SendMoneySuccessPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
-                                      child: dataWidget('Is Debit:', 'True'),
+                                      child: dataWidget(
+                                        'Cash Flow',
+                                        fundTransferDetail.cashFlow,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 5,
@@ -283,14 +298,18 @@ class SendMoneySuccessPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: dataWidget(
-                                          'Purpose:', 'Personal Use'),
+                                        'Purpose:',
+                                        fundTransferDetail.purpose,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 5,
                                     ),
                                     Expanded(
-                                      child: dataWidget('Receiver Username:',
-                                          'Swornima Shrestha'),
+                                      child: dataWidget(
+                                        'Receiver Username:',
+                                        fundTransferDetail.receiverUserName,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -300,14 +319,18 @@ class SendMoneySuccessPage extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: dataWidget(
-                                          'Email:', 'swornimastha@gmail.com'),
+                                        'Email:',
+                                        fundTransferDetail.receiverMhichaEmail,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 5,
                                     ),
                                     Expanded(
                                       child: dataWidget(
-                                          'Sender Name:', 'Ajay Prajapti'),
+                                        'Sender Name:',
+                                        SharedService.userName,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -323,7 +346,10 @@ class SendMoneySuccessPage extends StatelessWidget {
                                       width: 5,
                                     ),
                                     Expanded(
-                                      child: dataWidget('Remarks:', 'due'),
+                                      child: dataWidget(
+                                        'Remarks:',
+                                        fundTransferDetail.remarks,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -345,7 +371,13 @@ class SendMoneySuccessPage extends StatelessWidget {
                   10,
                 ),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      DashboardPage.routeName,
+                      (route) => false,
+                    );
+                  },
                   child: Container(
                     height: 50,
                     width: double.infinity,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class FlutterToasts {
   static void showNormalFlutterToast(String message) {
+    Fluttertoast.cancel();
     Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,

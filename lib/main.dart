@@ -1,30 +1,32 @@
+import 'L10n/L10n.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:mhicha/pages/dashboard_page.dart';
-import 'package:mhicha/pages/edit_profile_page.dart';
-import 'package:mhicha/pages/load_money_page.dart';
-import 'package:mhicha/pages/notifications_page.dart';
-import 'package:mhicha/pages/proceed_send_money_page.dart';
-import 'package:mhicha/pages/profile_page.dart';
+import 'package:provider/provider.dart';
 import 'package:mhicha/pages/qr_page.dart';
-import 'package:mhicha/pages/send_money_page.dart';
-import 'package:mhicha/pages/send_money_success_page.dart';
+import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/pages/splash_page.dart';
-import 'package:mhicha/pages/verify_email_page.dart';
+import 'package:mhicha/pages/profile_page.dart';
 import 'package:mhicha/pages/sign_in_page.dart';
 import 'package:mhicha/pages/sign_up_page.dart';
-import 'package:mhicha/pages/verify_loadmoneyotp_page.dart';
-import 'package:mhicha/providers/locale_provider.dart';
-import 'package:mhicha/providers/profile_provider.dart';
-import 'package:mhicha/providers/theme_provider.dart';
-import 'package:mhicha/utilities/themes.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mhicha/pages/dashboard_page.dart';
+import 'package:mhicha/pages/load_money_page.dart';
+import 'package:mhicha/pages/send_money_page.dart';
+import 'package:mhicha/pages/edit_profile_page.dart';
+import 'package:mhicha/pages/verify_email_page.dart';
+import 'package:mhicha/pages/notifications_page.dart';
+import 'package:mhicha/providers/theme_provider.dart';
+import 'package:mhicha/providers/locale_provider.dart';
+import 'package:mhicha/pages/reset_password_page.dart';
+import 'package:mhicha/providers/profile_provider.dart';
+import 'package:mhicha/pages/send_money_success_page.dart';
+import 'package:mhicha/pages/proceed_send_money_page.dart';
+import 'package:mhicha/providers/statements_provider.dart';
+import 'package:mhicha/pages/verify_loadmoneyotp_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'firebase_options.dart';
-import 'L10n/L10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel',
@@ -69,6 +71,9 @@ Future<void> main() async {
         ),
         ChangeNotifierProvider<LocaleProvider>(
           create: (context) => LocaleProvider(),
+        ),
+        ChangeNotifierProvider<StatementsProvider>(
+          create: (context) => StatementsProvider(),
         ),
       ],
       child: const MyApp(),
@@ -118,6 +123,7 @@ class _MyAppState extends State<MyApp> {
         NotificationsPage.routeName: (context) => const NotificationsPage(),
         VerifyLoadMoneyOtpPage.routeName: (context) =>
             const VerifyLoadMoneyOtpPage(),
+        ResetOtpPage.routeName: (context) => const ResetOtpPage(),
       },
       supportedLocales: L10n.all,
       localizationsDelegates: const [

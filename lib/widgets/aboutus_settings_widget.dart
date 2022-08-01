@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsSettingsWidget extends StatefulWidget {
   const AboutUsSettingsWidget({Key? key}) : super(key: key);
@@ -56,7 +57,16 @@ class AboutUsSettingsWidgetState extends State<AboutUsSettingsWidget> {
             ),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              const url = 'https://nohara-591ab.web.app/#/';
+              // ignore: deprecated_member_use
+              if (await canLaunch(url)) {
+                // ignore: deprecated_member_use
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
             icon: const Icon(
               Icons.navigate_next,
             ),

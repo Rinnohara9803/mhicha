@@ -1,4 +1,4 @@
-import 'package:mhicha/models/proceed_send_money.dart';
+import 'package:mhicha/models/fund_transfer_detail_model.dart';
 
 class SharedService {
   static String token = '';
@@ -12,12 +12,17 @@ class SharedService {
   static String sendToEmail = '';
   static bool sendToVerified = false;
 
-  static ProceedSendMoney proceedSendMoney = ProceedSendMoney(
-    mhichaEmail: '',
+  static FundTransferModel proceedSendMoney = FundTransferModel(
+    transactionCode: '',
+    receiverMhichaEmail: '',
     receiverUserName: '',
+    senderMhichaEmail: '',
+    senderUserName: '',
     amount: 0.0,
     purpose: '',
     remarks: '',
+    time: '',
+    cashFlow: '',
   );
 
   static bool isDarkMode = false;

@@ -45,15 +45,10 @@ class _SecondaryBalanceCardState extends State<SecondaryBalanceCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Icon(
-                  Icons.account_balance_wallet,
-                  size: 30,
-                  color: Colors.white,
-                ),
+              const Icon(
+                Icons.account_balance_wallet,
+                size: 30,
+                color: Colors.white,
               ),
               InkWell(
                 onTap: () {

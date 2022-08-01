@@ -45,58 +45,11 @@ class _NotificationsPageState extends State<NotificationsPage> {
               const SizedBox(
                 height: 10,
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 4,
-                  itemBuilder: (context, i) {
-                    return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            10,
-                          ),
-                          color: const Color(0xff018AF3).withOpacity(
-                            0.7,
-                          ),
-                        ),
-                        padding: const EdgeInsets.all(
-                          10,
-                        ),
-                        margin: const EdgeInsets.only(
-                          bottom: 10,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
-                              Icons.notifications_active_outlined,
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    'Topic',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Description is this that in the townr ekjldfjs kdjfkdfjdjkfj fkjdkfjdjfjdk k fklsdjfksdljfjkldsjkfjskldjkfsdlfjdklf',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ));
-                  },
+              const Expanded(
+                child: Center(
+                  child: Text(
+                    'No available notifications !!!.',
+                  ),
                 ),
               )
             ],

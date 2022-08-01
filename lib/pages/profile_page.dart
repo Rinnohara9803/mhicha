@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/edit_profile_page.dart';
+import 'package:mhicha/pages/reset_password_page.dart';
 import 'package:mhicha/providers/profile_provider.dart';
 import 'package:mhicha/providers/theme_provider.dart';
 import 'package:mhicha/services/shared_services.dart';
+import 'package:mhicha/utilities/snackbars.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -84,113 +86,103 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Expanded(
                   flex: 10,
-                  child: Column(
-                    children: [
-                      SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(
-                                left: 30,
-                                right: 40,
-                                top: 70,
-                                bottom: 20,
-                              ),
-                              child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                radius: const Radius.circular(
-                                  10,
-                                ),
-                                color: Provider.of<ThemeProvider>(context)
-                                        .isDarkMode
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                            left: 30,
+                            right: 40,
+                            top: 70,
+                            bottom: 20,
+                          ),
+                          child: DottedBorder(
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(
+                              10,
+                            ),
+                            color:
+                                Provider.of<ThemeProvider>(context).isDarkMode
                                     ? Colors.white
                                     : Colors.black,
-                                child: Container(
-                                  height: 95,
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.only(
-                                    left: 30,
-                                    right: 40,
-                                    top: 20,
-                                    bottom: 20,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topRight,
-                                      end: Alignment.bottomLeft,
-                                      colors: [
-                                        const Color(0xff018AF3),
-                                        ThemeClass.primaryColor,
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      10,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                            child: Container(
+                              height: 95,
+                              width: double.infinity,
+                              padding: const EdgeInsets.only(
+                                left: 30,
+                                right: 40,
+                                top: 20,
+                                bottom: 20,
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    const Color(0xff018AF3),
+                                    ThemeClass.primaryColor,
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  10,
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Icon(
-                                              Icons.account_balance_wallet,
-                                              size: 30,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          AutoSizeText(
-                                            'Rs. ${Provider.of<ProfileProvider>(context).balance}',
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 23,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
+                                      const Icon(
+                                        Icons.account_balance_wallet,
+                                        size: 30,
+                                        color: Colors.white,
                                       ),
-                                      const AutoSizeText(
-                                        'Total Balance',
-                                        style: TextStyle(
+                                      AutoSizeText(
+                                        'Rs. ${Provider.of<ProfileProvider>(context).balance}',
+                                        style: const TextStyle(
                                           color: Colors.white,
-                                          fontSize: 19,
+                                          fontSize: 23,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(
-                                left: 60,
-                                top: 15,
-                                right: 40,
-                                bottom: 10,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  profileDetailBox(
-                                    'Your email',
-                                    SharedService.email,
+                                  const AutoSizeText(
+                                    'Total Balance',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 19,
+                                    ),
                                   ),
-                                  profileDetailBox(
-                                      'Your password', '*********'),
                                 ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          padding: const EdgeInsets.only(
+                            left: 60,
+                            top: 15,
+                            right: 40,
+                            bottom: 10,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              profileDetailBox(
+                                'Your email',
+                                SharedService.email,
+                              ),
+                              profileDetailBox('Your password', '*********'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -284,7 +276,22 @@ class _ProfilePageState extends State<ProfilePage> {
               bottom: theHeight * 0.008,
               left: 30,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await Provider.of<ProfileProvider>(context, listen: false)
+                      .resetPasswordRequest()
+                      .then((value) {
+                    Navigator.pushNamed(context, ResetOtpPage.routeName);
+                    SnackBars.showNormalSnackbar(
+                      context,
+                      'Reset OTP sent successfully!!!',
+                    );
+                  }).catchError((e) {
+                    SnackBars.showErrorSnackBar(
+                      context,
+                      e.toString(),
+                    );
+                  });
+                },
                 child: const AutoSizeText(
                   'Reset Password',
                   style: TextStyle(

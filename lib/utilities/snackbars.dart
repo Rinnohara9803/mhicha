@@ -11,7 +11,7 @@ class SnackBars {
           style: const TextStyle(color: Colors.white),
         ),
         duration: const Duration(
-          milliseconds: 2500,
+          milliseconds: 2000,
         ),
         backgroundColor: ThemeClass.primaryColor,
         behavior: SnackBarBehavior.floating,
@@ -30,7 +30,7 @@ class SnackBars {
         ),
         backgroundColor: const Color.fromARGB(255, 189, 86, 80),
         duration: const Duration(
-          milliseconds: 2500,
+          milliseconds: 2000,
         ),
       ),
     );
@@ -47,7 +47,7 @@ class SnackBars {
           ),
         ),
         duration: Duration(
-          milliseconds: 2500,
+          milliseconds: 2000,
         ),
       ),
     );

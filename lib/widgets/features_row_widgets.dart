@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mhicha/pages/load_money_page.dart';
 import 'package:mhicha/pages/send_money_page.dart';
+import 'package:mhicha/utilities/flutter_toasts.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:provider/provider.dart';
@@ -117,10 +118,15 @@ class FeatureRowWidgets extends StatelessWidget {
           width: 10,
         ),
         Expanded(
-          child: InkWell(
-            child: Column(
-              children: [
-                DottedBorder(
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  FlutterToasts.showNormalFlutterToast(
+                    'Service not available at the moment !!!',
+                  );
+                },
+                child: DottedBorder(
                   color: Provider.of<ThemeProvider>(context).isDarkMode
                       ? Colors.white
                       : Colors.black,
@@ -134,28 +140,24 @@ class FeatureRowWidgets extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                         15,
                       ),
-                      color: ThemeClass.primaryColor.withOpacity(
-                        0.3,
-                      ),
+                      color: Colors.grey,
                     ),
                     height: 90,
-                    child: Icon(
+                    child: const Icon(
                       Icons.smartphone,
-                      color: Provider.of<ThemeProvider>(context).isDarkMode
-                          ? Colors.white
-                          : ThemeClass.primaryColor,
+                      color: Colors.white,
                       size: 30,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const AutoSizeText(
-                  'Top - Up',
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const AutoSizeText(
+                'Top - Up',
+              ),
+            ],
           ),
         ),
         Expanded(

@@ -68,7 +68,6 @@ class ProfileProvider with ChangeNotifier {
       );
 
       var jsonData = jsonDecode(responseData.body);
-      print(jsonData);
 
       SharedService.userID = jsonData['_id'];
       SharedService.userName = jsonData['name'];
@@ -91,25 +90,52 @@ class ProfileProvider with ChangeNotifier {
     }
   }
 
-  Future<void> createNewPassword(String newPassword) async {
+  Future<void> resetPasswordRequest() async {
     Map<String, String> headers = {
       "Content-type": "application/json",
       "Authorization": "Bearer ${SharedService.token}",
     };
     try {
-      await http.put(
-        Uri.http(Config.authority, 'user/updatepassword'),
+      await http.post(
+        Uri.http(Config.authority, 'api/users/reset-password-request'),
         headers: headers,
-        body: jsonEncode(
-          {
-            'Password': newPassword,
-          },
-        ),
       );
     } on SocketException {
       return Future.error('No Internet connection');
     } catch (e) {
-      rethrow;
+      return Future.error(e.toString());
+    }
+  }
+
+  Future<void> resetPassword(String otp, String password) async {
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": "Bearer ${SharedService.token}",
+    };
+    try {
+      var responseData = await http.put(
+        Uri.http(Config.authority, 'api/users/reset-password'),
+        headers: headers,
+        body: jsonEncode(
+          {
+            'otp': otp,
+            'password': password,
+          },
+        ),
+      );
+
+      if (responseData.statusCode == 200 || responseData.statusCode == 201) {
+      } else {
+        return Future.error(
+          jsonDecode(responseData.body)['error']['message'],
+        );
+      }
+    } on SocketException {
+      return Future.error('No Internet connection');
+    } catch (e) {
+      return Future.error(
+        e.toString(),
+      );
     }
   }
 }

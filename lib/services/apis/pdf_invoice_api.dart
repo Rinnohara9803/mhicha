@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:mhicha/models/fund_transfer_detail_model.dart';
 import 'package:mhicha/services/apis/pdf_api.dart';
+import 'package:mhicha/services/shared_services.dart';
 import 'package:pdf/widgets.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 class PdfInvoiceApi {
-  static Future<File> generate() async {
+  static Future<File> generate(FundTransferModel psm) async {
     final pdf = Document();
 
     pdf.addPage(
@@ -12,30 +14,30 @@ class PdfInvoiceApi {
         build: (context) => [
           Expanded(
             flex: 2,
-            child: buildTopInvoiceLayout(),
+            child: buildTopInvoiceLayout(psm),
           ),
           Divider(
             thickness: 1,
           ),
           Expanded(
             flex: 5,
-            child: buildMiddleInvoiceLayout(),
+            child: buildMiddleInvoiceLayout(psm),
           ),
           Divider(
             thickness: 1,
           ),
           Expanded(
             flex: 5,
-            child: buildBottomInvoiceLayout(),
+            child: buildBottomInvoiceLayout(psm),
           ),
         ],
       ),
     );
 
-    return PdfApi.saveDocument(name: 'invoice1.pdf', pdf: pdf);
+    return PdfApi.saveDocument(name: '${psm.transactionCode}.pdf', pdf: pdf);
   }
 
-  static Widget buildTopInvoiceLayout() {
+  static Widget buildTopInvoiceLayout(FundTransferModel psm) {
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 5,
@@ -53,9 +55,7 @@ class PdfInvoiceApi {
                   'Send Money',
                 ),
                 Text(
-                  DateFormat('yyyy-MM-dd kk:mm a').format(
-                    DateTime.now(),
-                  ),
+                  psm.time,
                 ),
                 Text(
                   'Complete',
@@ -64,7 +64,7 @@ class PdfInvoiceApi {
             ),
           ),
           Text(
-            'Rs. 50',
+            psm.amount.toString(),
             style: const TextStyle(
               fontSize: 18,
             ),
@@ -74,7 +74,7 @@ class PdfInvoiceApi {
     );
   }
 
-  static Widget buildMiddleInvoiceLayout() {
+  static Widget buildMiddleInvoiceLayout(FundTransferModel psm) {
     Widget dataWidget(String key, String value) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,13 +116,13 @@ class PdfInvoiceApi {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: dataWidget('Transaction Code:', 'RINO9803'),
+                child: dataWidget('Transaction Code:', psm.transactionCode),
               ),
               SizedBox(
                 width: 5,
               ),
               Expanded(
-                child: dataWidget('Processed By:', 'rinnohara9803@gmail.com'),
+                child: dataWidget('Processed By:', SharedService.email),
               ),
             ],
           ),
@@ -130,7 +130,7 @@ class PdfInvoiceApi {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: dataWidget('Is Debit:', 'True'),
+                child: dataWidget('Cash Flow:', psm.cashFlow),
               ),
               SizedBox(
                 width: 5,
@@ -145,7 +145,7 @@ class PdfInvoiceApi {
     );
   }
 
-  static buildBottomInvoiceLayout() {
+  static buildBottomInvoiceLayout(FundTransferModel psm) {
     Widget dataWidget(String key, String value) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,13 +173,16 @@ class PdfInvoiceApi {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: dataWidget('Purpose:', 'Personal Use'),
+                child: dataWidget('Purpose:', psm.purpose),
               ),
               SizedBox(
                 width: 5,
               ),
               Expanded(
-                child: dataWidget('Receiver Username:', 'Swornima Shrestha'),
+                child: dataWidget(
+                  'Receiver Username:',
+                  psm.receiverUserName,
+                ),
               ),
             ],
           ),
@@ -187,13 +190,13 @@ class PdfInvoiceApi {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: dataWidget('Email:', 'swornimastha@gmail.com'),
+                child: dataWidget('Email:', psm.receiverMhichaEmail),
               ),
               SizedBox(
                 width: 5,
               ),
               Expanded(
-                child: dataWidget('Sender Name:', 'Ajay Prajapti'),
+                child: dataWidget('Sender Name:', SharedService.userName),
               ),
             ],
           ),
@@ -207,7 +210,7 @@ class PdfInvoiceApi {
                 width: 5,
               ),
               Expanded(
-                child: dataWidget('Remarks:', 'due'),
+                child: dataWidget('Remarks:', psm.remarks),
               ),
             ],
           ),
