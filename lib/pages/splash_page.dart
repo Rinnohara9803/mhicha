@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 0), () {
       AuthService.autoLogin(context);
     });
     getIsDarkModeValue();

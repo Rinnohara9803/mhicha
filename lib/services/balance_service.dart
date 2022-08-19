@@ -19,7 +19,9 @@ class BalanceService {
         headers: headers,
         body: jsonEncode(
           {
-            "balanceRequest": amount,
+            "amount": amount,
+            "remarks": 'due',
+            "purpose": 'Personal Use',
           },
         ),
       );
@@ -89,7 +91,7 @@ class BalanceService {
 
       if (responseData.statusCode == 200 || responseData.statusCode == 201) {
       } else {
-        return Future.error('Insufficient balance !!!');
+        return Future.error(jsonDecode(responseData.body)['error']['message']);
       }
     } on SocketException {
       return Future.error('No Internet Connection');

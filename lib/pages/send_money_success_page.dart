@@ -9,7 +9,6 @@ import 'package:mhicha/widgets/secondary_balance_card.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:intl/intl.dart';
 import '../services/apis/pdf_invoice_api.dart';
 import 'package:share/share.dart';
 
@@ -38,6 +37,7 @@ class SendMoneySuccessPage extends StatelessWidget {
 
     final fundTransferDetail =
         ModalRoute.of(context)!.settings.arguments as FundTransferModel;
+    
 
     return SafeArea(
       child: Scaffold(
@@ -183,7 +183,7 @@ class SendMoneySuccessPage extends StatelessWidget {
                                       'Send Money',
                                     ),
                                     AutoSizeText(
-                                      fundTransferDetail.time,
+                                      fundTransferDetail.time.substring(0, 10),
                                     ),
                                     Container(
                                       padding: const EdgeInsets.symmetric(
@@ -252,7 +252,10 @@ class SendMoneySuccessPage extends StatelessWidget {
                                     Expanded(
                                       child: dataWidget(
                                         'Processed By:',
-                                        SharedService.email,
+                                        fundTransferDetail.cashFlow == 'In'
+                                            ? fundTransferDetail
+                                                .senderMhichaEmail
+                                            : SharedService.email,
                                       ),
                                     ),
                                   ],
@@ -329,7 +332,7 @@ class SendMoneySuccessPage extends StatelessWidget {
                                     Expanded(
                                       child: dataWidget(
                                         'Sender Name:',
-                                        SharedService.userName,
+                                        fundTransferDetail.senderUserName,
                                       ),
                                     ),
                                   ],

@@ -14,6 +14,12 @@ class StatementsProvider with ChangeNotifier {
     return [..._statements];
   }
 
+  List<FundTransferModel> _recentStatements = [];
+
+  List<FundTransferModel> get recentStatements {
+    return [..._recentStatements];
+  }
+
   Future<void> getStatements() async {
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -27,8 +33,20 @@ class StatementsProvider with ChangeNotifier {
         ),
         headers: headers,
       );
+      if (responseData.statusCode == 204) {
+        _statements = [];
+        notifyListeners();
+        _recentStatements = [];
+        notifyListeners();
+        return;
+      }
+
       var jsonData = jsonDecode(responseData.body);
       List<FundTransferModel> _loadedStatements = [];
+
+      if (responseData.statusCode == 401) {
+        return Future.error('Something went wrong.');
+      }
       for (var transaction in jsonData) {
         if (transaction['cashFlow'] == 'Out') {
           _loadedStatements.add(
@@ -52,17 +70,19 @@ class StatementsProvider with ChangeNotifier {
               receiverMhichaEmail: SharedService.email,
               receiverUserName: SharedService.userName,
               senderMhichaEmail: transaction['senderEmail'] ?? '',
-              senderUserName: transaction['senderEmail'] ?? '',
+              senderUserName: transaction['senderName'] ?? '',
               amount: double.parse(transaction['amount'].toString()),
-              purpose: '',
-              remarks: '',
-              time: '',
+              purpose: transaction['purpose'],
+              remarks: transaction['remarks'],
+              time: transaction['createdAt'],
               cashFlow: transaction['cashFlow'],
             ),
           );
         }
       }
       _statements = _loadedStatements.reversed.toList();
+      notifyListeners();
+      _recentStatements = _statements.take(3).toList();
       notifyListeners();
     } on SocketException {
       return Future.error('No Internet connection');

@@ -28,13 +28,14 @@ class ProfileSettingsWidget extends StatelessWidget {
             ),
           ),
         ),
-        Center(
+        Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AutoSizeText(
                 Provider.of<ProfileProvider>(context).userName,
                 overflow: TextOverflow.ellipsis,
+                maxLines: 1,
                 style: const TextStyle(
                   fontSize: 22,
                 ),

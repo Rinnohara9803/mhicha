@@ -13,6 +13,7 @@ import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/circular_progress_indicator.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/statements_provider.dart';
 import '../widgets/general_textformfield.dart';
 
 class SignInPage extends StatefulWidget {
@@ -46,16 +47,19 @@ class _SignInPageState extends State<SignInPage> {
         await Provider.of<ProfileProvider>(context, listen: false)
             .getMyProfile()
             .then((value) {
-          
-          if (SharedService.isVerified) {
-            Navigator.pushReplacementNamed(context, DashboardPage.routeName);
-          } else {
-            Navigator.pushReplacementNamed(
-              context,
-              VerifyEmailPage.routeName,
-              arguments: SharedService.email,
-            );
-          }
+          Provider.of<StatementsProvider>(context, listen: false)
+              .getStatements()
+              .then((value) {
+            if (SharedService.isVerified) {
+              Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+            } else {
+              Navigator.pushReplacementNamed(
+                context,
+                VerifyEmailPage.routeName,
+                arguments: SharedService.email,
+              );
+            }
+          });
         });
       });
     } on SocketException {

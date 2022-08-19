@@ -54,7 +54,7 @@ class _SendMoneyPageState extends State<SendMoneyPage> {
           purpose: purpose,
           remarks: _remarksController.text,
           time: DateTime.now().toIso8601String(),
-          cashFlow: '',
+          cashFlow: 'Out',
         );
         Navigator.pushNamed(
           context,

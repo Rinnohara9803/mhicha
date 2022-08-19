@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:mhicha/models/fund_transfer_detail_model.dart';
-import 'package:mhicha/pages/send_money_success_page.dart';
 import 'package:mhicha/providers/statements_provider.dart';
-import 'package:mhicha/services/shared_services.dart';
 import 'package:mhicha/utilities/themes.dart';
 import 'package:mhicha/widgets/secondary_balance_card.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:mhicha/widgets/statement_widget.dart';
 import 'package:provider/provider.dart';
-import '../providers/theme_provider.dart';
 
 class StatementsPage extends StatefulWidget {
   final Function returnToPreviousFunction;
@@ -20,6 +17,7 @@ class StatementsPage extends StatefulWidget {
 }
 
 class _StatementsPageState extends State<StatementsPage> {
+  var timeFrame = '';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -119,216 +117,36 @@ class _StatementsPageState extends State<StatementsPage> {
                                       itemCount:
                                           statementsData.statements.length,
                                       itemBuilder: (context, index) {
-                                        return InkWell(
-                                          onTap: () {
-                                            if (statementsData.statements[index]
-                                                    .cashFlow ==
-                                                'In') {
-                                              return;
-                                            } else {
-                                              Navigator.pushNamed(
-                                                context,
-                                                SendMoneySuccessPage.routeName,
-                                                arguments: FundTransferModel(
-                                                  transactionCode:
-                                                      statementsData
-                                                          .statements[index]
-                                                          .transactionCode,
-                                                  receiverMhichaEmail: statementsData
-                                                                  .statements[
-                                                                      index]
-                                                                  .cashFlow ==
-                                                              'In' &&
-                                                          statementsData
-                                                              .statements[index]
-                                                              .senderMhichaEmail
-                                                              .isNotEmpty
-                                                      ? SharedService.email
-                                                      : statementsData
-                                                          .statements[index]
-                                                          .receiverMhichaEmail,
-                                                  receiverUserName: statementsData
-                                                                  .statements[
-                                                                      index]
-                                                                  .cashFlow ==
-                                                              'In' &&
-                                                          statementsData
-                                                              .statements[index]
-                                                              .senderMhichaEmail
-                                                              .isNotEmpty
-                                                      ? SharedService.userName
-                                                      : statementsData
-                                                          .statements[index]
-                                                          .receiverMhichaEmail,
-                                                  senderMhichaEmail: 'rino',
-                                                  senderUserName: 'rino',
-                                                  amount: statementsData
-                                                      .statements[index].amount,
-                                                  purpose: statementsData
-                                                                  .statements[
-                                                                      index]
-                                                                  .cashFlow ==
-                                                              'In' &&
-                                                          statementsData
-                                                              .statements[index]
-                                                              .senderMhichaEmail
-                                                              .isEmpty
-                                                      ? ''
-                                                      : statementsData
-                                                          .statements[index]
-                                                          .purpose,
-                                                  remarks: statementsData
-                                                                  .statements[
-                                                                      index]
-                                                                  .cashFlow ==
-                                                              'In' &&
-                                                          statementsData
-                                                              .statements[index]
-                                                              .senderMhichaEmail
-                                                              .isEmpty
-                                                      ? ''
-                                                      : statementsData
-                                                          .statements[index]
-                                                          .remarks,
-                                                  time: statementsData
-                                                      .statements[index].time,
-                                                  cashFlow: statementsData
-                                                      .statements[index]
-                                                      .cashFlow,
+                                        var statementTimeFrame = statementsData
+                                            .statements[index].time
+                                            .toString()
+                                            .substring(0, 10);
+                                        if (timeFrame != statementTimeFrame) {
+                                          timeFrame = statementTimeFrame;
+                                          return Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              AutoSizeText(
+                                                statementTimeFrame,
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                              );
-                                            }
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8,
-                                              vertical: 10,
-                                            ),
-                                            margin: const EdgeInsets.only(
-                                              bottom: 10,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                5,
                                               ),
-                                              color: Colors.grey.withOpacity(
-                                                0.6,
+                                              const SizedBox(
+                                                height: 5,
                                               ),
-                                            ),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                DottedBorder(
-                                                  borderType: BorderType.RRect,
-                                                  radius: const Radius.circular(
-                                                    5,
-                                                  ),
-                                                  color:
-                                                      Provider.of<ThemeProvider>(
-                                                                  context)
-                                                              .isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                  child: SizedBox(
-                                                    height: 35,
-                                                    width: 35,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                        15,
-                                                      ),
-                                                      child: const Image(
-                                                        image: AssetImage(
-                                                          'images/mhicha.png',
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      AutoSizeText(
-                                                        statementsData
-                                                                    .statements[
-                                                                        index]
-                                                                    .cashFlow ==
-                                                                'In'
-                                                            ? 'Balance received ${statementsData.statements[index].amount}'
-                                                            : 'Fund transferred to ${statementsData.statements[index].receiverUserName}',
-                                                        style: const TextStyle(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 7,
-                                                      ),
-                                                      AutoSizeText(
-                                                        statementsData
-                                                            .statements[index]
-                                                            .time,
-                                                        style: const TextStyle(
-                                                          fontSize: 11,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Icon(
-                                                        statementsData
-                                                                    .statements[
-                                                                        index]
-                                                                    .cashFlow ==
-                                                                'In'
-                                                            ? Icons
-                                                                .arrow_drop_down
-                                                            : Icons
-                                                                .arrow_drop_up,
-                                                        color: statementsData
-                                                                    .statements[
-                                                                        index]
-                                                                    .cashFlow ==
-                                                                'In'
-                                                            ? Colors.green
-                                                            : Colors.red,
-                                                      ),
-                                                      Text(
-                                                        '200.0',
-                                                        style: TextStyle(
-                                                          fontSize: 15,
-                                                          color: statementsData
-                                                                      .statements[
-                                                                          index]
-                                                                      .cashFlow ==
-                                                                  'In'
-                                                              ? Colors.green
-                                                              : Colors.red,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                              StatementWidget(
+                                                statement: statementsData
+                                                    .statements[index],
+                                              ),
+                                            ],
+                                          );
+                                        }
+                                        return StatementWidget(
+                                          statement:
+                                              statementsData.statements[index],
                                         );
                                       },
                                     ),

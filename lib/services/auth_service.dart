@@ -12,6 +12,8 @@ import '../config.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+import '../providers/statements_provider.dart';
+
 class AuthService {
   static Future<void> signUpUser(User user) async {
     Map<String, String> headers = {
@@ -99,15 +101,19 @@ class AuthService {
         await Provider.of<ProfileProvider>(context, listen: false)
             .getMyProfile()
             .then((_) {
-          if (SharedService.isVerified) {
-            Navigator.pushReplacementNamed(context, DashboardPage.routeName);
-          } else {
-            Navigator.pushReplacementNamed(
-              context,
-              VerifyEmailPage.routeName,
-              arguments: SharedService.email,
-            );
-          }
+          Provider.of<StatementsProvider>(context, listen: false)
+              .getStatements()
+              .then((_) {
+            if (SharedService.isVerified) {
+              Navigator.pushReplacementNamed(context, DashboardPage.routeName);
+            } else {
+              Navigator.pushReplacementNamed(
+                context,
+                VerifyEmailPage.routeName,
+                arguments: SharedService.email,
+              );
+            }
+          });
         });
       } on SocketException {
         Navigator.pushReplacementNamed(context, SignInPage.routeName);

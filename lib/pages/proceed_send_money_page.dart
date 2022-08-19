@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../models/fund_transfer_detail_model.dart';
+import '../providers/statements_provider.dart';
 
 class ProceedSendMoneyPage extends StatefulWidget {
   static String routeName = '/proceedSendMoneyPage';
@@ -192,6 +193,8 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
         ),
       );
       await Provider.of<ProfileProvider>(context, listen: false).getMyProfile();
+      await Provider.of<StatementsProvider>(context, listen: false)
+          .getStatements();
       Navigator.pushReplacementNamed(
         context,
         SendMoneySuccessPage.routeName,

@@ -122,7 +122,7 @@ class PdfInvoiceApi {
                 width: 5,
               ),
               Expanded(
-                child: dataWidget('Processed By:', SharedService.email),
+                child: dataWidget('Processed By:', psm.senderMhichaEmail),
               ),
             ],
           ),
@@ -196,7 +196,7 @@ class PdfInvoiceApi {
                 width: 5,
               ),
               Expanded(
-                child: dataWidget('Sender Name:', SharedService.userName),
+                child: dataWidget('Sender Name:', psm.senderUserName),
               ),
             ],
           ),
