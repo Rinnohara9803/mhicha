@@ -1,17 +1,28 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:mhicha/models/fund_transfer_detail_model.dart';
 import 'package:mhicha/services/apis/pdf_api.dart';
-import 'package:mhicha/services/shared_services.dart';
 import 'package:pdf/widgets.dart';
-// import 'package:intl/intl.dart';
 
 class PdfInvoiceApi {
   static Future<File> generate(FundTransferModel psm) async {
     final pdf = Document();
 
+    final mhichaImage =
+        (await rootBundle.load('images/mhicha.png')).buffer.asUint8List();
+
     pdf.addPage(
       MultiPage(
         build: (context) => [
+          Center(
+            child: Image(
+              MemoryImage(
+                mhichaImage,
+              ),
+              width: 100,
+              height: 100,
+            ),
+          ),
           Expanded(
             flex: 2,
             child: buildTopInvoiceLayout(psm),
