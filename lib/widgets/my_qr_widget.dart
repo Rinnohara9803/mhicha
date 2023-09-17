@@ -55,23 +55,23 @@ class MyQRWidget extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(
-            child: Center(
-              child: CustomPaint(
-                foregroundPainter: BorderPainter(),
-                child: Container(
-                  margin: const EdgeInsets.all(
-                    10,
-                  ),
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  width: MediaQuery.of(context).size.height * 0.25,
-                  child: QrImage(
-                    data: SharedService.userID,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Expanded(
+          //   child: Center(
+          //     child: CustomPaint(
+          //       foregroundPainter: BorderPainter(),
+          //       child: Container(
+          //         margin: const EdgeInsets.all(
+          //           10,
+          //         ),
+          //         height: MediaQuery.of(context).size.height * 0.25,
+          //         width: MediaQuery.of(context).size.height * 0.25,
+          //         child: QrImage(
+          //           qrCode: SharedService.userID,
+          //         ) as Widget,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

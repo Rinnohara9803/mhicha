@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             listen: false,
           ).getMyProfile().then((_) async {
             await Provider.of<StatementsProvider>(context, listen: false)
-                .getStatements();
+                .getStatements('All');
           });
         },
         child: SingleChildScrollView(

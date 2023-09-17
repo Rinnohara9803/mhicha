@@ -18,6 +18,8 @@ class StatementsPage extends StatefulWidget {
 
 class _StatementsPageState extends State<StatementsPage> {
   var timeFrame = '';
+  String filterBy = 'All';
+  int filterByValue = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,23 +35,101 @@ class _StatementsPageState extends State<StatementsPage> {
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      widget.returnToPreviousFunction();
-                    },
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          widget.returnToPreviousFunction();
+                        },
+                        icon: const Icon(
+                          Icons.navigate_before,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      const AutoSizeText(
+                        'Statements',
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                  PopupMenuButton<int>(
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        value: 0,
+                        child: Row(
+                          children: [
+                            const Text('All'),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            if (filterByValue == 0)
+                              const Icon(
+                                Icons.check,
+                                size: 20,
+                              ),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 1,
+                        child: Row(
+                          children: [
+                            const Text('Debit'),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            if (filterByValue == 1)
+                              const Icon(
+                                Icons.check,
+                                size: 20,
+                              ),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 2,
+                        child: Row(
+                          children: [
+                            const Text('Credit'),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            if (filterByValue == 2)
+                              const Icon(
+                                Icons.check,
+                                size: 20,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
                     icon: const Icon(
-                      Icons.navigate_before,
+                      Icons.filter_alt_outlined,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  const AutoSizeText(
-                    'Statements',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
+                    onSelected: (value) {
+                      if (value == 0) {
+                        setState(() {
+                          filterBy = 'All';
+                          filterByValue = 0;
+                        });
+                      } else if (value == 1) {
+                        setState(() {
+                          filterBy = 'Debit';
+                          filterByValue = 1;
+                        });
+                      } else if (value == 2) {
+                        setState(() {
+                          filterBy = 'Credit';
+                          filterByValue = 2;
+                        });
+                      }
+                    },
                   ),
                 ],
               ),
@@ -68,7 +148,7 @@ class _StatementsPageState extends State<StatementsPage> {
                   child: FutureBuilder(
                     future:
                         Provider.of<StatementsProvider>(context, listen: false)
-                            .getStatements(),
+                            .getStatements(filterBy),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
@@ -105,7 +185,7 @@ class _StatementsPageState extends State<StatementsPage> {
                           builder: (context, statementsData, child) {
                             return RefreshIndicator(
                               onRefresh: () async {
-                                await statementsData.getStatements();
+                                await statementsData.getStatements(filterBy);
                               },
                               child: statementsData.statements.isEmpty
                                   ? const Center(

@@ -43,7 +43,7 @@ class _SplashPageState extends State<SplashPage> {
             android: AndroidNotificationDetails(
               channel.id,
               channel.name,
-              channelDescription: channel.description,
+              channel.description,
               color: Colors.pink,
               playSound: true,
               icon: '@mipmap/ic_launcher',
@@ -66,7 +66,7 @@ class _SplashPageState extends State<SplashPage> {
             android: AndroidNotificationDetails(
               channel.id,
               channel.name,
-              channelDescription: channel.description,
+              channel.description,
               color: Colors.orange,
               playSound: true,
               icon: '@mipmap/ic_launcher',

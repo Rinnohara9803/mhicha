@@ -184,7 +184,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
           android: AndroidNotificationDetails(
             channel.id,
             channel.name,
-            channelDescription: channel.description,
+            channel.description,
             importance: Importance.high,
             playSound: true,
             color: Colors.white,
@@ -194,7 +194,7 @@ class _ProceedSendMoneyPageState extends State<ProceedSendMoneyPage> {
       );
       await Provider.of<ProfileProvider>(context, listen: false).getMyProfile();
       await Provider.of<StatementsProvider>(context, listen: false)
-          .getStatements();
+          .getStatements('All');
       Navigator.pushReplacementNamed(
         context,
         SendMoneySuccessPage.routeName,

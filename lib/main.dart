@@ -31,7 +31,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel',
   'high_importance_notification',
-  description: 'this channel is used for important notifications',
+  'this channel is used for important notifications',
   importance: Importance.high,
   playSound: true,
 );

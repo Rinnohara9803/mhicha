@@ -102,7 +102,7 @@ class AuthService {
             .getMyProfile()
             .then((_) {
           Provider.of<StatementsProvider>(context, listen: false)
-              .getStatements()
+              .getStatements('All')
               .then((_) {
             if (SharedService.isVerified) {
               Navigator.pushReplacementNamed(context, DashboardPage.routeName);

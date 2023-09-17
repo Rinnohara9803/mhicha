@@ -20,7 +20,7 @@ class StatementsProvider with ChangeNotifier {
     return [..._recentStatements];
   }
 
-  Future<void> getStatements() async {
+  Future<void> getStatements(String filterBy) async {
     Map<String, String> headers = {
       "Content-type": "application/json",
       "Authorization": "Bearer ${SharedService.token}",
@@ -80,9 +80,22 @@ class StatementsProvider with ChangeNotifier {
           );
         }
       }
-      _statements = _loadedStatements.reversed.toList();
-      notifyListeners();
-      _recentStatements = _statements.take(3).toList();
+      if (filterBy == 'All') {
+        _statements = _loadedStatements.reversed.toList();
+        notifyListeners();
+      } else if (filterBy == 'Debit') {
+        _statements = _loadedStatements.reversed
+            .where((statement) => statement.cashFlow == 'In')
+            .toList();
+        notifyListeners();
+      } else if (filterBy == 'Credit') {
+        _statements = _loadedStatements.reversed
+            .where((statement) => statement.cashFlow == 'Out')
+            .toList();
+        notifyListeners();
+      }
+
+      _recentStatements = _loadedStatements.reversed.take(3).toList();
       notifyListeners();
     } on SocketException {
       return Future.error('No Internet connection');

@@ -37,7 +37,7 @@ class VerifyLoadMoneyOtpPageState extends State<VerifyLoadMoneyOtpPage> {
             android: AndroidNotificationDetails(
               channel.id,
               channel.name,
-              channelDescription: channel.description,
+              channel.description,
               importance: Importance.high,
               playSound: true,
               color: Colors.white,

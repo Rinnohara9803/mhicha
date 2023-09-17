@@ -57,8 +57,8 @@ dev_dependencies:
   pdf: 3.0.0
   pinput: null
   provider: null
-  qr_code_scanner: null
-  qr_flutter: null
+  qr_code_scanner: 
+  qr_flutter: 
   share: null
   shared_preferences: null
 
